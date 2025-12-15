@@ -1,0 +1,1190 @@
+[
+  {
+    "url": "https://leetcode.com/problems/two-sum/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Google tagged",
+      "row": 2,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/two-sum/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/palindrome-number/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Google tagged",
+      "row": 3,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/palindrome-number/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/merge-sorted-array/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 4,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/merge-sorted-array/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/longest-common-prefix/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 5,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/longest-common-prefix/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/valid-parentheses/description",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 6,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/valid-parentheses/description"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 7,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 8,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/majority-element/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 9,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/majority-element/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/roman-to-integer/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 10,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/roman-to-integer/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/binary-search/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 11,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/binary-search/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/move-zeroes/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 12,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/move-zeroes/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/employees-earning-more-than-their-managers/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 13,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/employees-earning-more-than-their-managers/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/valid-anagram/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 14,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/valid-anagram/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/valid-palindrome/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 15,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/valid-palindrome/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/reverse-linked-list/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 16,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/reverse-linked-list/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/middle-of-the-linked-list/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 17,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/middle-of-the-linked-list/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/add-binary/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 18,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/add-binary/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 19,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/happy-number/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 20,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/happy-number/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/remove-element/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 21,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/remove-element/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/final-value-of-variable-after-performing-operations",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 22,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/final-value-of-variable-after-performing-operations"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/length-of-last-word/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 23,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/length-of-last-word/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/contains-duplicate/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 24,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/contains-duplicate/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-i",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 25,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-i"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/calculate-money-in-leetcode-bank/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 26,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/calculate-money-in-leetcode-bank/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/isomorphic-strings/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 27,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/isomorphic-strings/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/make-array-elements-equal-to-zero",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 28,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/make-array-elements-equal-to-zero"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/smallest-number-with-all-set-bits/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 29,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/smallest-number-with-all-set-bits/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/sqrtx/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 30,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/sqrtx/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/combine-two-tables/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 31,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/combine-two-tables/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/plus-one/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 32,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/plus-one/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/climbing-stairs/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 33,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/climbing-stairs/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/valid-palindrome-ii/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 34,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/valid-palindrome-ii/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/running-sum-of-1d-array/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 35,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/running-sum-of-1d-array/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/add-two-numbers/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 36,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/add-two-numbers/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 37,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/3sum/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 38,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/3sum/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 39,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/binary-tree-inorder-traversal/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/binary-tree-postorder-traversal/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 40,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/binary-tree-postorder-traversal/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/binary-tree-preorder-traversal/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 41,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/binary-tree-preorder-traversal/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/minimum-depth-of-binary-tree/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 42,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/minimum-depth-of-binary-tree/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 43,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/binary-tree-level-order-traversal/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/course-schedule/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 44,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/course-schedule/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/course-schedule-ii/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 45,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/course-schedule-ii/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/clone-graph/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 46,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/clone-graph/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/graph-valid-tree/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 47,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/graph-valid-tree/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/find-the-celebrity/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 48,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/find-the-celebrity/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 49,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/minimum-height-trees/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 50,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/minimum-height-trees/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/evaluate-division/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 51,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/evaluate-division/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/container-with-most-water/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Google tagged",
+      "row": 52,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/container-with-most-water/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/meeting-rooms/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Arrays & Strings",
+      "row": 2,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/meeting-rooms/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/design-hashmap/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Hashmaps",
+      "row": 2,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/design-hashmap/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/insert-delete-getrandom-o1/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Hashmaps",
+      "row": 3,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/insert-delete-getrandom-o1/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/longest-consecutive-sequence/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Hashmaps",
+      "row": 4,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/longest-consecutive-sequence/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/subarray-sum-equals-k/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Hashmaps",
+      "row": 5,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/subarray-sum-equals-k/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/group-anagrams/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Hashmaps",
+      "row": 6,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/group-anagrams/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/snapshot-array/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Hashmaps",
+      "row": 7,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/snapshot-array/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/strobogrammatic-number/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Hashmaps",
+      "row": 8,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/strobogrammatic-number/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/lru-cache/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Linked Lists",
+      "row": 2,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/lru-cache/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/copy-list-with-random-pointer/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Linked Lists",
+      "row": 3,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/copy-list-with-random-pointer/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/merge-k-sorted-lists/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Linked Lists",
+      "row": 4,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/merge-k-sorted-lists/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/reverse-nodes-in-k-group/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Linked Lists",
+      "row": 5,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/reverse-nodes-in-k-group/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Linked Lists",
+      "row": 6,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/palindrome-linked-list/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Linked Lists",
+      "row": 7,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/palindrome-linked-list/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Linked Lists",
+      "row": 8,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/min-stack/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 2,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/min-stack/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/evaluate-reverse-polish-notation/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 3,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/evaluate-reverse-polish-notation/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/daily-temperatures/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 4,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/daily-temperatures/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/basic-calculator-ii/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 5,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/basic-calculator-ii/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/trapping-rain-water/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 6,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/trapping-rain-water/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/next-greater-element-i/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 7,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/next-greater-element-i/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/implement-stack-using-queues/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 8,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/implement-stack-using-queues/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/implement-queue-using-stacks/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 9,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/implement-queue-using-stacks/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/moving-average-from-data-stream/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 10,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/moving-average-from-data-stream/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/design-hit-counter/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 11,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/design-hit-counter/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/design-circular-queue/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Stacks & Queues",
+      "row": 12,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/design-circular-queue/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Graphs & Trees",
+      "row": 2,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Graphs & Trees",
+      "row": 3,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/kth-largest-element-in-a-stream/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Heaps",
+      "row": 2,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/kth-largest-element-in-a-stream/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/meeting-rooms-ii/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Heaps",
+      "row": 3,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/meeting-rooms-ii/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/top-k-frequent-elements/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Heaps",
+      "row": 4,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/top-k-frequent-elements/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Heaps",
+      "row": 5,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/kth-largest-element-in-an-array/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/find-median-from-data-stream/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Heaps",
+      "row": 6,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/find-median-from-data-stream/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/merge-k-sorted-lists/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Heaps",
+      "row": 7,
+      "col": 5,
+      "cell_content": "https://leetcode.com/problems/merge-k-sorted-lists/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/word-search/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 2,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/word-search/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/generate-parentheses/description/",
+    "title": null,
+    "notes": "Things to remember",
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 3,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/generate-parentheses/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/strobogrammatic-number-ii/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 4,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/strobogrammatic-number-ii/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/android-unlock-patterns/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 5,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/android-unlock-patterns/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/construct-quad-tree/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 6,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/construct-quad-tree/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/longest-increasing-subsequence/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 7,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/longest-increasing-subsequence/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/edit-distance/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 8,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/edit-distance/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/maximum-product-subarray/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 9,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/maximum-product-subarray/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/word-break/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 10,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/word-break/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/coin-change/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 11,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/coin-change/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/partition-equal-subset-sum/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 12,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/partition-equal-subset-sum/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/word-search-ii/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 13,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/word-search-ii/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/permutations/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 14,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/permutations/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/sudoku-solver/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 16,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/sudoku-solver/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/fibonacci-number/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 17,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/fibonacci-number/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/pascals-triangle/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 18,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/pascals-triangle/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/min-cost-climbing-stairs/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 19,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/min-cost-climbing-stairs/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/counting-bits/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 20,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/counting-bits/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/binary-watch/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 21,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/binary-watch/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/sum-of-all-subset-xor-totals/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 22,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/sum-of-all-subset-xor-totals/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/letter-case-permutation/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 23,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/letter-case-permutation/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/binary-tree-paths/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 24,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/binary-tree-paths/description/"
+    }
+  },
+  {
+    "url": "https://leetcode.com/problems/number-of-1-bits/description/",
+    "title": null,
+    "notes": null,
+    "context": {
+      "sheet": "Recursion & DP",
+      "row": 25,
+      "col": 6,
+      "cell_content": "https://leetcode.com/problems/number-of-1-bits/description/"
+    }
+  }
+]
