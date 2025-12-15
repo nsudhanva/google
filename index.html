@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode Problem Mindmaps - Interactive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            height: calc(100vh - 2rem);
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            border-right: 2px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .problem-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+
+        .category {
+            margin-bottom: 1rem;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .category-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .category-count {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .category-problems {
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .category-problems.expanded {
+            display: block;
+        }
+
+        .problem-item {
+            background: white;
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .problem-item:hover {
+            background: #f0f4ff;
+            border-left-color: #667eea;
+            transform: translateX(4px);
+        }
+
+        .problem-item.active {
+            background: #e8ecff;
+            border-left-color: #667eea;
+            font-weight: 600;
+        }
+
+        .problem-name {
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .problem-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .problem-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .problem-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f0f4ff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .problem-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .problem-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .expand-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .expand-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .expand-toggle-btn:active {
+            transform: translateY(0);
+        }
+
+        .mindmap-container {
+            flex: 1;
+            padding: 2rem;
+            overflow: auto;
+            background: #fafbfc;
+        }
+
+        #mindmap {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #6c757d;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #6c757d;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-text {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Markmap customization */
+        .markmap {
+            width: 100%;
+            height: 100%;
+        }
+
+        .markmap-node circle {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .markmap-node:hover circle {
+            r: 12;
+            stroke-width: 3;
+        }
+
+        .markmap-link {
+            transition: all 0.3s;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="header">
+                <h1>🧠 LeetCode Mindmaps</h1>
+                <p>Click nodes to expand/collapse</p>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number" id="total-problems">107</div>
+                        <div class="stat-label">Problems</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="total-categories">8</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="search" class="search-input" placeholder="🔍 Search problems...">
+            </div>
+
+            <div class="problem-list" id="problem-list">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading problems...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="problem-header" id="problem-header" style="display: none;">
+                <div class="problem-title" id="current-problem-title"></div>
+                <div class="problem-meta">
+                    <div class="problem-category" id="current-problem-category"></div>
+                    <a href="#" id="current-problem-link" class="problem-link" target="_blank">
+                        🔗 View on LeetCode
+                    </a>
+                    <button id="expand-toggle" class="expand-toggle-btn" onclick="toggleExpandAll()">
+                        📖 Expand All
+                    </button>
+                </div>
+            </div>
+
+            <div class="mindmap-container">
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-state-icon">🧠</div>
+                    <div class="empty-state-title">Select a Problem</div>
+                    <div class="empty-state-text">Choose a problem from the sidebar to view its interactive mindmap
+                    </div>
+                </div>
+                <svg id="mindmap" class="hidden"></svg>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.15.4"></script>
+
+    <script>
+        let problemsData = null;
+        let currentMarkmap = null;
+
+        // Load problems data
+        async function loadProblems() {
+            try {
+                const response = await fetch('leetcode_problems.json');
+                problemsData = await response.json();
+                renderProblemList(problemsData);
+            } catch (error) {
+                document.getElementById('problem-list').innerHTML = `
+                    <div style="padding: 1rem; color: #dc3545; text-align: center;">
+                        Error loading problems
+                    </div>
+                `;
+            }
+        }
+
+        // Group problems by category
+        function groupByCategory(problems) {
+            const grouped = {};
+            problems.forEach(problem => {
+                const category = problem.context.sheet;
+                if (!grouped[category]) {
+                    grouped[category] = [];
+                }
+                grouped[category].push(problem);
+            });
+            return grouped;
+        }
+
+        // Get problem slug from URL
+        function getProblemSlug(url) {
+            const match = url.match(/\/problems\/([\w-]+)\/?/);
+            return match ? match[1] : null;
+        }
+
+        // Convert slug to title
+        function slugToTitle(slug) {
+            return slug.split('-').map(word =>
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+        }
+
+        // Get category icon
+        function getCategoryIcon(category) {
+            const icons = {
+                'Google tagged': '🏢',
+                'Arrays & Strings': '📊',
+                'Hashmaps': '🗺️',
+                'Linked Lists': '🔗',
+                'Stacks & Queues': '📚',
+                'Graphs & Trees': '🌳',
+                'Heaps': '⛰️',
+                'Recursion & DP': '🔄'
+            };
+            return icons[category] || '📝';
+        }
+
+        // Render problem list
+        function renderProblemList(problems) {
+            const grouped = groupByCategory(problems);
+            const categories = Object.keys(grouped).sort();
+
+            let html = '';
+            categories.forEach((category, catIndex) => {
+                const categoryProblems = grouped[category];
+                const categoryId = `category-${catIndex}`;
+
+                html += `
+                    <div class="category">
+                        <div class="category-header" onclick="toggleCategory('${categoryId}')">
+                            <span>${getCategoryIcon(category)} ${category}</span>
+                            <span class="category-count">${categoryProblems.length}</span>
+                        </div>
+                        <div class="category-problems" id="${categoryId}">
+                `;
+
+                categoryProblems.forEach((problem) => {
+                    const slug = getProblemSlug(problem.url);
+                    const title = slugToTitle(slug);
+
+                    html += `
+                        <div class="problem-item" onclick='selectProblem(${JSON.stringify(problem)})'>
+                            <div class="problem-name">${title}</div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('problem-list').innerHTML = html;
+        }
+
+        // Toggle category
+        function toggleCategory(categoryId) {
+            const element = document.getElementById(categoryId);
+            element.classList.toggle('expanded');
+        }
+
+        // Select problem and render mindmap
+        function selectProblem(problem) {
+            const slug = getProblemSlug(problem.url);
+            const title = slugToTitle(slug);
+            const category = problem.context.sheet;
+
+            // Update header
+            document.getElementById('problem-header').style.display = 'block';
+            document.getElementById('current-problem-title').textContent = title;
+            document.getElementById('current-problem-category').innerHTML = `${getCategoryIcon(category)} ${category}`;
+            document.getElementById('current-problem-link').href = problem.url;
+
+            // Hide empty state, show mindmap
+            document.getElementById('empty-state').classList.add('hidden');
+            document.getElementById('mindmap').classList.remove('hidden');
+
+            // Highlight selected problem
+            document.querySelectorAll('.problem-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.problem-item').classList.add('active');
+
+            // Render mindmap
+            renderMindmap(title, problem);
+        }
+
+        // Create mindmap markdown content (FALLBACK ONLY)
+        function createMindmapMarkdown(title) {
+            return `# ${title}
+
+Mindmap file not found. 
+
+Please ensure the markdown file exists in the correct category folder.`;
+        }
+
+        // Fetch markdown content from file
+        async function fetchMindmapContent(problem) {
+            const slug = getProblemSlug(problem.url);
+            const categoryDir = problem.context.sheet.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s-]+/g, '_');
+            const path = `leetcode_mindmaps/${categoryDir}/${slug}.md`;
+
+            try {
+                const response = await fetch(path);
+                if (!response.ok) throw new Error('File not found');
+                return await response.text();
+            } catch (error) {
+                console.warn(`Could not load mindmap from ${path}, using fallback`);
+                return null;
+            }
+        }
+
+        // Render Markmap
+        async function renderMindmap(title, problem) {
+            try {
+                // Try to fetch specific content first
+                let markdown = await fetchMindmapContent(problem);
+
+                // If fetch failed, fallback to generic
+                if (!markdown) {
+                    markdown = createMindmapMarkdown(title);
+                }
+
+                // Create transformer
+                const transformer = new markmap.Transformer();
+
+                // Transform markdown to markmap data
+                const { root, features } = transformer.transform(markdown);
+
+                const svg = d3.select('#mindmap');
+                svg.selectAll('*').remove(); // Clear previous
+
+                // Load assets if needed
+                const { styles, scripts } = transformer.getUsedAssets(features);
+                if (styles) await markmap.loadCSS(styles);
+                if (scripts) await markmap.loadJS(scripts);
+
+                // Create markmap
+                currentMarkmap = markmap.Markmap.create(
+                    svg.node(),
+                    {
+                        color: (node) => {
+                            const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
+                            return colors[node.depth % colors.length];
+                        },
+                        duration: 500,
+                        maxWidth: 300,
+                        initialExpandLevel: 1,
+                    },
+                    root
+                );
+
+                // Fit to view
+                setTimeout(() => {
+                    currentMarkmap.fit();
+                }, 100);
+            } catch (error) {
+                console.error('Error rendering mindmap:', error);
+                document.getElementById('mindmap').innerHTML = `
+                    <text x="50%" y="50%" text-anchor="middle" fill="#dc3545">
+                        Error rendering mindmap: ${error.message}
+                    </text>
+                `;
+            }
+        }
+
+        // Search functionality
+        document.getElementById('search').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            document.querySelectorAll('.category').forEach(category => {
+                let hasVisibleProblems = false;
+
+                category.querySelectorAll('.problem-item').forEach(problem => {
+                    const problemName = problem.textContent.toLowerCase();
+                    const matches = problemName.includes(searchTerm);
+
+                    if (matches) {
+                        problem.style.display = 'block';
+                        hasVisibleProblems = true;
+                    } else {
+                        problem.style.display = 'none';
+                    }
+                });
+
+                category.style.display = hasVisibleProblems ? 'block' : 'none';
+            });
+        });
+
+        // Toggle expand/collapse all nodes
+        function toggleExpandAll() {
+            if (!currentMarkmap) return;
+
+            const btn = document.getElementById('expand-toggle');
+            const isExpanded = btn.textContent.includes('Collapse');
+
+            if (isExpanded) {
+                // Collapse all - set to level 1 (only root visible)
+                currentMarkmap.setData(currentMarkmap.state.data, {
+                    ...currentMarkmap.options,
+                    initialExpandLevel: 1
+                });
+                currentMarkmap.fit();
+                btn.innerHTML = '📖 Expand All';
+            } else {
+                // Expand all - set to level -1 (all levels)
+                currentMarkmap.setData(currentMarkmap.state.data, {
+                    ...currentMarkmap.options,
+                    initialExpandLevel: -1
+                });
+                currentMarkmap.fit();
+                btn.innerHTML = '📕 Collapse All';
+            }
+        }
+
+        // Load problems on page load
+        loadProblems();
+    </script>
+</body>
+
+</html>
