@@ -670,23 +670,33 @@ Please ensure the markdown file exists in the correct category folder.`;
             const btn = document.getElementById('expand-toggle');
             const isExpanded = btn.textContent.includes('Collapse');
 
+            // Recursive function to set fold state on all nodes
+            function setFoldState(node, fold) {
+                if (!node) return;
+                if (!node.payload) node.payload = {};
+                node.payload.fold = fold;
+                if (node.children) {
+                    node.children.forEach(child => setFoldState(child, fold));
+                }
+            }
+
+            const root = currentMarkmap.state.data;
+
             if (isExpanded) {
-                // Collapse all - set to level 1 (only root visible)
-                currentMarkmap.setData(currentMarkmap.state.data, {
-                    ...currentMarkmap.options,
-                    initialExpandLevel: 1
-                });
-                currentMarkmap.fit();
+                // Collapse all (fold = true, except root)
+                if (root.children) {
+                    root.children.forEach(child => setFoldState(child, true));
+                }
                 btn.innerHTML = '📖 Expand All';
             } else {
-                // Expand all - set to level -1 (all levels)
-                currentMarkmap.setData(currentMarkmap.state.data, {
-                    ...currentMarkmap.options,
-                    initialExpandLevel: -1
-                });
-                currentMarkmap.fit();
+                // Expand all (fold = false)
+                setFoldState(root, false);
                 btn.innerHTML = '📕 Collapse All';
             }
+
+            // Re-render with updated data
+            currentMarkmap.setData(root);
+            setTimeout(() => currentMarkmap.fit(), 100);
         }
 
         // Load problems on page load
