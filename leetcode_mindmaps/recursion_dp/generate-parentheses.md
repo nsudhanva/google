@@ -1,58 +1,35 @@
 # Generate Parentheses
 
-**Problem Link:** [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/description/)
-
+**Problem Link:** [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Generate all valid combinations of n pairs of parentheses
 
-```mermaid
-mindmap
-  root((Generate Parentheses))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Backtracking
+- Track open and close counts
+- Add '(' if open < n, ')' if close < open
+
+## Implementation
+```java
+public List<String> generateParenthesis(int n) {
+    List<String> result = new ArrayList<>();
+    backtrack(result, "", 0, 0, n);
+    return result;
+}
+
+private void backtrack(List<String> result, String curr, int open, int close, int n) {
+    if (curr.length() == 2 * n) {
+        result.add(curr);
+        return;
+    }
+    if (open < n) backtrack(result, curr + "(", open + 1, close, n);
+    if (close < open) backtrack(result, curr + ")", open, close + 1, n);
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(4^n / sqrt(n)) - Catalan number
+- **Space**: O(n)

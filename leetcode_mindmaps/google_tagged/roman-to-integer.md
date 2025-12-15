@@ -1,58 +1,35 @@
-# Roman To Integer
+# Roman to Integer
 
-**Problem Link:** [Roman To Integer](https://leetcode.com/problems/roman-to-integer/description/)
-
+**Problem Link:** [Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Convert Roman numeral string to integer
+- Handle subtraction cases (IV, IX, XL, XC, CD, CM)
 
-```mermaid
-mindmap
-  root((Roman To Integer))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Right-to-Left Pass
+- If current < previous, subtract; else add
+
+## Implementation
+```java
+public int romanToInt(String s) {
+    Map<Character, Integer> map = Map.of(
+        'I', 1, 'V', 5, 'X', 10, 'L', 50,
+        'C', 100, 'D', 500, 'M', 1000
+    );
+    
+    int total = 0, prev = 0;
+    for (int i = s.length() - 1; i >= 0; i--) {
+        int curr = map.get(s.charAt(i));
+        total += (curr < prev) ? -curr : curr;
+        prev = curr;
+    }
+    return total;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n)
+- **Space**: O(1)

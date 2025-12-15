@@ -1,58 +1,34 @@
 # Binary Search
 
 **Problem Link:** [Binary Search](https://leetcode.com/problems/binary-search/)
-
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Find target in sorted array, return index or -1
 
-```mermaid
-mindmap
-  root((Binary Search))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Binary Search
+- Divide search space in half each iteration
+
+## Implementation
+```java
+public int search(int[] nums, int target) {
+    int left = 0, right = nums.length - 1;
+    
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == target) return mid;
+        if (nums[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
 ```
 
-## Key Insights
+## Complexity
+- **Time**: O(log n)
+- **Space**: O(1)
 
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Key Insight
+- Use `left + (right - left) / 2` to avoid integer overflow

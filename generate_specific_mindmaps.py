@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate problem-specific mindmaps for all LeetCode problems.
-This creates high-quality, specific content for each problem.
+This creates high-quality, specific content with Java implementations.
 """
 
 import json
@@ -9,7 +9,7 @@ import os
 import re
 from pathlib import Path
 
-# Problem-specific content database
+# Problem-specific content database with JAVA implementations
 PROBLEM_CONTENT = {
     # ============ GOOGLE TAGGED ============
     "two-sum": """# Two Sum
@@ -19,7 +19,7 @@ PROBLEM_CONTENT = {
 
 ## Problem Understanding
 - Input: Array `nums`, integer `target`
-- Output: Indices of the two numbers that add up to `target`
+- Output: Indices of two numbers that add up to `target`
 - Constraints: Exactly one solution, can't use same element twice
 
 ## Approach
@@ -32,13 +32,18 @@ PROBLEM_CONTENT = {
 - One pass: check then add
 
 ## Implementation
-```python
-seen = {}
-for i, num in enumerate(nums):
-    diff = target - num
-    if diff in seen:
-        return [seen[diff], i]
-    seen[num] = i
+```java
+public int[] twoSum(int[] nums, int target) {
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++) {
+        int complement = target - nums[i];
+        if (map.containsKey(complement)) {
+            return new int[] { map.get(complement), i };
+        }
+        map.put(nums[i], i);
+    }
+    return new int[] {};
+}
 ```
 
 ## Complexity
@@ -46,7 +51,7 @@ for i, num in enumerate(nums):
 - **Space**: O(n)
 
 ## Key Insight
-- Trade space for time with Hash Map
+- Trade space for time with HashMap
 - Check *before* adding to handle duplicates correctly
 """,
 
@@ -67,22 +72,32 @@ for i, num in enumerate(nums):
 3. Skip duplicates at all levels
 
 ## Implementation
-```python
-nums.sort()
-result = []
-for i in range(len(nums) - 2):
-    if i > 0 and nums[i] == nums[i-1]: continue
-    l, r = i + 1, len(nums) - 1
-    while l < r:
-        s = nums[i] + nums[l] + nums[r]
-        if s < 0: l += 1
-        elif s > 0: r -= 1
-        else:
-            result.append([nums[i], nums[l], nums[r]])
-            while l < r and nums[l] == nums[l+1]: l += 1
-            while l < r and nums[r] == nums[r-1]: r -= 1
-            l, r = l + 1, r - 1
-return result
+```java
+public List<List<Integer>> threeSum(int[] nums) {
+    Arrays.sort(nums);
+    List<List<Integer>> result = new ArrayList<>();
+    
+    for (int i = 0; i < nums.length - 2; i++) {
+        if (i > 0 && nums[i] == nums[i - 1]) continue;
+        
+        int left = i + 1, right = nums.length - 1;
+        while (left < right) {
+            int sum = nums[i] + nums[left] + nums[right];
+            if (sum < 0) {
+                left++;
+            } else if (sum > 0) {
+                right--;
+            } else {
+                result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                while (left < right && nums[left] == nums[left + 1]) left++;
+                while (left < right && nums[right] == nums[right - 1]) right--;
+                left++;
+                right--;
+            }
+        }
+    }
+    return result;
+}
 ```
 
 ## Complexity
@@ -109,16 +124,18 @@ return result
 - Compare and place larger element at position `p`
 
 ## Implementation
-```python
-p1, p2 = m - 1, n - 1
-for p in range(m + n - 1, -1, -1):
-    if p2 < 0: break
-    if p1 >= 0 and nums1[p1] > nums2[p2]:
-        nums1[p] = nums1[p1]
-        p1 -= 1
-    else:
-        nums1[p] = nums2[p2]
-        p2 -= 1
+```java
+public void merge(int[] nums1, int m, int[] nums2, int n) {
+    int p1 = m - 1, p2 = n - 1, p = m + n - 1;
+    
+    while (p2 >= 0) {
+        if (p1 >= 0 && nums1[p1] > nums2[p2]) {
+            nums1[p--] = nums1[p1--];
+        } else {
+            nums1[p--] = nums2[p2--];
+        }
+    }
+}
 ```
 
 ## Complexity
@@ -144,16 +161,22 @@ for p in range(m + n - 1, -1, -1):
 - Pop and match for closing brackets
 
 ## Implementation
-```python
-stack = []
-mapping = {")": "(", "}": "{", "]": "["}
-for char in s:
-    if char in mapping:
-        if not stack or stack.pop() != mapping[char]:
-            return False
-    else:
-        stack.append(char)
-return not stack
+```java
+public boolean isValid(String s) {
+    Stack<Character> stack = new Stack<>();
+    Map<Character, Character> map = Map.of(')', '(', '}', '{', ']', '[');
+    
+    for (char c : s.toCharArray()) {
+        if (map.containsKey(c)) {
+            if (stack.isEmpty() || stack.pop() != map.get(c)) {
+                return false;
+            }
+        } else {
+            stack.push(c);
+        }
+    }
+    return stack.isEmpty();
+}
 ```
 
 ## Complexity
@@ -180,15 +203,20 @@ return not stack
 - At each price, calculate potential profit
 
 ## Implementation
-```python
-min_price = float('inf')
-max_profit = 0
-for price in prices:
-    if price < min_price:
-        min_price = price
-    elif price - min_price > max_profit:
-        max_profit = price - min_price
-return max_profit
+```java
+public int maxProfit(int[] prices) {
+    int minPrice = Integer.MAX_VALUE;
+    int maxProfit = 0;
+    
+    for (int price : prices) {
+        if (price < minPrice) {
+            minPrice = price;
+        } else if (price - minPrice > maxProfit) {
+            maxProfit = price - minPrice;
+        }
+    }
+    return maxProfit;
+}
 ```
 
 ## Complexity
@@ -214,14 +242,19 @@ return max_profit
 - Shrink until it matches start of each string
 
 ## Implementation
-```python
-if not strs: return ""
-prefix = strs[0]
-for s in strs[1:]:
-    while not s.startswith(prefix):
-        prefix = prefix[:-1]
-        if not prefix: return ""
-return prefix
+```java
+public String longestCommonPrefix(String[] strs) {
+    if (strs == null || strs.length == 0) return "";
+    
+    String prefix = strs[0];
+    for (int i = 1; i < strs.length; i++) {
+        while (strs[i].indexOf(prefix) != 0) {
+            prefix = prefix.substring(0, prefix.length() - 1);
+            if (prefix.isEmpty()) return "";
+        }
+    }
+    return prefix;
+}
 ```
 
 ## Complexity
@@ -244,14 +277,19 @@ return prefix
 - Fast pointer scans for new unique elements
 
 ## Implementation
-```python
-if not nums: return 0
-j = 0
-for i in range(1, len(nums)):
-    if nums[i] != nums[j]:
-        j += 1
-        nums[j] = nums[i]
-return j + 1
+```java
+public int removeDuplicates(int[] nums) {
+    if (nums.length == 0) return 0;
+    
+    int j = 0;
+    for (int i = 1; i < nums.length; i++) {
+        if (nums[i] != nums[j]) {
+            j++;
+            nums[j] = nums[i];
+        }
+    }
+    return j + 1;
+}
 ```
 
 ## Complexity
@@ -274,13 +312,18 @@ return j + 1
 - Majority survives because count > n/2
 
 ## Implementation
-```python
-candidate, count = None, 0
-for num in nums:
-    if count == 0:
-        candidate = num
-    count += (1 if num == candidate else -1)
-return candidate
+```java
+public int majorityElement(int[] nums) {
+    int candidate = 0, count = 0;
+    
+    for (int num : nums) {
+        if (count == 0) {
+            candidate = num;
+        }
+        count += (num == candidate) ? 1 : -1;
+    }
+    return candidate;
+}
 ```
 
 ## Complexity
@@ -303,14 +346,21 @@ return candidate
 - If current < previous, subtract; else add
 
 ## Implementation
-```python
-m = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-total, prev = 0, 0
-for c in reversed(s):
-    curr = m[c]
-    total += curr if curr >= prev else -curr
-    prev = curr
-return total
+```java
+public int romanToInt(String s) {
+    Map<Character, Integer> map = Map.of(
+        'I', 1, 'V', 5, 'X', 10, 'L', 50,
+        'C', 100, 'D', 500, 'M', 1000
+    );
+    
+    int total = 0, prev = 0;
+    for (int i = s.length() - 1; i >= 0; i--) {
+        int curr = map.get(s.charAt(i));
+        total += (curr < prev) ? -curr : curr;
+        prev = curr;
+    }
+    return total;
+}
 ```
 
 ## Complexity
@@ -332,14 +382,18 @@ return total
 - Divide search space in half each iteration
 
 ## Implementation
-```python
-l, r = 0, len(nums) - 1
-while l <= r:
-    mid = (l + r) // 2
-    if nums[mid] == target: return mid
-    elif nums[mid] < target: l = mid + 1
-    else: r = mid - 1
-return -1
+```java
+public int search(int[] nums, int target) {
+    int left = 0, right = nums.length - 1;
+    
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == target) return mid;
+        if (nums[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
 ```
 
 ## Complexity
@@ -347,7 +401,7 @@ return -1
 - **Space**: O(1)
 
 ## Key Insight
-- Use `l + (r-l)//2` in other languages to avoid overflow
+- Use `left + (right - left) / 2` to avoid integer overflow
 """,
 
     "move-zeroes": """# Move Zeroes
@@ -365,12 +419,18 @@ return -1
 - Swap non-zeros to front
 
 ## Implementation
-```python
-pos = 0
-for i in range(len(nums)):
-    if nums[i] != 0:
-        nums[pos], nums[i] = nums[i], nums[pos]
-        pos += 1
+```java
+public void moveZeroes(int[] nums) {
+    int pos = 0;
+    for (int i = 0; i < nums.length; i++) {
+        if (nums[i] != 0) {
+            int temp = nums[pos];
+            nums[pos] = nums[i];
+            nums[i] = temp;
+            pos++;
+        }
+    }
+}
 ```
 
 ## Complexity
@@ -393,19 +453,26 @@ for i in range(len(nums)):
 - Add digit by digit, track carry
 
 ## Implementation
-```python
-dummy = ListNode(0)
-curr, carry = dummy, 0
-while l1 or l2 or carry:
-    v1 = l1.val if l1 else 0
-    v2 = l2.val if l2 else 0
-    val = v1 + v2 + carry
-    carry, digit = divmod(val, 10)
-    curr.next = ListNode(digit)
-    curr = curr.next
-    l1 = l1.next if l1 else None
-    l2 = l2.next if l2 else None
-return dummy.next
+```java
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    ListNode dummy = new ListNode(0);
+    ListNode curr = dummy;
+    int carry = 0;
+    
+    while (l1 != null || l2 != null || carry != 0) {
+        int v1 = (l1 != null) ? l1.val : 0;
+        int v2 = (l2 != null) ? l2.val : 0;
+        int sum = v1 + v2 + carry;
+        
+        carry = sum / 10;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
+        
+        if (l1 != null) l1 = l1.next;
+        if (l2 != null) l2 = l2.next;
+    }
+    return dummy.next;
+}
 ```
 
 ## Complexity
@@ -413,7 +480,7 @@ return dummy.next
 - **Space**: O(max(m, n))
 
 ## Key Insight
-- Include `carry` in while condition for final carry
+- Include `carry != 0` in while condition for final carry
 """,
 
     "climbing-stairs": """# Climbing Stairs
@@ -431,12 +498,18 @@ return dummy.next
 - Only need last two values
 
 ## Implementation
-```python
-if n <= 2: return n
-prev1, prev2 = 1, 2
-for _ in range(3, n + 1):
-    prev1, prev2 = prev2, prev1 + prev2
-return prev2
+```java
+public int climbStairs(int n) {
+    if (n <= 2) return n;
+    
+    int prev1 = 1, prev2 = 2;
+    for (int i = 3; i <= n; i++) {
+        int curr = prev1 + prev2;
+        prev1 = prev2;
+        prev2 = curr;
+    }
+    return prev2;
+}
 ```
 
 ## Complexity
@@ -461,14 +534,22 @@ return prev2
 - Compare from both ends, skip non-alphanumeric
 
 ## Implementation
-```python
-l, r = 0, len(s) - 1
-while l < r:
-    while l < r and not s[l].isalnum(): l += 1
-    while l < r and not s[r].isalnum(): r -= 1
-    if s[l].lower() != s[r].lower(): return False
-    l, r = l + 1, r - 1
-return True
+```java
+public boolean isPalindrome(String s) {
+    int left = 0, right = s.length() - 1;
+    
+    while (left < right) {
+        while (left < right && !Character.isLetterOrDigit(s.charAt(left))) left++;
+        while (left < right && !Character.isLetterOrDigit(s.charAt(right))) right--;
+        
+        if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
 ```
 
 ## Complexity
@@ -490,14 +571,21 @@ return True
 - Count chars in both strings, compare
 
 ## Implementation
-```python
-if len(s) != len(t): return False
-count = {}
-for c in s: count[c] = count.get(c, 0) + 1
-for c in t:
-    if c not in count or count[c] == 0: return False
-    count[c] -= 1
-return True
+```java
+public boolean isAnagram(String s, String t) {
+    if (s.length() != t.length()) return false;
+    
+    int[] count = new int[26];
+    for (int i = 0; i < s.length(); i++) {
+        count[s.charAt(i) - 'a']++;
+        count[t.charAt(i) - 'a']--;
+    }
+    
+    for (int c : count) {
+        if (c != 0) return false;
+    }
+    return true;
+}
 ```
 
 ## Complexity
@@ -519,13 +607,21 @@ return True
 - Start from end, handle 9s specially
 
 ## Implementation
-```python
-for i in range(len(digits)-1, -1, -1):
-    if digits[i] < 9:
-        digits[i] += 1
-        return digits
-    digits[i] = 0
-return [1] + digits  # All 9s case
+```java
+public int[] plusOne(int[] digits) {
+    for (int i = digits.length - 1; i >= 0; i--) {
+        if (digits[i] < 9) {
+            digits[i]++;
+            return digits;
+        }
+        digits[i] = 0;
+    }
+    
+    // All 9s case
+    int[] result = new int[digits.length + 1];
+    result[0] = 1;
+    return result;
+}
 ```
 
 ## Complexity
@@ -539,7 +635,7 @@ return [1] + digits  # All 9s case
 **Category:** Google tagged
 
 ## Problem Understanding
-- Return floor of square root without using `pow`
+- Return floor of square root without using `Math.sqrt`
 
 ## Approach
 
@@ -547,16 +643,21 @@ return [1] + digits  # All 9s case
 - Search for `k` where `k*k <= x < (k+1)*(k+1)`
 
 ## Implementation
-```python
-if x < 2: return x
-l, r = 2, x // 2
-while l <= r:
-    mid = (l + r) // 2
-    sq = mid * mid
-    if sq == x: return mid
-    elif sq < x: l = mid + 1
-    else: r = mid - 1
-return r
+```java
+public int mySqrt(int x) {
+    if (x < 2) return x;
+    
+    long left = 2, right = x / 2;
+    while (left <= right) {
+        long mid = left + (right - left) / 2;
+        long sq = mid * mid;
+        
+        if (sq == x) return (int) mid;
+        if (sq < x) left = mid + 1;
+        else right = mid - 1;
+    }
+    return (int) right;
+}
 ```
 
 ## Complexity
@@ -575,23 +676,30 @@ return r
 
 ## Approach
 
-### Hash Set (Cycle Detection)
+### HashSet (Cycle Detection)
 - Track seen numbers, detect cycle
 
 ## Implementation
-```python
-def get_next(n):
-    total = 0
-    while n:
-        n, digit = divmod(n, 10)
-        total += digit ** 2
-    return total
+```java
+public boolean isHappy(int n) {
+    Set<Integer> seen = new HashSet<>();
+    
+    while (n != 1 && !seen.contains(n)) {
+        seen.add(n);
+        n = getNext(n);
+    }
+    return n == 1;
+}
 
-seen = set()
-while n != 1 and n not in seen:
-    seen.add(n)
-    n = get_next(n)
-return n == 1
+private int getNext(int n) {
+    int sum = 0;
+    while (n > 0) {
+        int digit = n % 10;
+        sum += digit * digit;
+        n /= 10;
+    }
+    return sum;
+}
 ```
 
 ## Complexity
@@ -613,15 +721,19 @@ return n == 1
 - Track prev, curr, next; reverse links
 
 ## Implementation
-```python
-prev = None
-curr = head
-while curr:
-    next_temp = curr.next
-    curr.next = prev
-    prev = curr
-    curr = next_temp
-return prev
+```java
+public ListNode reverseList(ListNode head) {
+    ListNode prev = null;
+    ListNode curr = head;
+    
+    while (curr != null) {
+        ListNode nextTemp = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = nextTemp;
+    }
+    return prev;
+}
 ```
 
 ## Complexity
@@ -639,16 +751,19 @@ return prev
 
 ## Approach
 
-### Hash Set
+### HashSet
 - Add to set, check if already exists
 
 ## Implementation
-```python
-seen = set()
-for n in nums:
-    if n in seen: return True
-    seen.add(n)
-return False
+```java
+public boolean containsDuplicate(int[] nums) {
+    Set<Integer> seen = new HashSet<>();
+    for (int num : nums) {
+        if (seen.contains(num)) return true;
+        seen.add(num);
+    }
+    return false;
+}
 ```
 
 ## Complexity
@@ -670,14 +785,19 @@ return False
 - Skip trailing spaces, count chars until space
 
 ## Implementation
-```python
-i = len(s) - 1
-while i >= 0 and s[i] == ' ': i -= 1
-length = 0
-while i >= 0 and s[i] != ' ':
-    length += 1
-    i -= 1
-return length
+```java
+public int lengthOfLastWord(String s) {
+    int i = s.length() - 1;
+    
+    while (i >= 0 && s.charAt(i) == ' ') i--;
+    
+    int length = 0;
+    while (i >= 0 && s.charAt(i) != ' ') {
+        length++;
+        i--;
+    }
+    return length;
+}
 ```
 
 ## Complexity
@@ -699,13 +819,17 @@ return length
 - Revert last half, compare with first half
 
 ## Implementation
-```python
-if x < 0 or (x % 10 == 0 and x != 0): return False
-rev = 0
-while x > rev:
-    rev = rev * 10 + x % 10
-    x //= 10
-return x == rev or x == rev // 10
+```java
+public boolean isPalindrome(int x) {
+    if (x < 0 || (x % 10 == 0 && x != 0)) return false;
+    
+    int reversed = 0;
+    while (x > reversed) {
+        reversed = reversed * 10 + x % 10;
+        x /= 10;
+    }
+    return x == reversed || x == reversed / 10;
+}
 ```
 
 ## Complexity
@@ -727,13 +851,17 @@ return x == rev or x == rev // 10
 - Writer pointer only advances for valid elements
 
 ## Implementation
-```python
-i = 0
-for x in nums:
-    if x != val:
-        nums[i] = x
-        i += 1
-return i
+```java
+public int removeElement(int[] nums, int val) {
+    int i = 0;
+    for (int j = 0; j < nums.length; j++) {
+        if (nums[j] != val) {
+            nums[i] = nums[j];
+            i++;
+        }
+    }
+    return i;
+}
 ```
 
 ## Complexity
@@ -752,14 +880,20 @@ return i
 ## Approach
 
 ### Sliding Window
-- Check each substring of length `len(needle)`
+- Check each substring of length `needle.length()`
 
 ## Implementation
-```python
-for i in range(len(haystack) - len(needle) + 1):
-    if haystack[i:i+len(needle)] == needle:
-        return i
-return -1
+```java
+public int strStr(String haystack, String needle) {
+    if (needle.isEmpty()) return 0;
+    
+    for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+        if (haystack.substring(i, i + needle.length()).equals(needle)) {
+            return i;
+        }
+    }
+    return -1;
+}
 ```
 
 ## Complexity
@@ -781,17 +915,23 @@ return -1
 - Push all lefts, pop one, go right
 
 ## Implementation
-```python
-res, stack = [], []
-curr = root
-while curr or stack:
-    while curr:
-        stack.append(curr)
-        curr = curr.left
-    curr = stack.pop()
-    res.append(curr.val)
-    curr = curr.right
-return res
+```java
+public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    Stack<TreeNode> stack = new Stack<>();
+    TreeNode curr = root;
+    
+    while (curr != null || !stack.isEmpty()) {
+        while (curr != null) {
+            stack.push(curr);
+            curr = curr.left;
+        }
+        curr = stack.pop();
+        result.add(curr.val);
+        curr = curr.right;
+    }
+    return result;
+}
 ```
 
 ## Complexity
@@ -813,10 +953,13 @@ return res
 - Each element becomes sum of itself and previous
 
 ## Implementation
-```python
-for i in range(1, len(nums)):
-    nums[i] += nums[i-1]
-return nums
+```java
+public int[] runningSum(int[] nums) {
+    for (int i = 1; i < nums.length; i++) {
+        nums[i] += nums[i - 1];
+    }
+    return nums;
+}
 ```
 
 ## Complexity
@@ -834,17 +977,26 @@ return nums
 
 ## Approach
 
-### Two Hash Maps
+### Two HashMaps
 - Track `s->t` and `t->s` mappings
 
 ## Implementation
-```python
-m1, m2 = {}, {}
-for c1, c2 in zip(s, t):
-    if (c1 in m1 and m1[c1] != c2) or (c2 in m2 and m2[c2] != c1):
-        return False
-    m1[c1], m2[c2] = c2, c1
-return True
+```java
+public boolean isIsomorphic(String s, String t) {
+    Map<Character, Character> mapST = new HashMap<>();
+    Map<Character, Character> mapTS = new HashMap<>();
+    
+    for (int i = 0; i < s.length(); i++) {
+        char c1 = s.charAt(i), c2 = t.charAt(i);
+        
+        if (mapST.containsKey(c1) && mapST.get(c1) != c2) return false;
+        if (mapTS.containsKey(c2) && mapTS.get(c2) != c1) return false;
+        
+        mapST.put(c1, c2);
+        mapTS.put(c2, c1);
+    }
+    return true;
+}
 ```
 
 ## Complexity
@@ -866,14 +1018,23 @@ return True
 - Start at max width, move shorter line inward
 
 ## Implementation
-```python
-l, r = 0, len(height) - 1
-max_area = 0
-while l < r:
-    max_area = max(max_area, min(height[l], height[r]) * (r - l))
-    if height[l] < height[r]: l += 1
-    else: r -= 1
-return max_area
+```java
+public int maxArea(int[] height) {
+    int left = 0, right = height.length - 1;
+    int maxArea = 0;
+    
+    while (left < right) {
+        int area = Math.min(height[left], height[right]) * (right - left);
+        maxArea = Math.max(maxArea, area);
+        
+        if (height[left] < height[right]) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+    return maxArea;
+}
 ```
 
 ## Complexity
@@ -898,12 +1059,16 @@ return max_area
 - Fast moves 2x, when fast ends, slow is at middle
 
 ## Implementation
-```python
-slow = fast = head
-while fast and fast.next:
-    slow = slow.next
-    fast = fast.next.next
-return slow
+```java
+public ListNode middleNode(ListNode head) {
+    ListNode slow = head, fast = head;
+    
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+}
 ```
 
 ## Complexity
@@ -925,13 +1090,22 @@ return slow
 - Start at ends, move based on sum comparison
 
 ## Implementation
-```python
-l, r = 0, len(numbers) - 1
-while l < r:
-    s = numbers[l] + numbers[r]
-    if s == target: return [l+1, r+1]
-    if s < target: l += 1
-    else: r -= 1
+```java
+public int[] twoSum(int[] numbers, int target) {
+    int left = 0, right = numbers.length - 1;
+    
+    while (left < right) {
+        int sum = numbers[left] + numbers[right];
+        if (sum == target) {
+            return new int[] { left + 1, right + 1 };
+        } else if (sum < target) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+    return new int[] {};
+}
 ```
 
 ## Complexity
@@ -949,23 +1123,29 @@ while l < r:
 
 ## Approach
 
-### DFS with Hash Map
+### DFS with HashMap
 - Map old node -> cloned node
 - Recursively clone neighbors
 
 ## Implementation
-```python
-def cloneGraph(node):
-    if not node: return None
-    cloned = {}
-    def dfs(n):
-        if n in cloned: return cloned[n]
-        copy = Node(n.val)
-        cloned[n] = copy
-        for neighbor in n.neighbors:
-            copy.neighbors.append(dfs(neighbor))
-        return copy
-    return dfs(node)
+```java
+private Map<Node, Node> visited = new HashMap<>();
+
+public Node cloneGraph(Node node) {
+    if (node == null) return null;
+    
+    if (visited.containsKey(node)) {
+        return visited.get(node);
+    }
+    
+    Node clone = new Node(node.val);
+    visited.put(node, clone);
+    
+    for (Node neighbor : node.neighbors) {
+        clone.neighbors.add(cloneGraph(neighbor));
+    }
+    return clone;
+}
 ```
 
 ## Complexity
@@ -988,68 +1168,37 @@ def cloneGraph(node):
 - If all removed, no cycle
 
 ## Implementation
-```python
-from collections import deque, defaultdict
-graph = defaultdict(list)
-indegree = [0] * numCourses
-for a, b in prerequisites:
-    graph[b].append(a)
-    indegree[a] += 1
-queue = deque([i for i in range(numCourses) if indegree[i] == 0])
-count = 0
-while queue:
-    node = queue.popleft()
-    count += 1
-    for neighbor in graph[node]:
-        indegree[neighbor] -= 1
-        if indegree[neighbor] == 0:
-            queue.append(neighbor)
-return count == numCourses
+```java
+public boolean canFinish(int numCourses, int[][] prerequisites) {
+    int[] indegree = new int[numCourses];
+    List<List<Integer>> adj = new ArrayList<>();
+    
+    for (int i = 0; i < numCourses; i++) adj.add(new ArrayList<>());
+    
+    for (int[] prereq : prerequisites) {
+        adj.get(prereq[1]).add(prereq[0]);
+        indegree[prereq[0]]++;
+    }
+    
+    Queue<Integer> queue = new LinkedList<>();
+    for (int i = 0; i < numCourses; i++) {
+        if (indegree[i] == 0) queue.offer(i);
+    }
+    
+    int count = 0;
+    while (!queue.isEmpty()) {
+        int course = queue.poll();
+        count++;
+        for (int next : adj.get(course)) {
+            if (--indegree[next] == 0) queue.offer(next);
+        }
+    }
+    return count == numCourses;
+}
 ```
 
 ## Complexity
 - **Time**: O(V + E)
-- **Space**: O(V + E)
-""",
-
-    "evaluate-division": """# Evaluate Division
-
-**Problem Link:** [Evaluate Division](https://leetcode.com/problems/evaluate-division/)
-**Category:** Google tagged
-
-## Problem Understanding
-- Given equations `a/b = k`, evaluate queries
-
-## Approach
-
-### Graph (DFS/BFS)
-- Build graph: `a -> b` with weight `k`, `b -> a` with weight `1/k`
-- For query `x/y`, find path `x -> y` and multiply weights
-
-## Implementation
-```python
-from collections import defaultdict
-graph = defaultdict(dict)
-for (a, b), v in zip(equations, values):
-    graph[a][b] = v
-    graph[b][a] = 1 / v
-
-def dfs(src, dst, visited):
-    if src not in graph or dst not in graph: return -1.0
-    if src == dst: return 1.0
-    visited.add(src)
-    for neighbor, weight in graph[src].items():
-        if neighbor not in visited:
-            result = dfs(neighbor, dst, visited)
-            if result != -1.0:
-                return weight * result
-    return -1.0
-
-return [dfs(c, d, set()) for c, d in queries]
-```
-
-## Complexity
-- **Time**: O(Q * (V + E))
 - **Space**: O(V + E)
 """,
 
@@ -1070,23 +1219,33 @@ return [dfs(c, d, set()) for c, d in queries]
 3. Compare halves
 
 ## Implementation
-```python
-# Find middle
-slow = fast = head
-while fast and fast.next:
-    slow, fast = slow.next, fast.next.next
-
-# Reverse second half
-prev = None
-while slow:
-    slow.next, prev, slow = prev, slow, slow.next
-
-# Compare
-left, right = head, prev
-while right:
-    if left.val != right.val: return False
-    left, right = left.next, right.next
-return True
+```java
+public boolean isPalindrome(ListNode head) {
+    // Find middle
+    ListNode slow = head, fast = head;
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    
+    // Reverse second half
+    ListNode prev = null;
+    while (slow != null) {
+        ListNode next = slow.next;
+        slow.next = prev;
+        prev = slow;
+        slow = next;
+    }
+    
+    // Compare
+    ListNode left = head, right = prev;
+    while (right != null) {
+        if (left.val != right.val) return false;
+        left = left.next;
+        right = right.next;
+    }
+    return true;
+}
 ```
 
 ## Complexity
@@ -1104,49 +1263,62 @@ return True
 
 ## Approach
 
-### Hash Map + Doubly Linked List
+### HashMap + Doubly Linked List
 - Map: key -> node
 - DLL: Most recent at head, least at tail
 
 ## Implementation
-```python
-class Node:
-    def __init__(self, k, v):
-        self.key, self.val = k, v
-        self.prev = self.next = None
-
-class LRUCache:
-    def __init__(self, capacity):
-        self.cap = capacity
-        self.cache = {}
-        self.head, self.tail = Node(0, 0), Node(0, 0)
-        self.head.next, self.tail.prev = self.tail, self.head
-
-    def _remove(self, node):
-        node.prev.next, node.next.prev = node.next, node.prev
-
-    def _insert(self, node):
-        node.next, node.prev = self.head.next, self.head
-        self.head.next.prev = node
-        self.head.next = node
-
-    def get(self, key):
-        if key in self.cache:
-            self._remove(self.cache[key])
-            self._insert(self.cache[key])
-            return self.cache[key].val
-        return -1
-
-    def put(self, key, value):
-        if key in self.cache:
-            self._remove(self.cache[key])
-        node = Node(key, value)
-        self.cache[key] = node
-        self._insert(node)
-        if len(self.cache) > self.cap:
-            lru = self.tail.prev
-            self._remove(lru)
-            del self.cache[lru.key]
+```java
+class LRUCache {
+    class Node {
+        int key, val;
+        Node prev, next;
+        Node(int k, int v) { key = k; val = v; }
+    }
+    
+    private Map<Integer, Node> cache = new HashMap<>();
+    private Node head = new Node(0, 0);
+    private Node tail = new Node(0, 0);
+    private int capacity;
+    
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        head.next = tail;
+        tail.prev = head;
+    }
+    
+    public int get(int key) {
+        if (!cache.containsKey(key)) return -1;
+        Node node = cache.get(key);
+        remove(node);
+        insertAtHead(node);
+        return node.val;
+    }
+    
+    public void put(int key, int value) {
+        if (cache.containsKey(key)) remove(cache.get(key));
+        Node node = new Node(key, value);
+        cache.put(key, node);
+        insertAtHead(node);
+        if (cache.size() > capacity) {
+            Node lru = tail.prev;
+            remove(lru);
+            cache.remove(lru.key);
+        }
+    }
+    
+    private void remove(Node node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+    
+    private void insertAtHead(Node node) {
+        node.next = head.next;
+        node.prev = head;
+        head.next.prev = node;
+        head.next = node;
+    }
+}
 ```
 
 ## Complexity
@@ -1170,54 +1342,27 @@ class LRUCache:
 - Slow is at prev of target
 
 ## Implementation
-```python
-dummy = ListNode(0, head)
-slow = fast = dummy
-for _ in range(n): fast = fast.next
-while fast.next:
-    slow, fast = slow.next, fast.next
-slow.next = slow.next.next
-return dummy.next
+```java
+public ListNode removeNthFromEnd(ListNode head, int n) {
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode slow = dummy, fast = dummy;
+    
+    for (int i = 0; i <= n; i++) fast = fast.next;
+    
+    while (fast != null) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+    
+    slow.next = slow.next.next;
+    return dummy.next;
+}
 ```
 
 ## Complexity
 - **Time**: O(n)
 - **Space**: O(1)
-""",
-
-    "copy-list-with-random-pointer": """# Copy List with Random Pointer
-
-**Problem Link:** [Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
-**Category:** Linked Lists
-
-## Problem Understanding
-- Deep copy list where each node has `next` and `random` pointers
-
-## Approach
-
-### Hash Map
-- Map old node -> new node
-- Two passes: create nodes, then set pointers
-
-## Implementation
-```python
-if not head: return None
-old_to_new = {}
-curr = head
-while curr:
-    old_to_new[curr] = Node(curr.val)
-    curr = curr.next
-curr = head
-while curr:
-    old_to_new[curr].next = old_to_new.get(curr.next)
-    old_to_new[curr].random = old_to_new.get(curr.random)
-    curr = curr.next
-return old_to_new[head]
-```
-
-## Complexity
-- **Time**: O(n)
-- **Space**: O(n)
 """,
 
     # ============ HEAPS ============
@@ -1236,14 +1381,18 @@ return old_to_new[head]
 - Top of min heap = kth largest
 
 ## Implementation
-```python
-import heapq
-heap = []
-for n in nums:
-    heapq.heappush(heap, n)
-    if len(heap) > k:
-        heapq.heappop(heap)
-return heap[0]
+```java
+public int findKthLargest(int[] nums, int k) {
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    
+    for (int num : nums) {
+        minHeap.offer(num);
+        if (minHeap.size() > k) {
+            minHeap.poll();
+        }
+    }
+    return minHeap.peek();
+}
 ```
 
 ## Complexity
@@ -1267,18 +1416,32 @@ return heap[0]
 - Collect from highest buckets
 
 ## Implementation
-```python
-from collections import Counter
-count = Counter(nums)
-buckets = [[] for _ in range(len(nums) + 1)]
-for num, freq in count.items():
-    buckets[freq].append(num)
-result = []
-for i in range(len(buckets) - 1, -1, -1):
-    for num in buckets[i]:
-        result.append(num)
-        if len(result) == k:
-            return result
+```java
+public int[] topKFrequent(int[] nums, int k) {
+    Map<Integer, Integer> count = new HashMap<>();
+    for (int num : nums) {
+        count.put(num, count.getOrDefault(num, 0) + 1);
+    }
+    
+    List<Integer>[] buckets = new List[nums.length + 1];
+    for (int key : count.keySet()) {
+        int freq = count.get(key);
+        if (buckets[freq] == null) buckets[freq] = new ArrayList<>();
+        buckets[freq].add(key);
+    }
+    
+    int[] result = new int[k];
+    int idx = 0;
+    for (int i = buckets.length - 1; i >= 0 && idx < k; i--) {
+        if (buckets[i] != null) {
+            for (int num : buckets[i]) {
+                result[idx++] = num;
+                if (idx == k) break;
+            }
+        }
+    }
+    return result;
+}
 ```
 
 ## Complexity
@@ -1302,23 +1465,26 @@ for i in range(len(buckets) - 1, -1, -1):
 - Balance sizes (differ by at most 1)
 
 ## Implementation
-```python
-import heapq
-class MedianFinder:
-    def __init__(self):
-        self.lo = []  # max heap (negated)
-        self.hi = []  # min heap
-
-    def addNum(self, num):
-        heapq.heappush(self.lo, -num)
-        heapq.heappush(self.hi, -heapq.heappop(self.lo))
-        if len(self.hi) > len(self.lo):
-            heapq.heappush(self.lo, -heapq.heappop(self.hi))
-
-    def findMedian(self):
-        if len(self.lo) > len(self.hi):
-            return -self.lo[0]
-        return (-self.lo[0] + self.hi[0]) / 2
+```java
+class MedianFinder {
+    private PriorityQueue<Integer> lo = new PriorityQueue<>(Collections.reverseOrder());
+    private PriorityQueue<Integer> hi = new PriorityQueue<>();
+    
+    public void addNum(int num) {
+        lo.offer(num);
+        hi.offer(lo.poll());
+        if (hi.size() > lo.size()) {
+            lo.offer(hi.poll());
+        }
+    }
+    
+    public double findMedian() {
+        if (lo.size() > hi.size()) {
+            return lo.peek();
+        }
+        return (lo.peek() + hi.peek()) / 2.0;
+    }
+}
 ```
 
 ## Complexity
@@ -1340,19 +1506,25 @@ class MedianFinder:
 ### Min Heap (End Times)
 - Sort by start time
 - Heap tracks earliest ending meeting
-- If new start >= heap top, reuse room (pop); else need new room
+- If new start >= heap top, reuse room (poll); else need new room
 
 ## Implementation
-```python
-import heapq
-if not intervals: return 0
-intervals.sort(key=lambda x: x[0])
-heap = [intervals[0][1]]
-for i in range(1, len(intervals)):
-    if intervals[i][0] >= heap[0]:
-        heapq.heappop(heap)
-    heapq.heappush(heap, intervals[i][1])
-return len(heap)
+```java
+public int minMeetingRooms(int[][] intervals) {
+    if (intervals.length == 0) return 0;
+    
+    Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+    PriorityQueue<Integer> heap = new PriorityQueue<>();
+    heap.offer(intervals[0][1]);
+    
+    for (int i = 1; i < intervals.length; i++) {
+        if (intervals[i][0] >= heap.peek()) {
+            heap.poll();
+        }
+        heap.offer(intervals[i][1]);
+    }
+    return heap.size();
+}
 ```
 
 ## Complexity
@@ -1375,26 +1547,27 @@ return len(heap)
 - One for values, one for minimums
 
 ## Implementation
-```python
-class MinStack:
-    def __init__(self):
-        self.stack = []
-        self.min_stack = []
-
-    def push(self, val):
-        self.stack.append(val)
-        if not self.min_stack or val <= self.min_stack[-1]:
-            self.min_stack.append(val)
-
-    def pop(self):
-        if self.stack.pop() == self.min_stack[-1]:
-            self.min_stack.pop()
-
-    def top(self):
-        return self.stack[-1]
-
-    def getMin(self):
-        return self.min_stack[-1]
+```java
+class MinStack {
+    private Stack<Integer> stack = new Stack<>();
+    private Stack<Integer> minStack = new Stack<>();
+    
+    public void push(int val) {
+        stack.push(val);
+        if (minStack.isEmpty() || val <= minStack.peek()) {
+            minStack.push(val);
+        }
+    }
+    
+    public void pop() {
+        if (stack.pop().equals(minStack.peek())) {
+            minStack.pop();
+        }
+    }
+    
+    public int top() { return stack.peek(); }
+    public int getMin() { return minStack.peek(); }
+}
 ```
 
 ## Complexity
@@ -1417,15 +1590,20 @@ class MinStack:
 - When warmer found, calculate distance for all colder ones
 
 ## Implementation
-```python
-result = [0] * len(temperatures)
-stack = []
-for i, t in enumerate(temperatures):
-    while stack and temperatures[stack[-1]] < t:
-        j = stack.pop()
-        result[j] = i - j
-    stack.append(i)
-return result
+```java
+public int[] dailyTemperatures(int[] temperatures) {
+    int[] result = new int[temperatures.length];
+    Stack<Integer> stack = new Stack<>();
+    
+    for (int i = 0; i < temperatures.length; i++) {
+        while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
+            int j = stack.pop();
+            result[j] = i - j;
+        }
+        stack.push(i);
+    }
+    return result;
+}
 ```
 
 ## Complexity
@@ -1444,28 +1622,35 @@ return result
 ## Approach
 
 ### Two Pointers
-- Track left_max and right_max
-- Water at i = min(left_max, right_max) - height[i]
+- Track leftMax and rightMax
+- Water at i = min(leftMax, rightMax) - height[i]
 
 ## Implementation
-```python
-l, r = 0, len(height) - 1
-left_max = right_max = 0
-water = 0
-while l < r:
-    if height[l] < height[r]:
-        if height[l] >= left_max:
-            left_max = height[l]
-        else:
-            water += left_max - height[l]
-        l += 1
-    else:
-        if height[r] >= right_max:
-            right_max = height[r]
-        else:
-            water += right_max - height[r]
-        r -= 1
-return water
+```java
+public int trap(int[] height) {
+    int left = 0, right = height.length - 1;
+    int leftMax = 0, rightMax = 0;
+    int water = 0;
+    
+    while (left < right) {
+        if (height[left] < height[right]) {
+            if (height[left] >= leftMax) {
+                leftMax = height[left];
+            } else {
+                water += leftMax - height[left];
+            }
+            left++;
+        } else {
+            if (height[right] >= rightMax) {
+                rightMax = height[right];
+            } else {
+                water += rightMax - height[right];
+            }
+            right--;
+        }
+    }
+    return water;
+}
 ```
 
 ## Complexity
@@ -1487,18 +1672,25 @@ return water
 - Push operands, pop two for operators
 
 ## Implementation
-```python
-stack = []
-for token in tokens:
-    if token in "+-*/":
-        b, a = stack.pop(), stack.pop()
-        if token == '+': stack.append(a + b)
-        elif token == '-': stack.append(a - b)
-        elif token == '*': stack.append(a * b)
-        else: stack.append(int(a / b))  # truncate toward zero
-    else:
-        stack.append(int(token))
-return stack[0]
+```java
+public int evalRPN(String[] tokens) {
+    Stack<Integer> stack = new Stack<>();
+    
+    for (String token : tokens) {
+        if ("+-*/".contains(token)) {
+            int b = stack.pop(), a = stack.pop();
+            switch (token) {
+                case "+": stack.push(a + b); break;
+                case "-": stack.push(a - b); break;
+                case "*": stack.push(a * b); break;
+                case "/": stack.push(a / b); break;
+            }
+        } else {
+            stack.push(Integer.parseInt(token));
+        }
+    }
+    return stack.pop();
+}
 ```
 
 ## Complexity
@@ -1522,17 +1714,23 @@ return stack[0]
 - `dp[i] = min(dp[i], dp[i - coin] + 1)`
 
 ## Implementation
-```python
-dp = [float('inf')] * (amount + 1)
-dp[0] = 0
-for coin in coins:
-    for x in range(coin, amount + 1):
-        dp[x] = min(dp[x], dp[x - coin] + 1)
-return dp[amount] if dp[amount] != float('inf') else -1
+```java
+public int coinChange(int[] coins, int amount) {
+    int[] dp = new int[amount + 1];
+    Arrays.fill(dp, amount + 1);
+    dp[0] = 0;
+    
+    for (int coin : coins) {
+        for (int x = coin; x <= amount; x++) {
+            dp[x] = Math.min(dp[x], dp[x - coin] + 1);
+        }
+    }
+    return dp[amount] > amount ? -1 : dp[amount];
+}
 ```
 
 ## Complexity
-- **Time**: O(amount * len(coins))
+- **Time**: O(amount * coins.length)
 - **Space**: O(amount)
 """,
 
@@ -1550,16 +1748,22 @@ return dp[amount] if dp[amount] != float('inf') else -1
 - Maintain array of smallest tail for each length
 
 ## Implementation
-```python
-from bisect import bisect_left
-tails = []
-for num in nums:
-    pos = bisect_left(tails, num)
-    if pos == len(tails):
-        tails.append(num)
-    else:
-        tails[pos] = num
-return len(tails)
+```java
+public int lengthOfLIS(int[] nums) {
+    List<Integer> tails = new ArrayList<>();
+    
+    for (int num : nums) {
+        int pos = Collections.binarySearch(tails, num);
+        if (pos < 0) pos = -(pos + 1);
+        
+        if (pos == tails.size()) {
+            tails.add(num);
+        } else {
+            tails.set(pos, num);
+        }
+    }
+    return tails.size();
+}
 ```
 
 ## Complexity
@@ -1579,19 +1783,25 @@ return len(tails)
 
 ### DP
 - `dp[i]` = can s[0:i] be segmented?
-- `dp[i] = dp[j] and s[j:i] in wordDict`
+- `dp[i] = dp[j] && s[j:i] in wordDict`
 
 ## Implementation
-```python
-word_set = set(wordDict)
-dp = [False] * (len(s) + 1)
-dp[0] = True
-for i in range(1, len(s) + 1):
-    for j in range(i):
-        if dp[j] and s[j:i] in word_set:
-            dp[i] = True
-            break
-return dp[len(s)]
+```java
+public boolean wordBreak(String s, List<String> wordDict) {
+    Set<String> wordSet = new HashSet<>(wordDict);
+    boolean[] dp = new boolean[s.length() + 1];
+    dp[0] = true;
+    
+    for (int i = 1; i <= s.length(); i++) {
+        for (int j = 0; j < i; j++) {
+            if (dp[j] && wordSet.contains(s.substring(j, i))) {
+                dp[i] = true;
+                break;
+            }
+        }
+    }
+    return dp[s.length()];
+}
 ```
 
 ## Complexity
@@ -1614,18 +1824,21 @@ return dp[len(s)]
 - Add '(' if open < n, ')' if close < open
 
 ## Implementation
-```python
-result = []
-def backtrack(curr, open_count, close_count):
-    if len(curr) == 2 * n:
-        result.append(curr)
-        return
-    if open_count < n:
-        backtrack(curr + '(', open_count + 1, close_count)
-    if close_count < open_count:
-        backtrack(curr + ')', open_count, close_count + 1)
-backtrack('', 0, 0)
-return result
+```java
+public List<String> generateParenthesis(int n) {
+    List<String> result = new ArrayList<>();
+    backtrack(result, "", 0, 0, n);
+    return result;
+}
+
+private void backtrack(List<String> result, String curr, int open, int close, int n) {
+    if (curr.length() == 2 * n) {
+        result.add(curr);
+        return;
+    }
+    if (open < n) backtrack(result, curr + "(", open + 1, close, n);
+    if (close < open) backtrack(result, curr + ")", open, close + 1, n);
+}
 ```
 
 ## Complexity
@@ -1644,21 +1857,31 @@ return result
 ## Approach
 
 ### Backtracking
-- Track used elements with set or swap technique
+- Track used elements with boolean array
 
 ## Implementation
-```python
-result = []
-def backtrack(path, remaining):
-    if not remaining:
-        result.append(path[:])
-        return
-    for i in range(len(remaining)):
-        path.append(remaining[i])
-        backtrack(path, remaining[:i] + remaining[i+1:])
-        path.pop()
-backtrack([], nums)
-return result
+```java
+public List<List<Integer>> permute(int[] nums) {
+    List<List<Integer>> result = new ArrayList<>();
+    backtrack(result, new ArrayList<>(), nums, new boolean[nums.length]);
+    return result;
+}
+
+private void backtrack(List<List<Integer>> result, List<Integer> path, 
+                       int[] nums, boolean[] used) {
+    if (path.size() == nums.length) {
+        result.add(new ArrayList<>(path));
+        return;
+    }
+    for (int i = 0; i < nums.length; i++) {
+        if (used[i]) continue;
+        used[i] = true;
+        path.add(nums[i]);
+        backtrack(result, path, nums, used);
+        path.remove(path.size() - 1);
+        used[i] = false;
+    }
+}
 ```
 
 ## Complexity
@@ -1681,13 +1904,19 @@ return result
 - Anagrams have same sorted form
 
 ## Implementation
-```python
-from collections import defaultdict
-groups = defaultdict(list)
-for s in strs:
-    key = ''.join(sorted(s))
-    groups[key].append(s)
-return list(groups.values())
+```java
+public List<List<String>> groupAnagrams(String[] strs) {
+    Map<String, List<String>> map = new HashMap<>();
+    
+    for (String s : strs) {
+        char[] chars = s.toCharArray();
+        Arrays.sort(chars);
+        String key = new String(chars);
+        
+        map.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
+    }
+    return new ArrayList<>(map.values());
+}
 ```
 
 ## Complexity
@@ -1705,19 +1934,23 @@ return list(groups.values())
 
 ## Approach
 
-### Prefix Sum + Hash Map
+### Prefix Sum + HashMap
 - If `prefix[j] - prefix[i] = k`, subarray i+1 to j sums to k
 
 ## Implementation
-```python
-count = 0
-prefix_sum = 0
-prefix_counts = {0: 1}
-for num in nums:
-    prefix_sum += num
-    count += prefix_counts.get(prefix_sum - k, 0)
-    prefix_counts[prefix_sum] = prefix_counts.get(prefix_sum, 0) + 1
-return count
+```java
+public int subarraySum(int[] nums, int k) {
+    int count = 0, prefixSum = 0;
+    Map<Integer, Integer> prefixCounts = new HashMap<>();
+    prefixCounts.put(0, 1);
+    
+    for (int num : nums) {
+        prefixSum += num;
+        count += prefixCounts.getOrDefault(prefixSum - k, 0);
+        prefixCounts.put(prefixSum, prefixCounts.getOrDefault(prefixSum, 0) + 1);
+    }
+    return count;
+}
 ```
 
 ## Complexity
@@ -1741,12 +1974,17 @@ return count
 - Check if any end > next start
 
 ## Implementation
-```python
-intervals.sort(key=lambda x: x[0])
-for i in range(len(intervals) - 1):
-    if intervals[i][1] > intervals[i+1][0]:
-        return False
-return True
+```java
+public boolean canAttendMeetings(int[][] intervals) {
+    Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+    
+    for (int i = 0; i < intervals.length - 1; i++) {
+        if (intervals[i][1] > intervals[i + 1][0]) {
+            return false;
+        }
+    }
+    return true;
+}
 ```
 
 ## Complexity
@@ -1775,7 +2013,7 @@ def main():
     with open('leetcode_problems.json', 'r') as f:
         problems = json.load(f)
 
-    print(f"Generating specific mindmaps for {len(PROBLEM_CONTENT)} problems...")
+    print(f"Generating specific mindmaps for {len(PROBLEM_CONTENT)} problems with Java implementations...")
 
     base_dir = Path('leetcode_mindmaps')
     base_dir.mkdir(exist_ok=True)
@@ -1798,7 +2036,7 @@ def main():
             updated += 1
             print(f"  Updated: {filepath}")
 
-    print(f"\n✓ Updated {updated} mindmaps with specific content!")
+    print(f"\n✓ Updated {updated} mindmaps with specific Java content!")
 
 
 if __name__ == '__main__':

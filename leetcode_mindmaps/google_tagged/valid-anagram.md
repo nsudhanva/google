@@ -1,58 +1,34 @@
 # Valid Anagram
 
 **Problem Link:** [Valid Anagram](https://leetcode.com/problems/valid-anagram/)
-
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Check if `t` is anagram of `s` (same chars, same counts)
 
-```mermaid
-mindmap
-  root((Valid Anagram))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Frequency Count
+- Count chars in both strings, compare
+
+## Implementation
+```java
+public boolean isAnagram(String s, String t) {
+    if (s.length() != t.length()) return false;
+    
+    int[] count = new int[26];
+    for (int i = 0; i < s.length(); i++) {
+        count[s.charAt(i) - 'a']++;
+        count[t.charAt(i) - 'a']--;
+    }
+    
+    for (int c : count) {
+        if (c != 0) return false;
+    }
+    return true;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n)
+- **Space**: O(1) (26 letters)

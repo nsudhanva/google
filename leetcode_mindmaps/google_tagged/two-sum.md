@@ -1,58 +1,41 @@
 # Two Sum
 
-**Problem Link:** [Two Sum](https://leetcode.com/problems/two-sum/description/)
-
+**Problem Link:** [Two Sum](https://leetcode.com/problems/two-sum/)
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Input: Array `nums`, integer `target`
+- Output: Indices of two numbers that add up to `target`
+- Constraints: Exactly one solution, can't use same element twice
 
-```mermaid
-mindmap
-  root((Two Sum))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Brute Force
+- Check every pair `(i, j)` -> O(n²)
+
+### Hash Map (Optimal)
+- For each `x`, look for `target - x` in map
+- One pass: check then add
+
+## Implementation
+```java
+public int[] twoSum(int[] nums, int target) {
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++) {
+        int complement = target - nums[i];
+        if (map.containsKey(complement)) {
+            return new int[] { map.get(complement), i };
+        }
+        map.put(nums[i], i);
+    }
+    return new int[] {};
+}
 ```
 
-## Key Insights
+## Complexity
+- **Time**: O(n)
+- **Space**: O(n)
 
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Key Insight
+- Trade space for time with HashMap
+- Check *before* adding to handle duplicates correctly

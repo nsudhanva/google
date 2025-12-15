@@ -1,58 +1,43 @@
 # Add Two Numbers
 
 **Problem Link:** [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
-
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Two linked lists represent numbers in reverse order
+- Return sum as linked list
 
-```mermaid
-mindmap
-  root((Add Two Numbers))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Elementary Math with Carry
+- Add digit by digit, track carry
+
+## Implementation
+```java
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    ListNode dummy = new ListNode(0);
+    ListNode curr = dummy;
+    int carry = 0;
+    
+    while (l1 != null || l2 != null || carry != 0) {
+        int v1 = (l1 != null) ? l1.val : 0;
+        int v2 = (l2 != null) ? l2.val : 0;
+        int sum = v1 + v2 + carry;
+        
+        carry = sum / 10;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
+        
+        if (l1 != null) l1 = l1.next;
+        if (l2 != null) l2 = l2.next;
+    }
+    return dummy.next;
+}
 ```
 
-## Key Insights
+## Complexity
+- **Time**: O(max(m, n))
+- **Space**: O(max(m, n))
 
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Key Insight
+- Include `carry != 0` in while condition for final carry

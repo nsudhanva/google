@@ -1,58 +1,36 @@
 # Word Break
 
-**Problem Link:** [Word Break](https://leetcode.com/problems/word-break/description/)
-
+**Problem Link:** [Word Break](https://leetcode.com/problems/word-break/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Can string be segmented into dictionary words?
 
-```mermaid
-mindmap
-  root((Word Break))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### DP
+- `dp[i]` = can s[0:i] be segmented?
+- `dp[i] = dp[j] && s[j:i] in wordDict`
+
+## Implementation
+```java
+public boolean wordBreak(String s, List<String> wordDict) {
+    Set<String> wordSet = new HashSet<>(wordDict);
+    boolean[] dp = new boolean[s.length() + 1];
+    dp[0] = true;
+    
+    for (int i = 1; i <= s.length(); i++) {
+        for (int j = 0; j < i; j++) {
+            if (dp[j] && wordSet.contains(s.substring(j, i))) {
+                dp[i] = true;
+                break;
+            }
+        }
+    }
+    return dp[s.length()];
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n² * m) where m is max word length
+- **Space**: O(n)

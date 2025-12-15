@@ -1,58 +1,34 @@
 # Daily Temperatures
 
-**Problem Link:** [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/description/)
-
+**Problem Link:** [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
 **Category:** Stacks & Queues
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- For each day, find days until warmer temperature
 
-```mermaid
-mindmap
-  root((Daily Temperatures))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Monotonic Stack (Decreasing)
+- Stack stores indices of unresolved temperatures
+- When warmer found, calculate distance for all colder ones
+
+## Implementation
+```java
+public int[] dailyTemperatures(int[] temperatures) {
+    int[] result = new int[temperatures.length];
+    Stack<Integer> stack = new Stack<>();
+    
+    for (int i = 0; i < temperatures.length; i++) {
+        while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
+            int j = stack.pop();
+            result[j] = i - j;
+        }
+        stack.push(i);
+    }
+    return result;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n)
+- **Space**: O(n)

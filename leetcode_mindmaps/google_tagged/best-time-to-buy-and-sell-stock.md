@@ -1,58 +1,38 @@
-# Best Time To Buy And Sell Stock
+# Best Time to Buy and Sell Stock
 
-**Problem Link:** [Best Time To Buy And Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
-
+**Problem Link:** [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Find max profit from one buy and one sell
+- Must buy before sell
 
-```mermaid
-mindmap
-  root((Best Time To Buy And Sell Stock))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### One Pass (Track Minimum)
+- Track minimum price seen so far
+- At each price, calculate potential profit
+
+## Implementation
+```java
+public int maxProfit(int[] prices) {
+    int minPrice = Integer.MAX_VALUE;
+    int maxProfit = 0;
+    
+    for (int price : prices) {
+        if (price < minPrice) {
+            minPrice = price;
+        } else if (price - minPrice > maxProfit) {
+            maxProfit = price - minPrice;
+        }
+    }
+    return maxProfit;
+}
 ```
 
-## Key Insights
+## Complexity
+- **Time**: O(n)
+- **Space**: O(1)
 
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Key Insight
+- Greedy: always buy at the lowest price seen so far

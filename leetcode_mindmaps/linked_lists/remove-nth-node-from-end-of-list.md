@@ -1,58 +1,37 @@
-# Remove Nth Node From End Of List
+# Remove Nth Node From End of List
 
-**Problem Link:** [Remove Nth Node From End Of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/)
-
+**Problem Link:** [Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
 **Category:** Linked Lists
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Remove nth node from end in one pass
 
-```mermaid
-mindmap
-  root((Remove Nth Node From End Of List))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Two Pointers (Gap of N)
+- Move fast n steps ahead
+- Move both until fast reaches end
+- Slow is at prev of target
+
+## Implementation
+```java
+public ListNode removeNthFromEnd(ListNode head, int n) {
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode slow = dummy, fast = dummy;
+    
+    for (int i = 0; i <= n; i++) fast = fast.next;
+    
+    while (fast != null) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+    
+    slow.next = slow.next.next;
+    return dummy.next;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n)
+- **Space**: O(1)

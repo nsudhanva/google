@@ -1,58 +1,45 @@
 # Trapping Rain Water
 
-**Problem Link:** [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/description/)
-
+**Problem Link:** [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
 **Category:** Stacks & Queues
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Calculate water trapped between bars
 
-```mermaid
-mindmap
-  root((Trapping Rain Water))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Two Pointers
+- Track leftMax and rightMax
+- Water at i = min(leftMax, rightMax) - height[i]
+
+## Implementation
+```java
+public int trap(int[] height) {
+    int left = 0, right = height.length - 1;
+    int leftMax = 0, rightMax = 0;
+    int water = 0;
+    
+    while (left < right) {
+        if (height[left] < height[right]) {
+            if (height[left] >= leftMax) {
+                leftMax = height[left];
+            } else {
+                water += leftMax - height[left];
+            }
+            left++;
+        } else {
+            if (height[right] >= rightMax) {
+                rightMax = height[right];
+            } else {
+                water += rightMax - height[right];
+            }
+            right--;
+        }
+    }
+    return water;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n)
+- **Space**: O(1)

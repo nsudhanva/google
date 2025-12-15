@@ -1,58 +1,71 @@
-# Lru Cache
+# LRU Cache
 
-**Problem Link:** [Lru Cache](https://leetcode.com/problems/lru-cache/description/)
-
+**Problem Link:** [LRU Cache](https://leetcode.com/problems/lru-cache/)
 **Category:** Linked Lists
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Implement LRU Cache with O(1) get/put
 
-```mermaid
-mindmap
-  root((Lru Cache))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### HashMap + Doubly Linked List
+- Map: key -> node
+- DLL: Most recent at head, least at tail
+
+## Implementation
+```java
+class LRUCache {
+    class Node {
+        int key, val;
+        Node prev, next;
+        Node(int k, int v) { key = k; val = v; }
+    }
+    
+    private Map<Integer, Node> cache = new HashMap<>();
+    private Node head = new Node(0, 0);
+    private Node tail = new Node(0, 0);
+    private int capacity;
+    
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        head.next = tail;
+        tail.prev = head;
+    }
+    
+    public int get(int key) {
+        if (!cache.containsKey(key)) return -1;
+        Node node = cache.get(key);
+        remove(node);
+        insertAtHead(node);
+        return node.val;
+    }
+    
+    public void put(int key, int value) {
+        if (cache.containsKey(key)) remove(cache.get(key));
+        Node node = new Node(key, value);
+        cache.put(key, node);
+        insertAtHead(node);
+        if (cache.size() > capacity) {
+            Node lru = tail.prev;
+            remove(lru);
+            cache.remove(lru.key);
+        }
+    }
+    
+    private void remove(Node node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+    
+    private void insertAtHead(Node node) {
+        node.next = head.next;
+        node.prev = head;
+        head.next.prev = node;
+        head.next = node;
+    }
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(1) for both operations
+- **Space**: O(capacity)

@@ -1,58 +1,35 @@
 # Longest Increasing Subsequence
 
-**Problem Link:** [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/description/)
-
+**Problem Link:** [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Find length of longest strictly increasing subsequence
 
-```mermaid
-mindmap
-  root((Longest Increasing Subsequence))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Binary Search + DP
+- Maintain array of smallest tail for each length
+
+## Implementation
+```java
+public int lengthOfLIS(int[] nums) {
+    List<Integer> tails = new ArrayList<>();
+    
+    for (int num : nums) {
+        int pos = Collections.binarySearch(tails, num);
+        if (pos < 0) pos = -(pos + 1);
+        
+        if (pos == tails.size()) {
+            tails.add(num);
+        } else {
+            tails.set(pos, num);
+        }
+    }
+    return tails.size();
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n log n)
+- **Space**: O(n)

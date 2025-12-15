@@ -1,58 +1,37 @@
-# Meeting Rooms Ii
+# Meeting Rooms II
 
-**Problem Link:** [Meeting Rooms Ii](https://leetcode.com/problems/meeting-rooms-ii/)
-
+**Problem Link:** [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)
 **Category:** Heaps
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Find minimum meeting rooms needed
 
-```mermaid
-mindmap
-  root((Meeting Rooms Ii))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Min Heap (End Times)
+- Sort by start time
+- Heap tracks earliest ending meeting
+- If new start >= heap top, reuse room (poll); else need new room
+
+## Implementation
+```java
+public int minMeetingRooms(int[][] intervals) {
+    if (intervals.length == 0) return 0;
+    
+    Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+    PriorityQueue<Integer> heap = new PriorityQueue<>();
+    heap.offer(intervals[0][1]);
+    
+    for (int i = 1; i < intervals.length; i++) {
+        if (intervals[i][0] >= heap.peek()) {
+            heap.poll();
+        }
+        heap.offer(intervals[i][1]);
+    }
+    return heap.size();
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n log n)
+- **Space**: O(n)

@@ -1,58 +1,41 @@
 # Permutations
 
-**Problem Link:** [Permutations](https://leetcode.com/problems/permutations/description/)
-
+**Problem Link:** [Permutations](https://leetcode.com/problems/permutations/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Return all permutations of unique integers
 
-```mermaid
-mindmap
-  root((Permutations))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Backtracking
+- Track used elements with boolean array
+
+## Implementation
+```java
+public List<List<Integer>> permute(int[] nums) {
+    List<List<Integer>> result = new ArrayList<>();
+    backtrack(result, new ArrayList<>(), nums, new boolean[nums.length]);
+    return result;
+}
+
+private void backtrack(List<List<Integer>> result, List<Integer> path, 
+                       int[] nums, boolean[] used) {
+    if (path.size() == nums.length) {
+        result.add(new ArrayList<>(path));
+        return;
+    }
+    for (int i = 0; i < nums.length; i++) {
+        if (used[i]) continue;
+        used[i] = true;
+        path.add(nums[i]);
+        backtrack(result, path, nums, used);
+        path.remove(path.size() - 1);
+        used[i] = false;
+    }
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n * n!)
+- **Space**: O(n)

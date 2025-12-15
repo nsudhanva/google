@@ -1,58 +1,47 @@
 # Course Schedule
 
 **Problem Link:** [Course Schedule](https://leetcode.com/problems/course-schedule/)
-
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Can finish all courses? (Detect cycle in DAG)
 
-```mermaid
-mindmap
-  root((Course Schedule))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+
+### Topological Sort (Kahn's BFS)
+- Remove nodes with 0 in-degree iteratively
+- If all removed, no cycle
+
+## Implementation
+```java
+public boolean canFinish(int numCourses, int[][] prerequisites) {
+    int[] indegree = new int[numCourses];
+    List<List<Integer>> adj = new ArrayList<>();
+    
+    for (int i = 0; i < numCourses; i++) adj.add(new ArrayList<>());
+    
+    for (int[] prereq : prerequisites) {
+        adj.get(prereq[1]).add(prereq[0]);
+        indegree[prereq[0]]++;
+    }
+    
+    Queue<Integer> queue = new LinkedList<>();
+    for (int i = 0; i < numCourses; i++) {
+        if (indegree[i] == 0) queue.offer(i);
+    }
+    
+    int count = 0;
+    while (!queue.isEmpty()) {
+        int course = queue.poll();
+        count++;
+        for (int next : adj.get(course)) {
+            if (--indegree[next] == 0) queue.offer(next);
+        }
+    }
+    return count == numCourses;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(V + E)
+- **Space**: O(V + E)
