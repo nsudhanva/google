@@ -611,6 +611,11 @@ Please ensure the markdown file exists in the correct category folder.`;
                 if (styles) await markmap.loadCSS(styles);
                 if (scripts) await markmap.loadJS(scripts);
 
+                // Save root data for expand/collapse toggle
+                currentRootData = root;
+                currentExpanded = false;
+                document.getElementById('expand-toggle').innerHTML = '📖 Expand All';
+
                 // Create markmap
                 currentMarkmap = markmap.Markmap.create(
                     svg.node(),
@@ -664,38 +669,34 @@ Please ensure the markdown file exists in the correct category folder.`;
         });
 
         // Toggle expand/collapse all nodes
+        let currentExpanded = false;
+        let currentRootData = null;
+
         function toggleExpandAll() {
-            if (!currentMarkmap) return;
+            if (!currentMarkmap || !currentRootData) return;
 
             const btn = document.getElementById('expand-toggle');
-            const isExpanded = btn.textContent.includes('Collapse');
+            currentExpanded = !currentExpanded;
 
-            // Recursive function to set fold state on all nodes
-            function setFoldState(node, fold) {
-                if (!node) return;
-                if (!node.payload) node.payload = {};
-                node.payload.fold = fold;
-                if (node.children) {
-                    node.children.forEach(child => setFoldState(child, fold));
-                }
-            }
+            // Clear and recreate with new expand level
+            const svg = d3.select('#mindmap');
+            svg.selectAll('*').remove();
 
-            const root = currentMarkmap.state.data;
+            currentMarkmap = markmap.Markmap.create(
+                svg.node(),
+                {
+                    color: (node) => {
+                        const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
+                        return colors[node.depth % colors.length];
+                    },
+                    duration: 500,
+                    maxWidth: 300,
+                    initialExpandLevel: currentExpanded ? -1 : 1,
+                },
+                currentRootData
+            );
 
-            if (isExpanded) {
-                // Collapse all (fold = true, except root)
-                if (root.children) {
-                    root.children.forEach(child => setFoldState(child, true));
-                }
-                btn.innerHTML = '📖 Expand All';
-            } else {
-                // Expand all (fold = false)
-                setFoldState(root, false);
-                btn.innerHTML = '📕 Collapse All';
-            }
-
-            // Re-render with updated data
-            currentMarkmap.setData(root);
+            btn.innerHTML = currentExpanded ? '📕 Collapse All' : '📖 Expand All';
             setTimeout(() => currentMarkmap.fit(), 100);
         }
 
