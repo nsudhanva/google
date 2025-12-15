@@ -1,58 +1,40 @@
 # Word Search
 
-**Problem Link:** [Word Search](https://leetcode.com/problems/word-search/description/)
-
+**Problem Link:** [Word Search](https://leetcode.com/problems/word-search/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Find if word exists in grid via adjacent cells
 
-```mermaid
-mindmap
-  root((Word Search))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+### Backtracking
+- DFS from each cell, mark visited
+
+## Implementation
+```java
+public boolean exist(char[][] board, String word) {
+    for (int i = 0; i < board.length; i++) {
+        for (int j = 0; j < board[0].length; j++) {
+            if (dfs(board, word, i, j, 0)) return true;
+        }
+    }
+    return false;
+}
+
+private boolean dfs(char[][] board, String word, int i, int j, int k) {
+    if (k == word.length()) return true;
+    if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return false;
+    if (board[i][j] != word.charAt(k)) return false;
+    
+    char temp = board[i][j];
+    board[i][j] = '#';
+    boolean found = dfs(board, word, i+1, j, k+1) || dfs(board, word, i-1, j, k+1) ||
+                    dfs(board, word, i, j+1, k+1) || dfs(board, word, i, j-1, k+1);
+    board[i][j] = temp;
+    return found;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(m * n * 4^L)
+- **Space**: O(L)

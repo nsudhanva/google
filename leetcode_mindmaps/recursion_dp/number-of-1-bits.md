@@ -1,58 +1,20 @@
-# Number Of 1 Bits
+# Number of 1 Bits
 
-**Problem Link:** [Number Of 1 Bits](https://leetcode.com/problems/number-of-1-bits/description/)
-
+**Problem Link:** [Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Number Of 1 Bits))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Implementation
+```java
+public int hammingWeight(int n) {
+    int count = 0;
+    while (n != 0) {
+        count += (n & 1);
+        n >>>= 1;
+    }
+    return count;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(32) = O(1)
+- **Space**: O(1)

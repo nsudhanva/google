@@ -1,58 +1,16 @@
-# Design Hashmap
+# Design HashMap
 
-**Problem Link:** [Design Hashmap](https://leetcode.com/problems/design-hashmap/description/)
-
+**Problem Link:** [Design HashMap](https://leetcode.com/problems/design-hashmap/)
 **Category:** Hashmaps
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Design Hashmap))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Implementation
+```java
+class MyHashMap {
+    int[] data = new int[1000001];
+    
+    public MyHashMap() { Arrays.fill(data, -1); }
+    public void put(int key, int value) { data[key] = value; }
+    public int get(int key) { return data[key]; }
+    public void remove(int key) { data[key] = -1; }
+}
 ```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*

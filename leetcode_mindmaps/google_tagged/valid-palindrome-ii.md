@@ -1,58 +1,25 @@
-# Valid Palindrome Ii
+# Valid Palindrome II
 
-**Problem Link:** [Valid Palindrome Ii](https://leetcode.com/problems/valid-palindrome-ii/)
-
+**Problem Link:** [Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/)
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Implementation
+```java
+public boolean validPalindrome(String s) {
+    int l = 0, r = s.length() - 1;
+    while (l < r) {
+        if (s.charAt(l) != s.charAt(r)) {
+            return isPalin(s, l+1, r) || isPalin(s, l, r-1);
+        }
+        l++; r--;
+    }
+    return true;
+}
 
-```mermaid
-mindmap
-  root((Valid Palindrome Ii))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+private boolean isPalin(String s, int l, int r) {
+    while (l < r) {
+        if (s.charAt(l++) != s.charAt(r--)) return false;
+    }
+    return true;
+}
 ```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*

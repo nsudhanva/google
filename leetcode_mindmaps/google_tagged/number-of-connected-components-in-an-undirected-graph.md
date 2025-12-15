@@ -1,58 +1,34 @@
-# Number Of Connected Components In An Undirected Graph
+# Number of Connected Components in an Undirected Graph
 
-**Problem Link:** [Number Of Connected Components In An Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
-
+**Problem Link:** [Number of Connected Components](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Implementation
+```java
+public int countComponents(int n, int[][] edges) {
+    int[] parent = new int[n];
+    for (int i = 0; i < n; i++) parent[i] = i;
+    
+    int count = n;
+    for (int[] e : edges) {
+        int p1 = find(parent, e[0]), p2 = find(parent, e[1]);
+        if (p1 != p2) {
+            parent[p1] = p2;
+            count--;
+        }
+    }
+    return count;
+}
 
-```mermaid
-mindmap
-  root((Number Of Connected Components In An Undirected Graph))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+private int find(int[] parent, int i) {
+    while (parent[i] != i) {
+        parent[i] = parent[parent[i]];
+        i = parent[i];
+    }
+    return i;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(E * α(N))
+- **Space**: O(N)

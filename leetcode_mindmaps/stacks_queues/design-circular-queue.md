@@ -1,58 +1,34 @@
 # Design Circular Queue
 
-**Problem Link:** [Design Circular Queue](https://leetcode.com/problems/design-circular-queue/description/)
-
+**Problem Link:** [Design Circular Queue](https://leetcode.com/problems/design-circular-queue/)
 **Category:** Stacks & Queues
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Design Circular Queue))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Implementation
+```java
+class MyCircularQueue {
+    int[] data;
+    int head = 0, tail = -1, size = 0;
+    
+    public MyCircularQueue(int k) { data = new int[k]; }
+    
+    public boolean enQueue(int value) {
+        if (isFull()) return false;
+        tail = (tail + 1) % data.length;
+        data[tail] = value;
+        size++;
+        return true;
+    }
+    
+    public boolean deQueue() {
+        if (isEmpty()) return false;
+        head = (head + 1) % data.length;
+        size--;
+        return true;
+    }
+    
+    public int Front() { return isEmpty() ? -1 : data[head]; }
+    public int Rear() { return isEmpty() ? -1 : data[tail]; }
+    public boolean isEmpty() { return size == 0; }
+    public boolean isFull() { return size == data.length; }
+}
 ```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*

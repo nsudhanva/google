@@ -1,58 +1,28 @@
-# Strobogrammatic Number Ii
+# Strobogrammatic Number II
 
-**Problem Link:** [Strobogrammatic Number Ii](https://leetcode.com/problems/strobogrammatic-number-ii/description/)
-
+**Problem Link:** [Strobogrammatic Number II](https://leetcode.com/problems/strobogrammatic-number-ii/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
+## Implementation
+```java
+public List<String> findStrobogrammatic(int n) {
+    return helper(n, n);
+}
 
-```mermaid
-mindmap
-  root((Strobogrammatic Number Ii))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+private List<String> helper(int n, int m) {
+    if (n == 0) return new ArrayList<>(Arrays.asList(""));
+    if (n == 1) return new ArrayList<>(Arrays.asList("0", "1", "8"));
+    
+    List<String> middles = helper(n - 2, m);
+    List<String> result = new ArrayList<>();
+    
+    for (String middle : middles) {
+        if (n != m) result.add("0" + middle + "0");
+        result.add("1" + middle + "1");
+        result.add("6" + middle + "9");
+        result.add("8" + middle + "8");
+        result.add("9" + middle + "6");
+    }
+    return result;
+}
 ```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*

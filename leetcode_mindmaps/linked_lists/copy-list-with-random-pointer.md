@@ -1,58 +1,30 @@
-# Copy List With Random Pointer
+# Copy List with Random Pointer
 
-**Problem Link:** [Copy List With Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/description/)
-
+**Problem Link:** [Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
 **Category:** Linked Lists
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Copy List With Random Pointer))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Implementation
+```java
+public Node copyRandomList(Node head) {
+    if (head == null) return null;
+    Map<Node, Node> map = new HashMap<>();
+    
+    Node curr = head;
+    while (curr != null) {
+        map.put(curr, new Node(curr.val));
+        curr = curr.next;
+    }
+    
+    curr = head;
+    while (curr != null) {
+        map.get(curr).next = map.get(curr.next);
+        map.get(curr).random = map.get(curr.random);
+        curr = curr.next;
+    }
+    return map.get(head);
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n)
+- **Space**: O(n)

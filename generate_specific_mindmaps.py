@@ -54,7 +54,6 @@ public int[] twoSum(int[] nums, int target) {
 - Trade space for time with HashMap
 - Check *before* adding to handle duplicates correctly
 """,
-
     "3sum": """# 3Sum
 
 **Problem Link:** [3sum](https://leetcode.com/problems/3sum/)
@@ -107,7 +106,6 @@ public List<List<Integer>> threeSum(int[] nums) {
 ## Key Insight
 - Sorting enables Two Pointers and easy duplicate skipping
 """,
-
     "merge-sorted-array": """# Merge Sorted Array
 
 **Problem Link:** [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
@@ -145,7 +143,6 @@ public void merge(int[] nums1, int m, int[] nums2, int n) {
 ## Key Insight
 - Fill from end when array has space at end
 """,
-
     "valid-parentheses": """# Valid Parentheses
 
 **Problem Link:** [Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
@@ -186,7 +183,6 @@ public boolean isValid(String s) {
 ## Key Insight
 - LIFO property of stack matches nested structure
 """,
-
     "best-time-to-buy-and-sell-stock": """# Best Time to Buy and Sell Stock
 
 **Problem Link:** [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
@@ -226,7 +222,6 @@ public int maxProfit(int[] prices) {
 ## Key Insight
 - Greedy: always buy at the lowest price seen so far
 """,
-
     "longest-common-prefix": """# Longest Common Prefix
 
 **Problem Link:** [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
@@ -261,7 +256,6 @@ public String longestCommonPrefix(String[] strs) {
 - **Time**: O(S) where S is sum of all chars
 - **Space**: O(1)
 """,
-
     "remove-duplicates-from-sorted-array": """# Remove Duplicates from Sorted Array
 
 **Problem Link:** [Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
@@ -296,7 +290,6 @@ public int removeDuplicates(int[] nums) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "majority-element": """# Majority Element
 
 **Problem Link:** [Majority Element](https://leetcode.com/problems/majority-element/)
@@ -330,7 +323,6 @@ public int majorityElement(int[] nums) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "roman-to-integer": """# Roman to Integer
 
 **Problem Link:** [Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
@@ -367,7 +359,6 @@ public int romanToInt(String s) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "binary-search": """# Binary Search
 
 **Problem Link:** [Binary Search](https://leetcode.com/problems/binary-search/)
@@ -403,7 +394,6 @@ public int search(int[] nums, int target) {
 ## Key Insight
 - Use `left + (right - left) / 2` to avoid integer overflow
 """,
-
     "move-zeroes": """# Move Zeroes
 
 **Problem Link:** [Move Zeroes](https://leetcode.com/problems/move-zeroes/)
@@ -437,7 +427,6 @@ public void moveZeroes(int[] nums) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "add-two-numbers": """# Add Two Numbers
 
 **Problem Link:** [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
@@ -482,7 +471,6 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 ## Key Insight
 - Include `carry != 0` in while condition for final carry
 """,
-
     "climbing-stairs": """# Climbing Stairs
 
 **Problem Link:** [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
@@ -519,7 +507,6 @@ public int climbStairs(int n) {
 ## Key Insight
 - Classic DP, same as Fibonacci
 """,
-
     "valid-palindrome": """# Valid Palindrome
 
 **Problem Link:** [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
@@ -556,7 +543,6 @@ public boolean isPalindrome(String s) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "valid-anagram": """# Valid Anagram
 
 **Problem Link:** [Valid Anagram](https://leetcode.com/problems/valid-anagram/)
@@ -592,7 +578,6 @@ public boolean isAnagram(String s, String t) {
 - **Time**: O(n)
 - **Space**: O(1) (26 letters)
 """,
-
     "plus-one": """# Plus One
 
 **Problem Link:** [Plus One](https://leetcode.com/problems/plus-one/)
@@ -628,7 +613,6 @@ public int[] plusOne(int[] digits) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "sqrtx": """# Sqrt(x)
 
 **Problem Link:** [Sqrt(x)](https://leetcode.com/problems/sqrtx/)
@@ -664,7 +648,6 @@ public int mySqrt(int x) {
 - **Time**: O(log x)
 - **Space**: O(1)
 """,
-
     "happy-number": """# Happy Number
 
 **Problem Link:** [Happy Number](https://leetcode.com/problems/happy-number/)
@@ -706,7 +689,6 @@ private int getNext(int n) {
 - **Time**: O(log n)
 - **Space**: O(log n)
 """,
-
     "reverse-linked-list": """# Reverse Linked List
 
 **Problem Link:** [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
@@ -740,7 +722,6 @@ public ListNode reverseList(ListNode head) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "contains-duplicate": """# Contains Duplicate
 
 **Problem Link:** [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
@@ -770,7 +751,6 @@ public boolean containsDuplicate(int[] nums) {
 - **Time**: O(n)
 - **Space**: O(n)
 """,
-
     "length-of-last-word": """# Length of Last Word
 
 **Problem Link:** [Length of Last Word](https://leetcode.com/problems/length-of-last-word/)
@@ -804,7 +784,6 @@ public int lengthOfLastWord(String s) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "palindrome-number": """# Palindrome Number
 
 **Problem Link:** [Palindrome Number](https://leetcode.com/problems/palindrome-number/)
@@ -836,7 +815,6 @@ public boolean isPalindrome(int x) {
 - **Time**: O(log x)
 - **Space**: O(1)
 """,
-
     "remove-element": """# Remove Element
 
 **Problem Link:** [Remove Element](https://leetcode.com/problems/remove-element/)
@@ -868,7 +846,6 @@ public int removeElement(int[] nums, int val) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "find-the-index-of-the-first-occurrence-in-a-string": """# Find the Index of the First Occurrence in a String
 
 **Problem Link:** [Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
@@ -900,7 +877,6 @@ public int strStr(String haystack, String needle) {
 - **Time**: O(n * m)
 - **Space**: O(1)
 """,
-
     "binary-tree-inorder-traversal": """# Binary Tree Inorder Traversal
 
 **Problem Link:** [Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
@@ -938,7 +914,6 @@ public List<Integer> inorderTraversal(TreeNode root) {
 - **Time**: O(n)
 - **Space**: O(h)
 """,
-
     "running-sum-of-1d-array": """# Running Sum of 1d Array
 
 **Problem Link:** [Running Sum of 1d Array](https://leetcode.com/problems/running-sum-of-1d-array/)
@@ -966,7 +941,6 @@ public int[] runningSum(int[] nums) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "isomorphic-strings": """# Isomorphic Strings
 
 **Problem Link:** [Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/)
@@ -1003,7 +977,6 @@ public boolean isIsomorphic(String s, String t) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "container-with-most-water": """# Container With Most Water
 
 **Problem Link:** [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
@@ -1044,7 +1017,6 @@ public int maxArea(int[] height) {
 ## Key Insight
 - Moving shorter line might find taller; moving taller can only hurt
 """,
-
     "middle-of-the-linked-list": """# Middle of the Linked List
 
 **Problem Link:** [Middle of the Linked List](https://leetcode.com/problems/middle-of-the-linked-list/)
@@ -1075,7 +1047,6 @@ public ListNode middleNode(ListNode head) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "two-sum-ii-input-array-is-sorted": """# Two Sum II - Input Array Is Sorted
 
 **Problem Link:** [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
@@ -1112,7 +1083,6 @@ public int[] twoSum(int[] numbers, int target) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "clone-graph": """# Clone Graph
 
 **Problem Link:** [Clone Graph](https://leetcode.com/problems/clone-graph/)
@@ -1152,7 +1122,6 @@ public Node cloneGraph(Node node) {
 - **Time**: O(V + E)
 - **Space**: O(V)
 """,
-
     "course-schedule": """# Course Schedule
 
 **Problem Link:** [Course Schedule](https://leetcode.com/problems/course-schedule/)
@@ -1201,7 +1170,6 @@ public boolean canFinish(int numCourses, int[][] prerequisites) {
 - **Time**: O(V + E)
 - **Space**: O(V + E)
 """,
-
     # ============ LINKED LISTS ============
     "palindrome-linked-list": """# Palindrome Linked List
 
@@ -1252,7 +1220,6 @@ public boolean isPalindrome(ListNode head) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "lru-cache": """# LRU Cache
 
 **Problem Link:** [LRU Cache](https://leetcode.com/problems/lru-cache/)
@@ -1325,7 +1292,6 @@ class LRUCache {
 - **Time**: O(1) for both operations
 - **Space**: O(capacity)
 """,
-
     "remove-nth-node-from-end-of-list": """# Remove Nth Node From End of List
 
 **Problem Link:** [Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
@@ -1364,7 +1330,6 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     # ============ HEAPS ============
     "kth-largest-element-in-an-array": """# Kth Largest Element in an Array
 
@@ -1399,7 +1364,6 @@ public int findKthLargest(int[] nums, int k) {
 - **Time**: O(n log k)
 - **Space**: O(k)
 """,
-
     "top-k-frequent-elements": """# Top K Frequent Elements
 
 **Problem Link:** [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
@@ -1448,7 +1412,6 @@ public int[] topKFrequent(int[] nums, int k) {
 - **Time**: O(n)
 - **Space**: O(n)
 """,
-
     "find-median-from-data-stream": """# Find Median from Data Stream
 
 **Problem Link:** [Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
@@ -1492,7 +1455,6 @@ class MedianFinder {
 - **findMedian**: O(1)
 - **Space**: O(n)
 """,
-
     "meeting-rooms-ii": """# Meeting Rooms II
 
 **Problem Link:** [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)
@@ -1531,7 +1493,6 @@ public int minMeetingRooms(int[][] intervals) {
 - **Time**: O(n log n)
 - **Space**: O(n)
 """,
-
     # ============ STACKS & QUEUES ============
     "min-stack": """# Min Stack
 
@@ -1574,7 +1535,6 @@ class MinStack {
 - **Time**: O(1) all operations
 - **Space**: O(n)
 """,
-
     "daily-temperatures": """# Daily Temperatures
 
 **Problem Link:** [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
@@ -1610,7 +1570,6 @@ public int[] dailyTemperatures(int[] temperatures) {
 - **Time**: O(n)
 - **Space**: O(n)
 """,
-
     "trapping-rain-water": """# Trapping Rain Water
 
 **Problem Link:** [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
@@ -1657,7 +1616,6 @@ public int trap(int[] height) {
 - **Time**: O(n)
 - **Space**: O(1)
 """,
-
     "evaluate-reverse-polish-notation": """# Evaluate Reverse Polish Notation
 
 **Problem Link:** [Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
@@ -1697,7 +1655,6 @@ public int evalRPN(String[] tokens) {
 - **Time**: O(n)
 - **Space**: O(n)
 """,
-
     # ============ RECURSION & DP ============
     "coin-change": """# Coin Change
 
@@ -1733,7 +1690,6 @@ public int coinChange(int[] coins, int amount) {
 - **Time**: O(amount * coins.length)
 - **Space**: O(amount)
 """,
-
     "longest-increasing-subsequence": """# Longest Increasing Subsequence
 
 **Problem Link:** [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
@@ -1770,7 +1726,6 @@ public int lengthOfLIS(int[] nums) {
 - **Time**: O(n log n)
 - **Space**: O(n)
 """,
-
     "word-break": """# Word Break
 
 **Problem Link:** [Word Break](https://leetcode.com/problems/word-break/)
@@ -1808,7 +1763,6 @@ public boolean wordBreak(String s, List<String> wordDict) {
 - **Time**: O(n² * m) where m is max word length
 - **Space**: O(n)
 """,
-
     "generate-parentheses": """# Generate Parentheses
 
 **Problem Link:** [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
@@ -1845,7 +1799,6 @@ private void backtrack(List<String> result, String curr, int open, int close, in
 - **Time**: O(4^n / sqrt(n)) - Catalan number
 - **Space**: O(n)
 """,
-
     "permutations": """# Permutations
 
 **Problem Link:** [Permutations](https://leetcode.com/problems/permutations/)
@@ -1888,7 +1841,6 @@ private void backtrack(List<List<Integer>> result, List<Integer> path,
 - **Time**: O(n * n!)
 - **Space**: O(n)
 """,
-
     # ============ HASHMAPS ============
     "group-anagrams": """# Group Anagrams
 
@@ -1923,7 +1875,6 @@ public List<List<String>> groupAnagrams(String[] strs) {
 - **Time**: O(n * k log k) where k is max string length
 - **Space**: O(n * k)
 """,
-
     "subarray-sum-equals-k": """# Subarray Sum Equals K
 
 **Problem Link:** [Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/)
@@ -1957,7 +1908,6 @@ public int subarraySum(int[] nums, int k) {
 - **Time**: O(n)
 - **Space**: O(n)
 """,
-
     # ============ ARRAYS & STRINGS ============
     "meeting-rooms": """# Meeting Rooms
 
@@ -1996,42 +1946,44 @@ public boolean canAttendMeetings(int[][] intervals) {
 
 def get_problem_slug(url):
     """Extract the problem slug from LeetCode URL."""
-    match = re.search(r'/problems/([\w-]+)/?', url)
+    match = re.search(r"/problems/([\w-]+)/?", url)
     return match.group(1) if match else None
 
 
 def create_category_dir(sheet_name):
     """Create a sanitized directory name from sheet name."""
-    sanitized = re.sub(r'[^\w\s-]', '', sheet_name.lower())
-    sanitized = re.sub(r'[\s-]+', '_', sanitized)
+    sanitized = re.sub(r"[^\w\s-]", "", sheet_name.lower())
+    sanitized = re.sub(r"[\s-]+", "_", sanitized)
     return sanitized
 
 
 def main():
     """Generate all problem-specific mindmaps."""
     # Load the extracted problems
-    with open('leetcode_problems.json', 'r') as f:
+    with open("leetcode_problems.json", "r") as f:
         problems = json.load(f)
 
-    print(f"Generating specific mindmaps for {len(PROBLEM_CONTENT)} problems with Java implementations...")
+    print(
+        f"Generating specific mindmaps for {len(PROBLEM_CONTENT)} problems with Java implementations..."
+    )
 
-    base_dir = Path('leetcode_mindmaps')
+    base_dir = Path("leetcode_mindmaps")
     base_dir.mkdir(exist_ok=True)
 
     updated = 0
     for problem in problems:
-        slug = get_problem_slug(problem['url'])
+        slug = get_problem_slug(problem["url"])
         if not slug:
             continue
 
         if slug in PROBLEM_CONTENT:
-            sheet_name = problem['context']['sheet']
+            sheet_name = problem["context"]["sheet"]
             category_dir = create_category_dir(sheet_name)
             full_dir = base_dir / category_dir
             full_dir.mkdir(exist_ok=True)
 
             filepath = full_dir / f"{slug}.md"
-            with open(filepath, 'w') as f:
+            with open(filepath, "w") as f:
                 f.write(PROBLEM_CONTENT[slug])
             updated += 1
             print(f"  Updated: {filepath}")
@@ -2039,5 +1991,5 @@ def main():
     print(f"\n✓ Updated {updated} mindmaps with specific Java content!")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -1,58 +1,40 @@
 # Minimum Height Trees
 
 **Problem Link:** [Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees/)
-
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Approach
+### Topological Sort (Trim Leaves)
+- Remove leaves layer by layer until 1-2 nodes remain
 
-```mermaid
-mindmap
-  root((Minimum Height Trees))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Implementation
+```java
+public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+    if (n == 1) return Arrays.asList(0);
+    
+    List<Set<Integer>> adj = new ArrayList<>();
+    for (int i = 0; i < n; i++) adj.add(new HashSet<>());
+    for (int[] e : edges) {
+        adj.get(e[0]).add(e[1]);
+        adj.get(e[1]).add(e[0]);
+    }
+    
+    List<Integer> leaves = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+        if (adj.get(i).size() == 1) leaves.add(i);
+    }
+    
+    int remaining = n;
+    while (remaining > 2) {
+        remaining -= leaves.size();
+        List<Integer> newLeaves = new ArrayList<>();
+        for (int leaf : leaves) {
+            int neighbor = adj.get(leaf).iterator().next();
+            adj.get(neighbor).remove(leaf);
+            if (adj.get(neighbor).size() == 1) newLeaves.add(neighbor);
+        }
+        leaves = newLeaves;
+    }
+    return leaves;
+}
 ```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*

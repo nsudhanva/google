@@ -1,58 +1,50 @@
 # Evaluate Division
 
-**Problem Link:** [Evaluate Division](https://leetcode.com/problems/evaluate-division/description/)
-
+**Problem Link:** [Evaluate Division](https://leetcode.com/problems/evaluate-division/)
 **Category:** Google tagged
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Given a/b = k, evaluate queries like a/c
 
-```mermaid
-mindmap
-  root((Evaluate Division))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+### Graph DFS
+- Build weighted graph, find path
+
+## Implementation
+```java
+public double[] calcEquation(List<List<String>> equations, double[] values, 
+                             List<List<String>> queries) {
+    Map<String, Map<String, Double>> graph = new HashMap<>();
+    
+    for (int i = 0; i < equations.size(); i++) {
+        String a = equations.get(i).get(0), b = equations.get(i).get(1);
+        graph.computeIfAbsent(a, k -> new HashMap<>()).put(b, values[i]);
+        graph.computeIfAbsent(b, k -> new HashMap<>()).put(a, 1.0 / values[i]);
+    }
+    
+    double[] result = new double[queries.size()];
+    for (int i = 0; i < queries.size(); i++) {
+        result[i] = dfs(queries.get(i).get(0), queries.get(i).get(1), 
+                        graph, new HashSet<>());
+    }
+    return result;
+}
+
+private double dfs(String src, String dst, Map<String, Map<String, Double>> graph, 
+                   Set<String> visited) {
+    if (!graph.containsKey(src)) return -1.0;
+    if (src.equals(dst)) return 1.0;
+    visited.add(src);
+    for (Map.Entry<String, Double> e : graph.get(src).entrySet()) {
+        if (!visited.contains(e.getKey())) {
+            double result = dfs(e.getKey(), dst, graph, visited);
+            if (result != -1.0) return e.getValue() * result;
+        }
+    }
+    return -1.0;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(Q * (V + E))
+- **Space**: O(V + E)

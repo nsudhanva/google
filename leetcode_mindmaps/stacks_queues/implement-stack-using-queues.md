@@ -1,58 +1,21 @@
-# Implement Stack Using Queues
+# Implement Stack using Queues
 
-**Problem Link:** [Implement Stack Using Queues](https://leetcode.com/problems/implement-stack-using-queues/description/)
-
+**Problem Link:** [Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/)
 **Category:** Stacks & Queues
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Implement Stack Using Queues))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Implementation
+```java
+class MyStack {
+    Queue<Integer> queue = new LinkedList<>();
+    
+    public void push(int x) {
+        queue.offer(x);
+        int size = queue.size();
+        while (size-- > 1) queue.offer(queue.poll());
+    }
+    
+    public int pop() { return queue.poll(); }
+    public int top() { return queue.peek(); }
+    public boolean empty() { return queue.isEmpty(); }
+}
 ```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*

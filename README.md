@@ -1,82 +1,107 @@
 # LeetCode Problem Mindmaps
 
-This repository contains **107 LeetCode problems** organized with Mermaid mindmaps to help understand problem-solving approaches.
-
-## 📁 Structure
-
-Mindmaps are organized into 8 categories matching the original Google Sheet tabs:
-
-- **arrays_strings** (1 problem)
-- **google_tagged** (51 problems)
-- **graphs_trees** (2 problems)
-- **hashmaps** (6 problems)
-- **heaps** (6 problems)
-- **linked_lists** (7 problems)
-- **recursion_dp** (23 problems)
-- **stacks_queues** (11 problems)
-
-## 🎯 What's in Each Mindmap?
-
-Each `.md` file contains:
-
-- **Problem Link**: Direct link to the LeetCode problem
-- **Mermaid Mindmap**: Visual diagram showing problem-solving approach
-  - Problem Understanding
-  - Approach (Brute Force & Optimization)
-  - Implementation Guidelines
-  - Complexity Analysis
-  - Common Pitfalls
-- **Key Insights**: Pattern recognition and strategy tips
-- **Things to Remember**: Notes from the original spreadsheet (to be customized)
-- **Template Approach**: Step-by-step problem-solving framework
+Interactive mindmap viewer for LeetCode problems, organized by category with detailed Java solutions.
 
 ## 🚀 Quick Start
 
-### Viewing Mindmaps
-
-1. **GitHub**: Mindmaps render automatically when viewing `.md` files on GitHub
-2. **Local**: Use any Markdown viewer that supports Mermaid (VS Code, Obsidian, etc.)
-3. **Online**: Use [Mermaid Live Editor](https://mermaid.live/)
-
-### Example
-
-Check out [`google_tagged/two-sum.md`](leetcode_mindmaps/google_tagged/two-sum.md) for an example mindmap.
-
-## 📝 Customization
-
-These mindmaps are templates! After solving each problem:
-
-1. Update the "Things to Remember" section with specific insights
-2. Add problem-specific patterns and edge cases
-3. Note optimal time/space complexity
-4. Add your solution approach details
-
-## 🔧 Generation Scripts
-
-This repository includes scripts to:
-
-- **`fetch_leetcode_problems.py`**: Extract problems from Google Sheet using Google Sheets API
-- **`generate_mindmaps.py`**: Generate Mermaid mindmaps for all problems
-- **`update_sheet.py`**: Update Google Sheet with links to mindmap files (TBD)
-
-### Running Scripts
-
 ```bash
-# Set up environment
-uv init
-uv add google-api-python-client google-auth-httplib2 google-auth-oauthlib
+# Start local server
+python3 -m http.server 8000
 
-# Extract problems from Google Sheet
-uv run fetch_leetcode_problems.py
-
-# Generate mindmaps
-uv run generate_mindmaps.py
+# Open in browser
+open http://localhost:8000
 ```
 
-## 📊 Original Data Source
+## 📁 Project Structure
 
-Data extracted from: [Google Leetcode Spreadsheet](https://docs.google.com/spreadsheets/d/1LL0wiWx8BP6ID_TAa48uTe1rxnp8MZAJxtJU0OMcZaQ/)
+```
+├── index.html                     # Main viewer (Markmap-based)
+├── leetcode_problems.json         # Extracted problems from Google Sheet
+├── leetcode_mindmaps/             # Problem-specific mindmap files
+│   ├── google_tagged/
+│   ├── linked_lists/
+│   ├── heaps/
+│   ├── stacks_queues/
+│   ├── recursion_dp/
+│   ├── hashmaps/
+│   ├── graphs_trees/
+│   └── arrays_strings/
+├── fetch_leetcode_problems.py     # Fetches problems from Google Sheet
+├── generate_mindmaps.py           # Creates generic mindmap templates
+├── generate_specific_mindmaps.py  # Problem-specific Java solutions (Part 1)
+└── generate_specific_mindmaps_part2.py  # Problem-specific solutions (Part 2)
+```
 
-## 📄 License
+## 🔄 Updating After Google Sheet Changes
 
-MIT License - feel free to use and customize for your own learning!
+When you add/remove problems in the Google Sheet, run these steps:
+
+### Step 1: Fetch Latest Problems from Sheet
+```bash
+uv run fetch_leetcode_problems.py
+```
+This updates `leetcode_problems.json` with the latest problems from all tabs.
+
+### Step 2: Generate Mindmap Folders/Files for New Problems
+```bash
+uv run generate_mindmaps.py
+```
+This creates new `.md` files for any new problems (skips existing files).
+
+### Step 3: Add Problem-Specific Content (Optional)
+For new problems, add their specific content to either:
+- `generate_specific_mindmaps.py` (PROBLEM_CONTENT dict)
+- `generate_specific_mindmaps_part2.py` (PROBLEM_CONTENT_2 dict)
+
+Then run:
+```bash
+uv run generate_specific_mindmaps.py
+uv run generate_specific_mindmaps_part2.py
+```
+
+### Step 4: Commit and Push
+```bash
+git add -A
+git commit -m "Update mindmaps from Google Sheet"
+git push origin main
+```
+
+## 🛠️ Full Workflow Summary
+
+```bash
+# 1. Fetch latest from sheet
+uv run fetch_leetcode_problems.py
+
+# 2. Generate templates for new problems
+uv run generate_mindmaps.py
+
+# 3. (Optional) Add specific content to scripts, then:
+uv run generate_specific_mindmaps.py
+uv run generate_specific_mindmaps_part2.py
+
+# 4. Commit and push
+git add -A && git commit -m "Update mindmaps" && git push
+```
+
+## 🔐 Google Sheets API Setup
+
+First-time setup only:
+
+1. Enable Google Sheets API in Google Cloud Console
+2. Create OAuth 2.0 credentials (Desktop app)
+3. Download `credentials.json` to project root
+4. Run `uv run fetch_leetcode_problems.py` and complete OAuth flow
+5. `token.json` will be created for future use
+
+## 📊 Current Coverage
+
+- **Total Problems**: 103 unique problems
+- **Categories**: 8 (Google tagged, Linked Lists, Heaps, Stacks & Queues, etc.)
+- **All problems have Java implementations**
+
+## ⌨️ Viewer Features
+
+- **Collapsible nodes**: Click nodes to expand/collapse
+- **Expand/Collapse All**: Button in header
+- **Search**: Filter problems in sidebar
+- **Interactive zoom/pan**: Mouse scroll and drag

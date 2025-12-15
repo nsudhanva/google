@@ -1,58 +1,22 @@
 # Design Hit Counter
 
-**Problem Link:** [Design Hit Counter](https://leetcode.com/problems/design-hit-counter/description/)
-
+**Problem Link:** [Design Hit Counter](https://leetcode.com/problems/design-hit-counter/)
 **Category:** Stacks & Queues
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Design Hit Counter))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Implementation
+```java
+class HitCounter {
+    Queue<Integer> queue = new LinkedList<>();
+    
+    public void hit(int timestamp) {
+        queue.offer(timestamp);
+    }
+    
+    public int getHits(int timestamp) {
+        while (!queue.isEmpty() && timestamp - queue.peek() >= 300) {
+            queue.poll();
+        }
+        return queue.size();
+    }
+}
 ```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*

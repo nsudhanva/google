@@ -1,58 +1,26 @@
 # Letter Case Permutation
 
-**Problem Link:** [Letter Case Permutation](https://leetcode.com/problems/letter-case-permutation/description/)
-
+**Problem Link:** [Letter Case Permutation](https://leetcode.com/problems/letter-case-permutation/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
+## Implementation
+```java
+public List<String> letterCasePermutation(String s) {
+    List<String> result = new ArrayList<>();
+    backtrack(s.toCharArray(), 0, result);
+    return result;
+}
 
-```mermaid
-mindmap
-  root((Letter Case Permutation))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+private void backtrack(char[] chars, int idx, List<String> result) {
+    if (idx == chars.length) {
+        result.add(new String(chars));
+        return;
+    }
+    backtrack(chars, idx + 1, result);
+    if (Character.isLetter(chars[idx])) {
+        chars[idx] ^= 32;  // Toggle case
+        backtrack(chars, idx + 1, result);
+        chars[idx] ^= 32;
+    }
+}
 ```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*

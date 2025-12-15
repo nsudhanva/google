@@ -1,58 +1,34 @@
 # Maximum Product Subarray
 
-**Problem Link:** [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/description/)
-
+**Problem Link:** [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
+## Problem Understanding
+- Find contiguous subarray with largest product
 
-```mermaid
-mindmap
-  root((Maximum Product Subarray))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+## Approach
+### Track Min and Max
+- Negative * Negative can become max
+
+## Implementation
+```java
+public int maxProduct(int[] nums) {
+    int maxProd = nums[0], minProd = nums[0], result = nums[0];
+    
+    for (int i = 1; i < nums.length; i++) {
+        if (nums[i] < 0) {
+            int temp = maxProd;
+            maxProd = minProd;
+            minProd = temp;
+        }
+        maxProd = Math.max(nums[i], maxProd * nums[i]);
+        minProd = Math.min(nums[i], minProd * nums[i]);
+        result = Math.max(result, maxProd);
+    }
+    return result;
+}
 ```
 
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Complexity
+- **Time**: O(n)
+- **Space**: O(1)

@@ -1,58 +1,22 @@
 # Binary Tree Paths
 
-**Problem Link:** [Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/description/)
-
+**Problem Link:** [Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/)
 **Category:** Recursion & DP
 
-## Problem-Solving Mindmap
+## Implementation
+```java
+public List<String> binaryTreePaths(TreeNode root) {
+    List<String> result = new ArrayList<>();
+    if (root != null) dfs(root, "", result);
+    return result;
+}
 
-```mermaid
-mindmap
-  root((Binary Tree Paths))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
+private void dfs(TreeNode node, String path, List<String> result) {
+    if (node.left == null && node.right == null) {
+        result.add(path + node.val);
+        return;
+    }
+    if (node.left != null) dfs(node.left, path + node.val + "->", result);
+    if (node.right != null) dfs(node.right, path + node.val + "->", result);
+}
 ```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
-
-## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
