@@ -66,6 +66,32 @@ git commit -m "Update mindmaps from Google Sheet"
 git push origin main
 ```
 
+## 🚀 Deploying to Cloudflare Pages
+
+### Option 1: Git Integration (Recommended)
+1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) → Pages
+2. Create a new project → Connect to Git
+3. Select this repository
+4. Settings:
+   - **Build command**: (leave empty - static site)
+   - **Build output directory**: `.` (or `/`)
+5. Deploy!
+
+### Option 2: Direct Deploy via CLI
+```bash
+# Install wrangler if needed
+npm install -g wrangler
+
+# Login to Cloudflare
+wrangler login
+
+# Deploy (first time creates the project)
+npx wrangler pages deploy . --project-name=google
+
+# Subsequent deploys
+npx wrangler pages deploy .
+```
+
 ## 🛠️ Full Workflow Summary
 
 ```bash
@@ -79,7 +105,7 @@ uv run generate_mindmaps.py
 uv run generate_specific_mindmaps.py
 uv run generate_specific_mindmaps_part2.py
 
-# 4. Commit and push
+# 4. Commit and push (auto-deploys if git integration is set up)
 git add -A && git commit -m "Update mindmaps" && git push
 ```
 

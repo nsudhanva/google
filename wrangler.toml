@@ -1,5 +1,0 @@
-name = 'google'
-pages_build_output_dir = "."
-
-# No build command needed - this is a static site
-# The entire repo root is served as-is
