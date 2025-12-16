@@ -1,20 +1,17 @@
-# Number of 1 Bits
+# Number of 1 bits
 
-**Problem Link:** [Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [Number of 1 bits](https://leetcode.com/problems/number-of-1-bits/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Easy
+- **Status**: NOT DONE
 
-## Implementation
-```java
-public int hammingWeight(int n) {
-    int count = 0;
-    while (n != 0) {
-        count += (n & 1);
-        n >>>= 1;
-    }
-    return count;
-}
-```
+## Approach
+### Data Structure
+- *To be determined*
 
-## Complexity
-- **Time**: O(32) = O(1)
-- **Space**: O(1)
+### Time Complexity
+- O(?)
+
+## Things to Remember
+- *Add your key insights after solving*

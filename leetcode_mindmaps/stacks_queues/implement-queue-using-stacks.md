@@ -1,31 +1,20 @@
-# Implement Queue using Stacks
+# Implement Queue using Stack
 
-**Problem Link:** [Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/)
-**Category:** Stacks & Queues
+## Problem Info
+- **Link**: [Implement Queue using Stack](https://leetcode.com/problems/implement-queue-using-stacks/description/)
+- **Category**: Stacks & Queues
+- **Difficulty**: Easy
+- **Status**: DONE
 
-## Implementation
-```java
-class MyQueue {
-    Stack<Integer> in = new Stack<>();
-    Stack<Integer> out = new Stack<>();
-    
-    public void push(int x) { in.push(x); }
-    
-    public int pop() {
-        peek();
-        return out.pop();
-    }
-    
-    public int peek() {
-        if (out.isEmpty()) {
-            while (!in.isEmpty()) out.push(in.pop());
-        }
-        return out.peek();
-    }
-    
-    public boolean empty() { return in.isEmpty() && out.isEmpty(); }
-}
-```
+## Approach
+### Data Structure
+- Stacks
 
-## Complexity
-- **Amortized**: O(1) per operation
+### Time Complexity
+- Push O(n)
+
+## Things to Remember
+- Maintain 2 stacks.
+- transfer 1-by-1 from s1 to s2.
+- push to s2 and transfer back to s1.
+- pop and peek are normal.

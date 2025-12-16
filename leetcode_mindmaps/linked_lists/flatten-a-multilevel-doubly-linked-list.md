@@ -1,28 +1,20 @@
-# Flatten a Multilevel Doubly Linked List
+# Flatten a multi level doubly linked list
 
-**Problem Link:** [Flatten a Multilevel Doubly Linked List](https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/)
-**Category:** Linked Lists
+## Problem Info
+- **Link**: [Flatten a multi level doubly linked list](https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/description/)
+- **Category**: Linked Lists
+- **Difficulty**: Medium
+- **Status**: DONE
 
-## Implementation
-```java
-public Node flatten(Node head) {
-    if (head == null) return null;
-    Node curr = head;
-    while (curr != null) {
-        if (curr.child != null) {
-            Node next = curr.next;
-            Node child = flatten(curr.child);
-            curr.next = child;
-            child.prev = curr;
-            curr.child = null;
-            while (curr.next != null) curr = curr.next;
-            if (next != null) {
-                curr.next = next;
-                next.prev = curr;
-            }
-        }
-        curr = curr.next;
-    }
-    return head;
-}
-```
+## Approach
+### Data Structure
+- Linked List, DFS
+
+### Time Complexity
+- O(n)
+
+## Things to Remember
+- DFS - can be solved with recursion or iteration (stack)
+
+## Additional Notes
+- Recursion: traverse through child first. Iteration: push next into the stack first, then child

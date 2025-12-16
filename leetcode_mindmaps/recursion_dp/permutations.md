@@ -1,41 +1,17 @@
 # Permutations
 
-**Problem Link:** [Permutations](https://leetcode.com/problems/permutations/)
-**Category:** Recursion & DP
-
-## Problem Understanding
-- Return all permutations of unique integers
+## Problem Info
+- **Link**: [Permutations](https://leetcode.com/problems/permutations/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Medium
+- **Status**: NOT DONE
 
 ## Approach
+### Data Structure
+- *To be determined*
 
-### Backtracking
-- Track used elements with boolean array
+### Time Complexity
+- O(?)
 
-## Implementation
-```java
-public List<List<Integer>> permute(int[] nums) {
-    List<List<Integer>> result = new ArrayList<>();
-    backtrack(result, new ArrayList<>(), nums, new boolean[nums.length]);
-    return result;
-}
-
-private void backtrack(List<List<Integer>> result, List<Integer> path, 
-                       int[] nums, boolean[] used) {
-    if (path.size() == nums.length) {
-        result.add(new ArrayList<>(path));
-        return;
-    }
-    for (int i = 0; i < nums.length; i++) {
-        if (used[i]) continue;
-        used[i] = true;
-        path.add(nums[i]);
-        backtrack(result, path, nums, used);
-        path.remove(path.size() - 1);
-        used[i] = false;
-    }
-}
-```
-
-## Complexity
-- **Time**: O(n * n!)
-- **Space**: O(n)
+## Things to Remember
+- *Add your key insights after solving*

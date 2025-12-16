@@ -1,58 +1,20 @@
-# Find The Index Of The First Occurrence In A String
+# Index of first occurrence in a string
 
-**Problem Link:** [Find The Index Of The First Occurrence In A String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/)
+## Problem Info
+- **Link**: [Index of first occurrence in a string](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/)
+- **Category**: Hashmaps & HashSets
+- **Difficulty**: Easy
+- **Status**: DONE but REVISIT
 
-**Category:** Hashmaps & HashSets
+## Approach
+### Data Structure
+- Hashing
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Find The Index Of The First Occurrence In A String))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
-```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
+### Time Complexity
+- O(nm)
 
 ## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+- I used substring method - but that is brute force.
+- Other way is hasing each character, checking the hash of each substring and only if it matches, compare chars.
+- but that also in worst case is the same complexity.
+- There is another way with O(n) but very complex - revisit.

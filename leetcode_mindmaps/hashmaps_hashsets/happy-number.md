@@ -1,58 +1,19 @@
 # Happy Number
 
-**Problem Link:** [Happy Number](https://leetcode.com/problems/happy-number/)
+## Problem Info
+- **Link**: [Happy Number](https://leetcode.com/problems/happy-number/)
+- **Category**: Hashmaps & HashSets
+- **Difficulty**: Easy
+- **Status**: DONE
 
-**Category:** Hashmaps & HashSets
+## Approach
+### Data Structure
+- HashSet / Math
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Happy Number))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
-```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
+### Time Complexity
+- O(logn)
 
 ## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+- Maintain a hashset to detect already visited numbers (cycle).
+- This can also be seen as an LL and use the cycle detection to find cycles.
+- The rest is to use divide and mod to find squares.

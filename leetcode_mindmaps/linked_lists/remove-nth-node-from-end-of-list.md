@@ -1,37 +1,21 @@
-# Remove Nth Node From End of List
+# Remove nth node from list
 
-**Problem Link:** [Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
-**Category:** Linked Lists
-
-## Problem Understanding
-- Remove nth node from end in one pass
+## Problem Info
+- **Link**: [Remove nth node from list](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/)
+- **Category**: Linked Lists
+- **Difficulty**: Medium
+- **Status**: DONE
 
 ## Approach
+### Data Structure
+- Linked List
 
-### Two Pointers (Gap of N)
-- Move fast n steps ahead
-- Move both until fast reaches end
-- Slow is at prev of target
+### Time Complexity
+- O(L)
 
-## Implementation
-```java
-public ListNode removeNthFromEnd(ListNode head, int n) {
-    ListNode dummy = new ListNode(0);
-    dummy.next = head;
-    ListNode slow = dummy, fast = dummy;
-    
-    for (int i = 0; i <= n; i++) fast = fast.next;
-    
-    while (fast != null) {
-        slow = slow.next;
-        fast = fast.next;
-    }
-    
-    slow.next = slow.next.next;
-    return dummy.next;
-}
-```
+## Things to Remember
+- Need a dummy node at the start in case head is to be removed.
+- I solved it by finding the length and then traversing till there again to remove.
 
-## Complexity
-- **Time**: O(n)
-- **Space**: O(1)
+## Additional Notes
+- One pass algo: have a dummy node, maintain two pointers. Move the first pointer to the n+1th node so that the gap b/w the two pointers is n nodes. Then till first pointer becomes null, advance both of them together. At that point, second ptr will be at (L-n)th node. remove that node

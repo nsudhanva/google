@@ -1,26 +1,17 @@
-# Letter Case Permutation
+# letter case permumtation
 
-**Problem Link:** [Letter Case Permutation](https://leetcode.com/problems/letter-case-permutation/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [letter case permumtation](https://leetcode.com/problems/letter-case-permutation/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Medium
+- **Status**: NOT DONE
 
-## Implementation
-```java
-public List<String> letterCasePermutation(String s) {
-    List<String> result = new ArrayList<>();
-    backtrack(s.toCharArray(), 0, result);
-    return result;
-}
+## Approach
+### Data Structure
+- *To be determined*
 
-private void backtrack(char[] chars, int idx, List<String> result) {
-    if (idx == chars.length) {
-        result.add(new String(chars));
-        return;
-    }
-    backtrack(chars, idx + 1, result);
-    if (Character.isLetter(chars[idx])) {
-        chars[idx] ^= 32;  // Toggle case
-        backtrack(chars, idx + 1, result);
-        chars[idx] ^= 32;
-    }
-}
-```
+### Time Complexity
+- O(?)
+
+## Things to Remember
+- *Add your key insights after solving*

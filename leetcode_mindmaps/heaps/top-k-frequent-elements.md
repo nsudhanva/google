@@ -1,47 +1,21 @@
-# Top K Frequent Elements
+# Top k frequent elements
 
-**Problem Link:** [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
-**Category:** Heaps
-
-## Problem Understanding
-- Return k most frequent elements
+## Problem Info
+- **Link**: [Top k frequent elements](https://leetcode.com/problems/top-k-frequent-elements/)
+- **Category**: Heaps
+- **Difficulty**: Medium
+- **Status**: DONE
 
 ## Approach
+### Data Structure
+- max heap
 
-### Bucket Sort
-- Count frequencies
-- Bucket by frequency
-- Collect from highest buckets
+### Time Complexity
+- O(n + nlogk)
 
-## Implementation
-```java
-public int[] topKFrequent(int[] nums, int k) {
-    Map<Integer, Integer> count = new HashMap<>();
-    for (int num : nums) {
-        count.put(num, count.getOrDefault(num, 0) + 1);
-    }
-    
-    List<Integer>[] buckets = new List[nums.length + 1];
-    for (int key : count.keySet()) {
-        int freq = count.get(key);
-        if (buckets[freq] == null) buckets[freq] = new ArrayList<>();
-        buckets[freq].add(key);
-    }
-    
-    int[] result = new int[k];
-    int idx = 0;
-    for (int i = buckets.length - 1; i >= 0 && idx < k; i--) {
-        if (buckets[i] != null) {
-            for (int num : buckets[i]) {
-                result[idx++] = num;
-                if (idx == k) break;
-            }
-        }
-    }
-    return result;
-}
-```
+## Things to Remember
+- Brute force I came up with - count map, inverse map, convert to 2d array, sort based on count, return top k keys...
+- Better: use a max heap - count map, inverse, insert count into prio queue, get top k.
 
-## Complexity
-- **Time**: O(n)
-- **Space**: O(n)
+## Additional Notes
+- **imp note** prio queues HAVE to be traversed in a while loop with q.poll() or q.peek()

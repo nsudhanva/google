@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 """
-Generate Mermaid mindmaps for LeetCode problems.
+Generate markmap-compatible mindmaps for LeetCode problems.
+Uses structured data from Google Sheets including:
+- Problem name, difficulty, data structure
+- Time complexity
+- Things to remember (key insights)
+- Extra notes
 """
 
 import json
 import os
 import re
 from pathlib import Path
-from urllib.parse import urlparse
 
 
 def get_problem_slug(url):
     """Extract the problem slug from LeetCode URL."""
-    # Extract the problem slug from URLs like:
-    # https://leetcode.com/problems/two-sum/description/
-    # https://leetcode.com/problems/two-sum/
     match = re.search(r"/problems/([\w-]+)/?", url)
     return match.group(1) if match else None
 
@@ -26,88 +27,72 @@ def slug_to_title(slug):
 
 def create_category_dir(sheet_name):
     """Create a sanitized directory name from sheet name."""
-    # Remove special characters and convert to lowercase with underscores
     sanitized = re.sub(r"[^\w\s-]", "", sheet_name.lower())
     sanitized = re.sub(r"[\s-]+", "_", sanitized)
     return sanitized
 
 
 def generate_mindmap(problem):
-    """Generate a Mermaid mindmap for a single problem."""
+    """Generate a markmap-compatible mindmap for a single problem."""
     url = problem["url"]
-    slug = get_problem_slug(url)
+    slug = problem.get("slug") or get_problem_slug(url)
     if not slug:
         return None
 
-    title = problem.get("title") or slug_to_title(slug)
+    # Use name from sheet, fallback to slug
+    title = problem.get("name") or slug_to_title(slug)
     sheet = problem["context"]["sheet"]
-    notes = problem.get("notes", "")
+    difficulty = problem.get("difficulty") or "Unknown"
+    data_structure = problem.get("data_structure") or ""
+    time_complexity = problem.get("time_complexity") or "O(?)"
+    things_to_remember = problem.get("things_to_remember") or ""
+    extra_notes = problem.get("extra_notes") or []
+    done = problem.get("done") or ""
 
-    # Create the mindmap structure
+    # Build the mindmap content
     mindmap = f"""# {title}
 
-**Problem Link:** [{title}]({url})
+## Problem Info
+- **Link**: [{title}]({url})
+- **Category**: {sheet}
+- **Difficulty**: {difficulty}
+- **Status**: {done}
 
-**Category:** {sheet}
+## Approach
+"""
 
-## Problem-Solving Mindmap
+    if data_structure:
+        mindmap += f"### Data Structure\n- {data_structure}\n\n"
+    else:
+        mindmap += "### Data Structure\n- *To be determined*\n\n"
 
-```mermaid
-mindmap
-  root(({title}))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
-```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
+    mindmap += f"""### Time Complexity
+- {time_complexity}
 
 ## Things to Remember
 """
 
-    if notes and notes != "Things to remember":
-        mindmap += f"\n{notes}\n"
+    if things_to_remember and things_to_remember.lower() not in ["things to remember", "revisit", ""]:
+        # Split on common delimiters for better formatting
+        notes = things_to_remember
+        # Handle multiple sentences
+        if ". " in notes and len(notes) > 100:
+            sentences = [s.strip() for s in notes.split(". ") if s.strip()]
+            for sentence in sentences:
+                if not sentence.endswith("."):
+                    sentence += "."
+                mindmap += f"- {sentence}\n"
+        else:
+            mindmap += f"- {notes}\n"
     else:
-        mindmap += "\n*Add your notes after solving the problem*\n"
+        mindmap += "- *Add your key insights after solving*\n"
 
-    mindmap += f"""
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
-"""
+    # Add extra notes if present
+    if extra_notes:
+        mindmap += "\n## Additional Notes\n"
+        for note in extra_notes:
+            if note and note.strip():
+                mindmap += f"- {note.strip()}\n"
 
     return mindmap
 
@@ -124,12 +109,14 @@ def main():
     base_dir = Path("leetcode_mindmaps")
     base_dir.mkdir(exist_ok=True)
 
-    # Track created files per category
+    # Track stats
+    created = 0
+    skipped = 0
     category_files = {}
 
     for idx, problem in enumerate(problems, 1):
         # Get problem details
-        slug = get_problem_slug(problem["url"])
+        slug = problem.get("slug") or get_problem_slug(problem["url"])
         if not slug:
             print(f"  Skipping invalid URL: {problem['url']}")
             continue
@@ -149,23 +136,28 @@ def main():
         filename = f"{slug}.md"
         filepath = full_dir / filename
 
-        # Skip if file already exists (don't overwrite problem-specific content)
+        # Check if file already has custom content (longer than generated)
         if filepath.exists():
-            print(f"  Skipping existing: {filepath}")
-            continue
+            existing_content = filepath.read_text()
+            # Skip if existing file has more content (custom additions)
+            if len(existing_content) > len(mindmap_content) + 100:
+                print(f"  Skipping (has custom content): {filepath}")
+                skipped += 1
+                continue
 
         with open(filepath, "w") as f:
             f.write(mindmap_content)
+        created += 1
 
         # Track for summary
         if category_dir not in category_files:
             category_files[category_dir] = []
         category_files[category_dir].append(filename)
 
-        if idx % 10 == 0:
+        if idx % 20 == 0:
             print(f"  Generated {idx}/{len(problems)}...")
 
-    print(f"\n✓ Successfully generated {len(problems)} mindmaps!")
+    print(f"\n✓ Created {created} mindmaps, skipped {skipped} with custom content")
     print(f"\nOrganized into {len(category_files)} categories:")
     for category, files in sorted(category_files.items()):
         print(f"  - {category}: {len(files)} problems")

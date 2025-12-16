@@ -1,30 +1,17 @@
-# Convert Binary Search Tree to Sorted Doubly Linked List
+# Convert BST to DLL
 
-**Problem Link:** [Convert Binary Search Tree to Sorted Doubly Linked List](https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/)
-**Category:** Graphs & Trees
+## Problem Info
+- **Link**: [Convert BST to DLL](https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/description/)
+- **Category**: Graphs & Trees
+- **Difficulty**: Medium
+- **Status**: NOT DONE
 
-## Implementation
-```java
-Node first = null, last = null;
+## Approach
+### Data Structure
+- *To be determined*
 
-public Node treeToDoublyList(Node root) {
-    if (root == null) return null;
-    inorder(root);
-    last.right = first;
-    first.left = last;
-    return first;
-}
+### Time Complexity
+- O(?)
 
-private void inorder(Node node) {
-    if (node == null) return;
-    inorder(node.left);
-    if (last != null) {
-        last.right = node;
-        node.left = last;
-    } else {
-        first = node;
-    }
-    last = node;
-    inorder(node.right);
-}
-```
+## Things to Remember
+- *Add your key insights after solving*

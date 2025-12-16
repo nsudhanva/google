@@ -1,58 +1,17 @@
-# Step By Step Directions From A Binary Tree Node To Another
+# Step-by-step direction
 
-**Problem Link:** [Step By Step Directions From A Binary Tree Node To Another](https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/)
+## Problem Info
+- **Link**: [Step-by-step direction](https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/)
+- **Category**: Graphs & Trees
+- **Difficulty**: Medium
+- **Status**: NOT DONE
 
-**Category:** Graphs & Trees
+## Approach
+### Data Structure
+- *To be determined*
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Step By Step Directions From A Binary Tree Node To Another))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
-```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
+### Time Complexity
+- O(?)
 
 ## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+- *Add your key insights after solving*

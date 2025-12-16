@@ -1,25 +1,17 @@
 # Flatten Binary Tree to Linked List
 
-**Problem Link:** [Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/)
-**Category:** Graphs & Trees
+## Problem Info
+- **Link**: [Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/)
+- **Category**: Graphs & Trees
+- **Difficulty**: Medium
+- **Status**: NOT DONE
 
-## Implementation
-```java
-public void flatten(TreeNode root) {
-    TreeNode curr = root;
-    while (curr != null) {
-        if (curr.left != null) {
-            TreeNode rightmost = curr.left;
-            while (rightmost.right != null) rightmost = rightmost.right;
-            rightmost.right = curr.right;
-            curr.right = curr.left;
-            curr.left = null;
-        }
-        curr = curr.right;
-    }
-}
-```
+## Approach
+### Data Structure
+- *To be determined*
 
-## Complexity
-- **Time**: O(n)
-- **Space**: O(1)
+### Time Complexity
+- O(?)
+
+## Things to Remember
+- *Add your key insights after solving*

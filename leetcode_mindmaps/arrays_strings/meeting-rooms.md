@@ -1,31 +1,20 @@
-# Meeting Rooms
+# Meeting rooms
 
-**Problem Link:** [Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)
-**Category:** Arrays & Strings
-
-## Problem Understanding
-- Can a person attend all meetings? (No overlap)
+## Problem Info
+- **Link**: [Meeting rooms](https://leetcode.com/problems/meeting-rooms/)
+- **Category**: Arrays & Strings
+- **Difficulty**: Easy
+- **Status**: DONE
 
 ## Approach
+### Data Structure
+- Arrays, sorting
 
-### Sort and Compare Adjacent
-- Sort by start time
-- Check if any end > next start
+### Time Complexity
+- O(nlogn)
 
-## Implementation
-```java
-public boolean canAttendMeetings(int[][] intervals) {
-    Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
-    
-    for (int i = 0; i < intervals.length - 1; i++) {
-        if (intervals[i][1] > intervals[i + 1][0]) {
-            return false;
-        }
-    }
-    return true;
-}
-```
+## Things to Remember
+- Sort based on start times and then check for overlapping meetings
 
-## Complexity
-- **Time**: O(n log n)
-- **Space**: O(1)
+## Additional Notes
+- Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0])); ---- sorting based on start times

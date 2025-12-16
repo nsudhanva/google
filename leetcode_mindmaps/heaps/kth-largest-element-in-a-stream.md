@@ -1,27 +1,20 @@
-# Kth Largest Element in a Stream
+# kth largest element in a stream
 
-**Problem Link:** [Kth Largest Element in a Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
-**Category:** Heaps
+## Problem Info
+- **Link**: [kth largest element in a stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/description/)
+- **Category**: Heaps
+- **Difficulty**: Easy
+- **Status**: DONE
 
-## Implementation
-```java
-class KthLargest {
-    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-    int k;
-    
-    public KthLargest(int k, int[] nums) {
-        this.k = k;
-        for (int n : nums) add(n);
-    }
-    
-    public int add(int val) {
-        minHeap.offer(val);
-        if (minHeap.size() > k) minHeap.poll();
-        return minHeap.peek();
-    }
-}
-```
+## Approach
+### Data Structure
+- min heap
 
-## Complexity
-- **Time**: O(log k) per add
-- **Space**: O(k)
+### Time Complexity
+- O(n logk)
+
+## Things to Remember
+- Use a min heap of size k. then the kth largest will always be at the root
+
+## Additional Notes
+- minheap - new PriorityQueue<>();     maxheap - new PriorityQueue<>(Collections.reverseOrder());

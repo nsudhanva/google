@@ -1,58 +1,17 @@
 # Longest Common Prefix
 
-**Problem Link:** [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
+## Problem Info
+- **Link**: [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
+- **Category**: Arrays & Strings
+- **Difficulty**: Easy
+- **Status**: DONE
 
-**Category:** Arrays & Strings
+## Approach
+### Data Structure
+- Binary Search
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Longest Common Prefix))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
-```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
+### Time Complexity
+- O(S logn)
 
 ## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+- If first half of string not common, disc 2nd half. If common, disc 1st half

@@ -1,27 +1,19 @@
-# Construct Quad Tree
+# Construct quad tree
 
-**Problem Link:** [Construct Quad Tree](https://leetcode.com/problems/construct-quad-tree/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [Construct quad tree](https://leetcode.com/problems/construct-quad-tree/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Medium
+- **Status**: DONE
 
-## Implementation
-```java
-public Node construct(int[][] grid) {
-    return build(grid, 0, 0, grid.length);
-}
+## Approach
+### Data Structure
+- Recursion
 
-private Node build(int[][] grid, int r, int c, int len) {
-    if (len == 1) return new Node(grid[r][c] == 1, true);
-    
-    int half = len / 2;
-    Node tl = build(grid, r, c, half);
-    Node tr = build(grid, r, c + half, half);
-    Node bl = build(grid, r + half, c, half);
-    Node br = build(grid, r + half, c + half, half);
-    
-    if (tl.isLeaf && tr.isLeaf && bl.isLeaf && br.isLeaf &&
-        tl.val == tr.val && tr.val == bl.val && bl.val == br.val) {
-        return new Node(tl.val, true);
-    }
-    return new Node(false, false, tl, tr, bl, br);
-}
-```
+### Time Complexity
+- O(n2)
+
+## Things to Remember
+- 2 ways of recursion - 1st: At each call, check if the grid has all same values, if not then divide into 4 recursively.
+- 2nd: divide by 4 recursively till you reach length 1 when you return the value and is leaf.
+- The later check if all 4 vals are same, if so, then can be combined into a single leaf, otherwise no.

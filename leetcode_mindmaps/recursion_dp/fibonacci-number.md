@@ -1,22 +1,22 @@
 # Fibonacci Number
 
-**Problem Link:** [Fibonacci Number](https://leetcode.com/problems/fibonacci-number/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [Fibonacci Number](https://leetcode.com/problems/fibonacci-number/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Easy
+- **Status**: DONE
 
-## Implementation
-```java
-public int fib(int n) {
-    if (n <= 1) return n;
-    int a = 0, b = 1;
-    for (int i = 2; i <= n; i++) {
-        int temp = a + b;
-        a = b;
-        b = temp;
-    }
-    return b;
-}
-```
+## Approach
+### Data Structure
+- DP, recursion, memo
 
-## Complexity
-- **Time**: O(n)
-- **Space**: O(1)
+### Time Complexity
+- O(n)
+
+## Things to Remember
+- Just recursion - most time consuming.
+- I did recursion with memo, space O(n).
+- Better way, use 2 variables to store n-1 and n-2 ans and do iterative - space O(1).
+
+## Additional Notes
+- memo[n] = fib_rec(n - 1, memo) + fib_rec(n-2, memo);

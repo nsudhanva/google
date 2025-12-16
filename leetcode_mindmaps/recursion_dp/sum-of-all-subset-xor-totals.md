@@ -1,16 +1,17 @@
-# Sum of All Subset XOR Totals
+# Sum of all subset xor totals
 
-**Problem Link:** [Sum of All Subset XOR Totals](https://leetcode.com/problems/sum-of-all-subset-xor-totals/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [Sum of all subset xor totals](https://leetcode.com/problems/sum-of-all-subset-xor-totals/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Easy
+- **Status**: NOT DONE
 
-## Implementation
-```java
-public int subsetXORSum(int[] nums) {
-    return helper(nums, 0, 0);
-}
+## Approach
+### Data Structure
+- *To be determined*
 
-private int helper(int[] nums, int idx, int curr) {
-    if (idx == nums.length) return curr;
-    return helper(nums, idx + 1, curr ^ nums[idx]) + helper(nums, idx + 1, curr);
-}
-```
+### Time Complexity
+- O(?)
+
+## Things to Remember
+- *Add your key insights after solving*

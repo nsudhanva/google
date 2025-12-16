@@ -1,38 +1,20 @@
-# Evaluate Reverse Polish Notation
+# Reverse Polish Notation
 
-**Problem Link:** [Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
-**Category:** Stacks & Queues
-
-## Problem Understanding
-- Evaluate postfix expression
+## Problem Info
+- **Link**: [Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/description/)
+- **Category**: Stacks & Queues
+- **Difficulty**: Medium
+- **Status**: DONE
 
 ## Approach
+### Data Structure
+- Stack
 
-### Stack
-- Push operands, pop two for operators
+### Time Complexity
+- O(n)
 
-## Implementation
-```java
-public int evalRPN(String[] tokens) {
-    Stack<Integer> stack = new Stack<>();
-    
-    for (String token : tokens) {
-        if ("+-*/".contains(token)) {
-            int b = stack.pop(), a = stack.pop();
-            switch (token) {
-                case "+": stack.push(a + b); break;
-                case "-": stack.push(a - b); break;
-                case "*": stack.push(a * b); break;
-                case "/": stack.push(a / b); break;
-            }
-        } else {
-            stack.push(Integer.parseInt(token));
-        }
-    }
-    return stack.pop();
-}
-```
+## Things to Remember
+- Keep pushing till you reach an operator, push the result back
 
-## Complexity
-- **Time**: O(n)
-- **Space**: O(n)
+## Additional Notes
+- Brute force is to do string manipulation - keep traversing till you find an operator, then take prev 2 numbers and evaluate. O(n2)

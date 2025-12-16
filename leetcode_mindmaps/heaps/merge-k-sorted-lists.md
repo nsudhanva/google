@@ -1,33 +1,17 @@
-# Merge K Sorted Lists
+# Merge k sorted Lists
 
-**Problem Link:** [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
-**Category:** Heaps / Linked Lists
+## Problem Info
+- **Link**: [Merge k sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/description/)
+- **Category**: Heaps
+- **Difficulty**: Hard
+- **Status**: NOT DONE
 
 ## Approach
-### Min Heap
+### Data Structure
+- *To be determined*
 
-## Implementation
-```java
-public ListNode mergeKLists(ListNode[] lists) {
-    PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
-    
-    for (ListNode node : lists) {
-        if (node != null) pq.offer(node);
-    }
-    
-    ListNode dummy = new ListNode(0);
-    ListNode curr = dummy;
-    
-    while (!pq.isEmpty()) {
-        ListNode node = pq.poll();
-        curr.next = node;
-        curr = curr.next;
-        if (node.next != null) pq.offer(node.next);
-    }
-    return dummy.next;
-}
-```
+### Time Complexity
+- O(?)
 
-## Complexity
-- **Time**: O(N log k)
-- **Space**: O(k)
+## Things to Remember
+- *Add your key insights after solving*

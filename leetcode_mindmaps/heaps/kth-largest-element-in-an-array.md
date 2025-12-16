@@ -1,32 +1,22 @@
-# Kth Largest Element in an Array
+# kth largest element in an array
 
-**Problem Link:** [Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
-**Category:** Heaps
-
-## Problem Understanding
-- Find kth largest element
+## Problem Info
+- **Link**: [kth largest element in an array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+- **Category**: Heaps
+- **Difficulty**: Medium
+- **Status**: DONE
 
 ## Approach
+### Data Structure
+- min heap
 
-### Min Heap of Size K
-- Keep k largest elements
-- Top of min heap = kth largest
+### Time Complexity
+- O(nlogk) / O(n)
 
-## Implementation
-```java
-public int findKthLargest(int[] nums, int k) {
-    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-    
-    for (int num : nums) {
-        minHeap.offer(num);
-        if (minHeap.size() > k) {
-            minHeap.poll();
-        }
-    }
-    return minHeap.peek();
-}
-```
+## Things to Remember
+- Similar to #1.
+- Can be done with max heap and poll till we hit k.
+- Or use a min heap and only insert if < size k (so min heap of size k).
 
-## Complexity
-- **Time**: O(n log k)
-- **Space**: O(k)
+## Additional Notes
+- Another soln: quick select: similar to quick sort - choose a pivot element (rightmost). Go through the array, if nums[i] is less than pivot, then swap with p otherwise keep as is. after the loop, swap pivot with p element. Then do it recursively till k == p. Average time O(n) but worst time O(n2)

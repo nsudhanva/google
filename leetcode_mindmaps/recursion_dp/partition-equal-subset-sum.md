@@ -1,35 +1,17 @@
-# Partition Equal Subset Sum
+# Partition Equal Subset sum
 
-**Problem Link:** [Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
-**Category:** Recursion & DP
-
-## Problem Understanding
-- Can array be partitioned into two equal sum subsets?
+## Problem Info
+- **Link**: [Partition Equal Subset sum](https://leetcode.com/problems/partition-equal-subset-sum/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Medium
+- **Status**: NOT DONE
 
 ## Approach
-### 0/1 Knapsack DP
-- Target = totalSum / 2
+### Data Structure
+- *To be determined*
 
-## Implementation
-```java
-public boolean canPartition(int[] nums) {
-    int sum = 0;
-    for (int n : nums) sum += n;
-    if (sum % 2 != 0) return false;
-    
-    int target = sum / 2;
-    boolean[] dp = new boolean[target + 1];
-    dp[0] = true;
-    
-    for (int num : nums) {
-        for (int j = target; j >= num; j--) {
-            dp[j] = dp[j] || dp[j - num];
-        }
-    }
-    return dp[target];
-}
-```
+### Time Complexity
+- O(?)
 
-## Complexity
-- **Time**: O(n * sum)
-- **Space**: O(sum)
+## Things to Remember
+- *Add your key insights after solving*

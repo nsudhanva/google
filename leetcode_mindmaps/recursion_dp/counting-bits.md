@@ -1,22 +1,17 @@
-# Counting Bits
+# Counting bits
 
-**Problem Link:** [Counting Bits](https://leetcode.com/problems/counting-bits/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [Counting bits](https://leetcode.com/problems/counting-bits/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Easy
+- **Status**: NOT DONE
 
 ## Approach
-### DP: dp[i] = dp[i >> 1] + (i & 1)
+### Data Structure
+- *To be determined*
 
-## Implementation
-```java
-public int[] countBits(int n) {
-    int[] dp = new int[n + 1];
-    for (int i = 1; i <= n; i++) {
-        dp[i] = dp[i >> 1] + (i & 1);
-    }
-    return dp;
-}
-```
+### Time Complexity
+- O(?)
 
-## Complexity
-- **Time**: O(n)
-- **Space**: O(n)
+## Things to Remember
+- *Add your key insights after solving*

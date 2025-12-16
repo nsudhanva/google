@@ -1,1630 +1,2258 @@
 [
   {
     "url": "https://leetcode.com/problems/palindrome-number/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "palindrome-number",
+    "name": "Palindrome Number",
+    "difficulty": "Easy",
+    "data_structure": "Math",
+    "time_complexity": "O(logn)",
+    "things_to_remember": "Bruteforce is to convert to string and check. Math is to compare half of x to the reversed second part. r = r * 10 + (x % 10)",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Math/Bitwise",
-      "row": 2,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/palindrome-number/description/"
+      "row": 2
     }
   },
   {
     "url": "https://leetcode.com/problems/add-binary/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "add-binary",
+    "name": "Add Binary",
+    "difficulty": "Easy",
+    "data_structure": "Bit",
+    "time_complexity": "O(max(n,m))",
+    "things_to_remember": "two pointers from end. calculate char by char",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Math/Bitwise",
-      "row": 3,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/add-binary/description/"
+      "row": 3
     }
   },
   {
     "url": "https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-i",
-    "title": null,
-    "notes": null,
+    "slug": "check-if-digits-are-equal-in-string-after-operations-i",
+    "name": "Check if digits are equal in string after ops 1",
+    "difficulty": "Easy",
+    "data_structure": "Simulation",
+    "time_complexity": "O(n2)",
+    "things_to_remember": "two loops",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Math/Bitwise",
-      "row": 4,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-i"
+      "row": 4
     }
   },
   {
     "url": "https://leetcode.com/problems/calculate-money-in-leetcode-bank/",
-    "title": null,
-    "notes": null,
+    "slug": "calculate-money-in-leetcode-bank",
+    "name": "Calculate money in leetcode bank",
+    "difficulty": "Easy",
+    "data_structure": "Simulation",
+    "time_complexity": "O(n)",
+    "things_to_remember": "two loops - one for n(each week) and one for each day. there is another way with Math",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Math/Bitwise",
-      "row": 5,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/calculate-money-in-leetcode-bank/"
+      "row": 5
     }
   },
   {
     "url": "https://leetcode.com/problems/smallest-number-with-all-set-bits/description/",
-    "title": null,
-    "notes": null,
+    "slug": "smallest-number-with-all-set-bits",
+    "name": "Smallest number with set bits",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": "REVISIT",
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Math/Bitwise",
-      "row": 6,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/smallest-number-with-all-set-bits/description/"
+      "row": 6
     }
   },
   {
     "url": "https://leetcode.com/problems/sqrtx/",
-    "title": null,
-    "notes": null,
+    "slug": "sqrtx",
+    "name": "Sqrt(x)",
+    "difficulty": "Easy",
+    "data_structure": "Binary search",
+    "time_complexity": "O(logn)",
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Math/Bitwise",
-      "row": 7,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/sqrtx/"
+      "row": 7
     }
   },
   {
     "url": "https://leetcode.com/problems/plus-one/",
-    "title": null,
-    "notes": null,
+    "slug": "plus-one",
+    "name": "Plus one",
+    "difficulty": "Easy",
+    "data_structure": "Math",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Schoolbook addition",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Math/Bitwise",
-      "row": 8,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/plus-one/"
+      "row": 8
     }
   },
   {
     "url": "https://leetcode.com/problems/meeting-rooms/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "meeting-rooms",
+    "name": "Meeting rooms",
+    "difficulty": "Easy",
+    "data_structure": "Arrays, sorting",
+    "time_complexity": "O(nlogn)",
+    "things_to_remember": "Sort based on start times and then check for overlapping meetings",
+    "extra_notes": [
+      "Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0])); ---- sorting based on start times"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 2,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/meeting-rooms/"
+      "row": 2
     }
   },
   {
     "url": "https://leetcode.com/problems/merge-sorted-array/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "merge-sorted-array",
+    "name": "Merge Sorted Arrays",
+    "difficulty": "Easy",
+    "data_structure": "Pointers",
+    "time_complexity": "O(m+n)",
+    "things_to_remember": "If they ask to do it within nums1, then first make a copy and then do",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 3,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/merge-sorted-array/description/"
+      "row": 3
     }
   },
   {
     "url": "https://leetcode.com/problems/longest-common-prefix/",
-    "title": null,
-    "notes": null,
+    "slug": "longest-common-prefix",
+    "name": "Longest Common Prefix",
+    "difficulty": "Easy",
+    "data_structure": "Binary Search",
+    "time_complexity": "O(S logn)",
+    "things_to_remember": "If first half of string not common, disc 2nd half. If common, disc 1st half",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 4,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/longest-common-prefix/"
+      "row": 4
     }
   },
   {
     "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
-    "title": null,
-    "notes": null,
+    "slug": "remove-duplicates-from-sorted-array",
+    "name": "Remove Duplicates from sorted array",
+    "difficulty": "Easy",
+    "data_structure": "Two pointers",
+    "time_complexity": "O(n)",
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 5,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/"
+      "row": 5
     }
   },
   {
     "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-    "title": null,
-    "notes": null,
+    "slug": "best-time-to-buy-and-sell-stock",
+    "name": "Best Time to Buy and Sell stock",
+    "difficulty": "Easy",
+    "data_structure": "Arrays",
+    "time_complexity": "O(n)",
+    "things_to_remember": "maintain minPrice and maxProfit, one pass",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 6,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
+      "row": 6
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-search/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-search",
+    "name": "Binary Search",
+    "difficulty": "Easy",
+    "data_structure": "divide n conquer",
+    "time_complexity": "O(logn)",
+    "things_to_remember": "mid, divide by half, compare mid to target",
+    "extra_notes": [
+      "Revisit - upper bound and lower bound ways"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 7,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-search/"
+      "row": 7
     }
   },
   {
     "url": "https://leetcode.com/problems/move-zeroes/",
-    "title": null,
-    "notes": null,
+    "slug": "move-zeroes",
+    "name": "Move Zeros",
+    "difficulty": "Easy",
+    "data_structure": "Two pointers",
+    "time_complexity": "O(n)",
+    "things_to_remember": "one pointer for array, second pointer for non-zero elements",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 8,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/move-zeroes/"
+      "row": 8
     }
   },
   {
     "url": "https://leetcode.com/problems/valid-palindrome/",
-    "title": null,
-    "notes": null,
+    "slug": "valid-palindrome",
+    "name": "Valid Palindrome",
+    "difficulty": "Easy",
+    "data_structure": "Two pointers",
+    "time_complexity": "O(n)",
+    "things_to_remember": "pointers at start and end, check for alphanumeric along the way. Another way is to build the reverse and compare",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 9,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/valid-palindrome/"
+      "row": 9
     }
   },
   {
     "url": "https://leetcode.com/problems/remove-element/",
-    "title": null,
-    "notes": null,
+    "slug": "remove-element",
+    "name": "Remove element",
+    "difficulty": "Easy",
+    "data_structure": "two pointers",
+    "time_complexity": "O(n)",
+    "things_to_remember": "similar to remove duplicates. Another way is to swap with last element when you see a matching value (since order doesn't matter)",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 10,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/remove-element/"
+      "row": 10
     }
   },
   {
     "url": "https://leetcode.com/problems/final-value-of-variable-after-performing-operations",
-    "title": null,
-    "notes": null,
+    "slug": "final-value-of-variable-after-performing-operations",
+    "name": "Final value after performing ops",
+    "difficulty": "Easy",
+    "data_structure": "String",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Straight forward",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 11,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/final-value-of-variable-after-performing-operations"
+      "row": 11
     }
   },
   {
     "url": "https://leetcode.com/problems/length-of-last-word/",
-    "title": null,
-    "notes": null,
+    "slug": "length-of-last-word",
+    "name": "Length of last word",
+    "difficulty": "Easy",
+    "data_structure": "String",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Can use string funcs. Other way is to iterate from back and count the length of non-space chars",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 12,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/length-of-last-word/"
+      "row": 12
     }
   },
   {
     "url": "https://leetcode.com/problems/make-array-elements-equal-to-zero",
-    "title": null,
-    "notes": null,
+    "slug": "make-array-elements-equal-to-zero",
+    "name": "Make array elements equal to 0",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": "REVISIT",
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 13,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/make-array-elements-equal-to-zero"
+      "row": 13
     }
   },
   {
     "url": "https://leetcode.com/problems/valid-palindrome-ii/",
-    "title": null,
-    "notes": null,
+    "slug": "valid-palindrome-ii",
+    "name": "Valid Palindrome II",
+    "difficulty": "Easy",
+    "data_structure": "Two Pointers, greedy",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Use a separate method to check palindrome when there is a mismatch",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 14,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/valid-palindrome-ii/"
+      "row": 14
     }
   },
   {
     "url": "https://leetcode.com/problems/running-sum-of-1d-array/",
-    "title": null,
-    "notes": null,
+    "slug": "running-sum-of-1d-array",
+    "name": "Running sum of 1d array",
+    "difficulty": "Easy",
+    "data_structure": "Prefix sum",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Just easy",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 15,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/running-sum-of-1d-array/"
+      "row": 15
     }
   },
   {
     "url": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
-    "title": null,
-    "notes": null,
+    "slug": "two-sum-ii-input-array-is-sorted",
+    "name": "Two Sum II",
+    "difficulty": "Medium",
+    "data_structure": "Two pointers",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Input array sorted. two pointers - one at start and one at end. if sum is less than t, inc. if more, dec.",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 16,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/"
+      "row": 16
     }
   },
   {
     "url": "https://leetcode.com/problems/3sum/",
-    "title": null,
-    "notes": null,
+    "slug": "3sum",
+    "name": "Three Sum",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": "O(n^2)",
+    "things_to_remember": "REVISIT",
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 17,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/3sum/"
+      "row": 17
     }
   },
   {
     "url": "https://leetcode.com/problems/container-with-most-water/description/",
-    "title": null,
-    "notes": null,
+    "slug": "container-with-most-water",
+    "name": "Container with Most Water",
+    "difficulty": "Medium",
+    "data_structure": "Two pointers",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Two pointers, 1 at start and 1 at end. Move the one with smaller height",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 18,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/container-with-most-water/description/"
+      "row": 18
     }
   },
   {
     "url": "https://leetcode.com/problems/text-justification/description/",
-    "title": null,
-    "notes": null,
+    "slug": "text-justification",
+    "name": "Text Justification",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 19,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/text-justification/description/"
+      "row": 19
     }
   },
   {
     "url": "https://leetcode.com/problems/minimum-window-substring/description/",
-    "title": null,
-    "notes": null,
+    "slug": "minimum-window-substring",
+    "name": "Minimum window substring",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 20,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/minimum-window-substring/description/"
+      "row": 20
     }
   },
   {
     "url": "https://leetcode.com/problems/merge-intervals/description/",
-    "title": null,
-    "notes": null,
+    "slug": "merge-intervals",
+    "name": "merge intervals",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 21,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/merge-intervals/description/"
+      "row": 21
     }
   },
   {
     "url": "https://leetcode.com/problems/swap-adjacent-in-lr-string/description/",
-    "title": null,
-    "notes": null,
+    "slug": "swap-adjacent-in-lr-string",
+    "name": "swap adjacent in LR string",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 22,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/swap-adjacent-in-lr-string/description/"
+      "row": 22
     }
   },
   {
     "url": "https://leetcode.com/problems/range-sum-query-immutable/description/",
-    "title": null,
-    "notes": null,
+    "slug": "range-sum-query-immutable",
+    "name": "Range sum query",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 23,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/range-sum-query-immutable/description/"
+      "row": 23
     }
   },
   {
     "url": "https://leetcode.com/problems/contiguous-array/description/",
-    "title": null,
-    "notes": null,
+    "slug": "contiguous-array",
+    "name": "Contiguous Array",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 24,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/contiguous-array/description/"
+      "row": 24
     }
   },
   {
     "url": "https://leetcode.com/problems/maximum-average-subarray-i/description/",
-    "title": null,
-    "notes": null,
+    "slug": "maximum-average-subarray-i",
+    "name": "Maximum Average subarray",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 25,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/maximum-average-subarray-i/description/"
+      "row": 25
     }
   },
   {
     "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/description/",
-    "title": null,
-    "notes": null,
+    "slug": "longest-substring-without-repeating-characters",
+    "name": "Longest substring without repeatinf chars",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 26,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/longest-substring-without-repeating-characters/description/"
+      "row": 26
     }
   },
   {
     "url": "https://leetcode.com/problems/find-the-duplicate-number/description/",
-    "title": null,
-    "notes": null,
+    "slug": "find-the-duplicate-number",
+    "name": "Find the duplicate number",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 27,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/find-the-duplicate-number/description/"
+      "row": 27
     }
   },
   {
     "url": "https://leetcode.com/problems/insert-interval/description/",
-    "title": null,
-    "notes": null,
+    "slug": "insert-interval",
+    "name": "Insert Interval",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 28,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/insert-interval/description/"
+      "row": 28
     }
   },
   {
     "url": "https://leetcode.com/problems/search-in-rotated-sorted-array/description/",
-    "title": null,
-    "notes": null,
+    "slug": "search-in-rotated-sorted-array",
+    "name": "search in a rotated sorted array",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 29,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/search-in-rotated-sorted-array/description/"
+      "row": 29
     }
   },
   {
     "url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/",
-    "title": null,
-    "notes": null,
+    "slug": "find-minimum-in-rotated-sorted-array",
+    "name": "Find min in a rotated sorted array",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 30,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/"
+      "row": 30
     }
   },
   {
     "url": "https://leetcode.com/problems/search-a-2d-matrix-ii/description/",
-    "title": null,
-    "notes": null,
+    "slug": "search-a-2d-matrix-ii",
+    "name": "search in a 2d matrix II",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Arrays & Strings",
-      "row": 31,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/search-a-2d-matrix-ii/description/"
+      "row": 31
     }
   },
   {
     "url": "https://leetcode.com/problems/design-hashmap/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "design-hashmap",
+    "name": "Design Hashmap",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 2,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/design-hashmap/description/"
+      "row": 2
     }
   },
   {
     "url": "https://leetcode.com/problems/insert-delete-getrandom-o1/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "insert-delete-getrandom-o1",
+    "name": "Insert Delete GetRandom O(1)",
+    "difficulty": "Medium",
+    "data_structure": "Hashmap, array",
+    "time_complexity": "O(1)",
+    "things_to_remember": "Insert: insert into list, insert into map with index as value. Delete: swap the last element into that index, update map for that, then delete last element from list and corresponding map element. GetRandom: use Java Random() on the list index to retrieve",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 3,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/insert-delete-getrandom-o1/description/"
+      "row": 3
     }
   },
   {
     "url": "https://leetcode.com/problems/longest-consecutive-sequence/description/",
-    "title": null,
-    "notes": null,
+    "slug": "longest-consecutive-sequence",
+    "name": "Longest Consecutive sequence",
+    "difficulty": "Medium",
+    "data_structure": "BFS Solution was more intuitive",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Bruteforce - sort and check every consecutive while maintaining max. BFS - visualize as graph, create adj by adding list of prev and next numbers if exists, then maintain visted, for each key and not visited, add to q, while q not empty, remove, and for each nei not visited, add to q while inc size",
+    "extra_notes": null,
+    "done": "DONE but REVISIT",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 4,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/longest-consecutive-sequence/description/"
+      "row": 4
     }
   },
   {
     "url": "https://leetcode.com/problems/subarray-sum-equals-k/description/",
-    "title": null,
-    "notes": null,
+    "slug": "subarray-sum-equals-k",
+    "name": "Subarray sum equals k",
+    "difficulty": "Medium",
+    "data_structure": "HashMap, prefix sum",
+    "time_complexity": "O(n)",
+    "things_to_remember": "bruteforce O(n3), sum array precomputed O(n2), hashmap O(n). Not very intuitive. Basic Idea: create a hashmap with prefix sums from 0 to every index and the count of how many times that occurs. Also at each interation, look if the target (k - currSum) is already there in map. If so, add it to the count, then just add the currSum to the map with count.",
+    "extra_notes": null,
+    "done": "DONE but REVISIT",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 5,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/subarray-sum-equals-k/description/"
+      "row": 5
     }
   },
   {
     "url": "https://leetcode.com/problems/group-anagrams/description/",
-    "title": null,
-    "notes": null,
+    "slug": "group-anagrams",
+    "name": "Group Anagrams",
+    "difficulty": "Medium",
+    "data_structure": "Hahsmap",
+    "time_complexity": "O(nk)",
+    "things_to_remember": "1st approach: hashmap with sorted string as key - O(nklogk). 2nd approad: hashmap with count array as key - O(nk)",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 6,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/group-anagrams/description/"
+      "row": 6
     }
   },
   {
     "url": "https://leetcode.com/problems/snapshot-array/description/",
-    "title": null,
-    "notes": null,
+    "slug": "snapshot-array",
+    "name": "Snapshot array",
+    "difficulty": "Medium",
+    "data_structure": "Treemap",
+    "time_complexity": "O(nlogn+k)",
+    "things_to_remember": "Bruteforce of storing every snapshot uses too much memory. Optimal: On set, store the value with snapID every time. On get, do a binary search to get the closest smaller snapid and value. Easily done with Treemaps in Java",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 7,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/snapshot-array/description/"
+      "row": 7
     }
   },
   {
     "url": "https://leetcode.com/problems/strobogrammatic-number/",
-    "title": null,
-    "notes": null,
+    "slug": "strobogrammatic-number",
+    "name": "Strobogrammatic number",
+    "difficulty": "Easy",
+    "data_structure": "Hashmap",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Make a map with rotated numbers for 0,1,8,6,9. Use 2 pointers to go through the input and compare.",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 8,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/strobogrammatic-number/"
+      "row": 8
     }
   },
   {
     "url": "https://leetcode.com/problems/two-sum/description/",
-    "title": null,
-    "notes": null,
+    "slug": "two-sum",
+    "name": "Two Sum",
+    "difficulty": "Easy",
+    "data_structure": "HashMap",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Store number and index in a hashmap",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 9,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/two-sum/description/"
+      "row": 9
     }
   },
   {
     "url": "https://leetcode.com/problems/majority-element/description/",
-    "title": null,
-    "notes": null,
+    "slug": "majority-element",
+    "name": "Majority Element",
+    "difficulty": "Easy",
+    "data_structure": "HashMap, Sorting",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Hashmap - O(n), sorting and return n/2 element - O(nlogn)",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 10,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/majority-element/description/"
+      "row": 10
     }
   },
   {
     "url": "https://leetcode.com/problems/roman-to-integer/description/",
-    "title": null,
-    "notes": null,
+    "slug": "roman-to-integer",
+    "name": "Roman to Integer",
+    "difficulty": "Easy",
+    "data_structure": "HashMap, String",
+    "time_complexity": "O(1) since roman numbers are limited to 3999",
+    "things_to_remember": "Hashmap for values, consider current and next value to determine the number to be added. Another way - also store double digits in the map.",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 11,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/roman-to-integer/description/"
+      "row": 11
     }
   },
   {
     "url": "https://leetcode.com/problems/valid-anagram/",
-    "title": null,
-    "notes": null,
+    "slug": "valid-anagram",
+    "name": "Valid Anagrams",
+    "difficulty": "Easy",
+    "data_structure": "Hashmap, arrays",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Hashmap to store letter count, or array counter to store the count",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 12,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/valid-anagram/"
+      "row": 12
     }
   },
   {
     "url": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/",
-    "title": null,
-    "notes": null,
+    "slug": "find-the-index-of-the-first-occurrence-in-a-string",
+    "name": "Index of first occurrence in a string",
+    "difficulty": "Easy",
+    "data_structure": "Hashing",
+    "time_complexity": "O(nm)",
+    "things_to_remember": "I used substring method - but that is brute force. Other way is hasing each character, checking the hash of each substring and only if it matches, compare chars. but that also in worst case is the same complexity. There is another way with O(n) but very complex - revisit.",
+    "extra_notes": null,
+    "done": "DONE but REVISIT",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 13,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/"
+      "row": 13
     }
   },
   {
     "url": "https://leetcode.com/problems/happy-number/",
-    "title": null,
-    "notes": null,
+    "slug": "happy-number",
+    "name": "Happy Number",
+    "difficulty": "Easy",
+    "data_structure": "HashSet / Math",
+    "time_complexity": "O(logn)",
+    "things_to_remember": "Maintain a hashset to detect already visited numbers (cycle). This can also be seen as an LL and use the cycle detection to find cycles. The rest is to use divide and mod to find squares",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 14,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/happy-number/"
+      "row": 14
     }
   },
   {
     "url": "https://leetcode.com/problems/contains-duplicate/",
-    "title": null,
-    "notes": null,
+    "slug": "contains-duplicate",
+    "name": "Contains Duplicate",
+    "difficulty": "Easy",
+    "data_structure": "Hash set",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Bruteforce is n2 or sorting",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 15,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/contains-duplicate/"
+      "row": 15
     }
   },
   {
     "url": "https://leetcode.com/problems/isomorphic-strings/description/",
-    "title": null,
-    "notes": null,
+    "slug": "isomorphic-strings",
+    "name": "Isomorphic Strings",
+    "difficulty": "Easy",
+    "data_structure": "Hashset",
+    "time_complexity": "O(n)",
+    "things_to_remember": "One soln - hashmap and set. second sol - transform both strings and compare. transofmration - create a string with index of first occurrence",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Hashmaps & HashSets",
-      "row": 16,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/isomorphic-strings/description/"
+      "row": 16
     }
   },
   {
     "url": "https://leetcode.com/problems/lru-cache/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "lru-cache",
+    "name": "LRU Cache",
+    "difficulty": "Medium",
+    "data_structure": "Linked List, Hashmap",
+    "time_complexity": "O(1)",
+    "things_to_remember": "Use a doubly linked list with a hashmap",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 2,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/lru-cache/description/"
+      "row": 2
     }
   },
   {
     "url": "https://leetcode.com/problems/copy-list-with-random-pointer/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "copy-list-with-random-pointer",
+    "name": "Copy List with Random Pointer",
+    "difficulty": "Medium",
+    "data_structure": "Linked List, Hashmap",
+    "time_complexity": "O(n)",
+    "things_to_remember": "I used a hashmap to store old and new nodes. Copied as a normal list while adding to the map and traversing again and assigning random pointers by looking at the map",
+    "extra_notes": [
+      "This can also be done recursively with a hashmap - check if map contains, then return. otherwise create a new node, save it in the map, then call func recursively on next and random while assigning them. With constant space: traverse the list while creating copy and storing each copy as next of old node. Then go through again and assign randoms to the new ones. Then decouple the two lists and return"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 3,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/copy-list-with-random-pointer/description/"
+      "row": 3
     }
   },
   {
     "url": "https://leetcode.com/problems/merge-k-sorted-lists/description/",
-    "title": null,
-    "notes": null,
+    "slug": "merge-k-sorted-lists",
+    "name": null,
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 4,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/merge-k-sorted-lists/description/"
+      "row": 4
     }
   },
   {
     "url": "https://leetcode.com/problems/reverse-nodes-in-k-group/description/",
-    "title": null,
-    "notes": null,
+    "slug": "reverse-nodes-in-k-group",
+    "name": null,
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 5,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/reverse-nodes-in-k-group/description/"
+      "row": 5
     }
   },
   {
     "url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/",
-    "title": null,
-    "notes": null,
+    "slug": "remove-nth-node-from-end-of-list",
+    "name": "Remove nth node from list",
+    "difficulty": "Medium",
+    "data_structure": "Linked List",
+    "time_complexity": "O(L)",
+    "things_to_remember": "Need a dummy node at the start in case head is to be removed. I solved it by finding the length and then traversing till there again to remove",
+    "extra_notes": [
+      "One pass algo: have a dummy node, maintain two pointers. Move the first pointer to the n+1th node so that the gap b/w the two pointers is n nodes. Then till first pointer becomes null, advance both of them together. At that point, second ptr will be at (L-n)th node. remove that node"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 6,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/"
+      "row": 6
     }
   },
   {
     "url": "https://leetcode.com/problems/palindrome-linked-list/description/",
-    "title": null,
-    "notes": null,
+    "slug": "palindrome-linked-list",
+    "name": "Palindrome linked list",
+    "difficulty": "Easy",
+    "data_structure": "Linked list",
+    "time_complexity": "O(n)",
+    "things_to_remember": "I did it with slow and fast pointers and a stack. Can also be done in-place by reversing the second half and traversing",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 7,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/palindrome-linked-list/description/"
+      "row": 7
     }
   },
   {
     "url": "https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/description/",
-    "title": null,
-    "notes": null,
+    "slug": "flatten-a-multilevel-doubly-linked-list",
+    "name": "Flatten a multi level doubly linked list",
+    "difficulty": "Medium",
+    "data_structure": "Linked List, DFS",
+    "time_complexity": "O(n)",
+    "things_to_remember": "DFS - can be solved with recursion or iteration (stack)",
+    "extra_notes": [
+      "Recursion: traverse through child first. Iteration: push next into the stack first, then child"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 8,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/description/"
+      "row": 8
     }
   },
   {
     "url": "https://leetcode.com/problems/reverse-linked-list/",
-    "title": null,
-    "notes": null,
+    "slug": "reverse-linked-list",
+    "name": "Reverse Linked List",
+    "difficulty": "Easy",
+    "data_structure": "Linked Lists",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Save next node in a variable and change pointer of curr node to prev node",
+    "extra_notes": [
+      "Can also be done recursively"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 9,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/reverse-linked-list/"
+      "row": 9
     }
   },
   {
     "url": "https://leetcode.com/problems/middle-of-the-linked-list/",
-    "title": null,
-    "notes": null,
+    "slug": "middle-of-the-linked-list",
+    "name": "Middle of the linked list",
+    "difficulty": "Easy",
+    "data_structure": "LL, fast and slow pointers",
+    "time_complexity": "O(n)",
+    "things_to_remember": "fast and slow. can also be done by converting into an array of nodes",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 10,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/middle-of-the-linked-list/"
+      "row": 10
     }
   },
   {
     "url": "https://leetcode.com/problems/add-two-numbers/",
-    "title": null,
-    "notes": null,
+    "slug": "add-two-numbers",
+    "name": "Add two numbers",
+    "difficulty": "Medium",
+    "data_structure": "Linked List",
+    "time_complexity": "O(max(m,n))",
+    "things_to_remember": "Linked list adding",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 11,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/add-two-numbers/"
+      "row": 11
     }
   },
   {
     "url": "https://leetcode.com/problems/linked-list-cycle/description/",
-    "title": null,
-    "notes": null,
+    "slug": "linked-list-cycle",
+    "name": "Linked List Cycle",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 12,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/linked-list-cycle/description/"
+      "row": 12
     }
   },
   {
     "url": "https://leetcode.com/problems/reverse-linked-list-ii/description/",
-    "title": null,
-    "notes": null,
+    "slug": "reverse-linked-list-ii",
+    "name": "Reverse Linked List II",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 13,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/reverse-linked-list-ii/description/"
+      "row": 13
     }
   },
   {
     "url": "https://leetcode.com/problems/swap-nodes-in-pairs/description/",
-    "title": null,
-    "notes": null,
+    "slug": "swap-nodes-in-pairs",
+    "name": "Swap nodes in pairs",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Linked Lists",
-      "row": 14,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/swap-nodes-in-pairs/description/"
+      "row": 14
     }
   },
   {
     "url": "https://leetcode.com/problems/min-stack/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "min-stack",
+    "name": "Min Stack",
+    "difficulty": "Medium",
+    "data_structure": "Stack",
+    "time_complexity": "O(1)",
+    "things_to_remember": "Use stack as underlying DS. For min -- use the stack with a list for every push - with actual value and minimum till now.",
+    "extra_notes": [
+      "You can also use two stacks instead - one to store vals, one to store mins when it changes."
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 2,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/min-stack/"
+      "row": 2
     }
   },
   {
     "url": "https://leetcode.com/problems/evaluate-reverse-polish-notation/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "evaluate-reverse-polish-notation",
+    "name": "Reverse Polish Notation",
+    "difficulty": "Medium",
+    "data_structure": "Stack",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Keep pushing till you reach an operator, push the result back",
+    "extra_notes": [
+      "Brute force is to do string manipulation - keep traversing till you find an operator, then take prev 2 numbers and evaluate. O(n2)"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 3,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/evaluate-reverse-polish-notation/description/"
+      "row": 3
     }
   },
   {
     "url": "https://leetcode.com/problems/daily-temperatures/description/",
-    "title": null,
-    "notes": null,
+    "slug": "daily-temperatures",
+    "name": "Daily Temperatures",
+    "difficulty": "Medium",
+    "data_structure": "Stack",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Similar to #7 next greater element. map is not reqd",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 4,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/daily-temperatures/description/"
+      "row": 4
     }
   },
   {
     "url": "https://leetcode.com/problems/basic-calculator-ii/description/",
-    "title": null,
-    "notes": null,
+    "slug": "basic-calculator-ii",
+    "name": "Basic Calculator ii",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 5,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/basic-calculator-ii/description/"
+      "row": 5
     }
   },
   {
     "url": "https://leetcode.com/problems/trapping-rain-water/description/",
-    "title": null,
-    "notes": null,
+    "slug": "trapping-rain-water",
+    "name": "Trapping Rain Water",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 6,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/trapping-rain-water/description/"
+      "row": 6
     }
   },
   {
     "url": "https://leetcode.com/problems/next-greater-element-i/",
-    "title": null,
-    "notes": null,
+    "slug": "next-greater-element-i",
+    "name": "Next Greater element i",
+    "difficulty": "Easy",
+    "data_structure": "Stack",
+    "time_complexity": "O(n)",
+    "things_to_remember": "push element to stack if it is decreasing order. if not, pop and put the larger element in a map to be able to access quickly",
+    "extra_notes": [
+      "Bruteforce is to check for every element, the next largest one - O(mn)"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 7,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/next-greater-element-i/"
+      "row": 7
     }
   },
   {
     "url": "https://leetcode.com/problems/implement-stack-using-queues/description/",
-    "title": null,
-    "notes": null,
+    "slug": "implement-stack-using-queues",
+    "name": "Implement Stack using queue",
+    "difficulty": "Easy",
+    "data_structure": "Queue",
+    "time_complexity": "Either push or pop is O(n)",
+    "things_to_remember": "Use 2 queues. Push - O(1) - just add to end and maintain top. Pop - O(n) - remove and add to a temp queue till except last element which should be poppped",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 8,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/implement-stack-using-queues/description/"
+      "row": 8
     }
   },
   {
     "url": "https://leetcode.com/problems/implement-queue-using-stacks/description/",
-    "title": null,
-    "notes": null,
+    "slug": "implement-queue-using-stacks",
+    "name": "Implement Queue using Stack",
+    "difficulty": "Easy",
+    "data_structure": "Stacks",
+    "time_complexity": "Push O(n)",
+    "things_to_remember": "Maintain 2 stacks. transfer 1-by-1 from s1 to s2. push to s2 and transfer back to s1. pop and peek are normal",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 9,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/implement-queue-using-stacks/description/"
+      "row": 9
     }
   },
   {
     "url": "https://leetcode.com/problems/moving-average-from-data-stream/description/",
-    "title": null,
-    "notes": null,
+    "slug": "moving-average-from-data-stream",
+    "name": "Moving Average from Data stream",
+    "difficulty": "Easy",
+    "data_structure": "Queues",
+    "time_complexity": "O(m)",
+    "things_to_remember": "Queue to hold values equal to size. And currentSum to have sum of size elements",
+    "extra_notes": [
+      "Can also be done using Circular queue"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 10,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/moving-average-from-data-stream/description/"
+      "row": 10
     }
   },
   {
     "url": "https://leetcode.com/problems/design-hit-counter/description/",
-    "title": null,
-    "notes": null,
+    "slug": "design-hit-counter",
+    "name": "Design a hit counter",
+    "difficulty": "Medium",
+    "data_structure": "Queue, Deque",
+    "time_complexity": "O(n) worst case",
+    "things_to_remember": "I did this using a hashmap with timestamp to count - but not very efficient. Assuming timestamps are always increasing, we can use queues.",
+    "extra_notes": [
+      "Queue: Hit: just add to queue. GetHits: check first, if diff>=300, remove it in loop. then return size. Deque: use deque with pairs of timestamp and count. Hit: check last element, if same timestamp, inc count, remove and add new pair, otherwise just add. GetHits: similar to queue. One diff - maintain a total variable."
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 11,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/design-hit-counter/description/"
+      "row": 11
     }
   },
   {
     "url": "https://leetcode.com/problems/design-circular-queue/description/",
-    "title": null,
-    "notes": null,
+    "slug": "design-circular-queue",
+    "name": "Design a circular queue",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 12,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/design-circular-queue/description/"
+      "row": 12
     }
   },
   {
     "url": "https://leetcode.com/problems/valid-parentheses/description",
-    "title": null,
-    "notes": null,
+    "slug": "valid-parentheses",
+    "name": "Valid Paranthesis",
+    "difficulty": "Easy",
+    "data_structure": "Stack and Map",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Store bracket pairs in map",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 13,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/valid-parentheses/description"
+      "row": 13
     }
   },
   {
     "url": "https://leetcode.com/problems/largest-rectangle-in-histogram/description/",
-    "title": null,
-    "notes": null,
+    "slug": "largest-rectangle-in-histogram",
+    "name": "Largest rectangle in Histogram",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Stacks & Queues",
-      "row": 14,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/largest-rectangle-in-histogram/description/"
+      "row": 14
     }
   },
   {
     "url": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "flatten-binary-tree-to-linked-list",
+    "name": "Flatten Binary Tree to Linked List",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 2,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/"
+      "row": 2
     }
   },
   {
     "url": "https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "convert-binary-search-tree-to-sorted-doubly-linked-list",
+    "name": "Convert BST to DLL",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 3,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/description/"
+      "row": 3
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-tree-postorder-traversal/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-tree-postorder-traversal",
+    "name": "Post order",
+    "difficulty": "Easy",
+    "data_structure": "Tree, DFS",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Little more complex - one while loop. maintain prev node and make right null when visited",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 4,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-tree-postorder-traversal/"
+      "row": 4
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-tree-preorder-traversal/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-tree-preorder-traversal",
+    "name": "Pre order",
+    "difficulty": "Easy",
+    "data_structure": "Tree, DFS",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Similar to in-order - 2 while loops",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 5,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-tree-preorder-traversal/"
+      "row": 5
     }
   },
   {
     "url": "https://leetcode.com/problems/minimum-depth-of-binary-tree/",
-    "title": null,
-    "notes": null,
+    "slug": "minimum-depth-of-binary-tree",
+    "name": "Min Depth of BT",
+    "difficulty": "Easy",
+    "data_structure": "Tree, BFS",
+    "time_complexity": "O(n)",
+    "things_to_remember": "BFS is better sol, but can be done with dfs too",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 6,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/minimum-depth-of-binary-tree/"
+      "row": 6
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-tree-level-order-traversal",
+    "name": "Level Order Traversal",
+    "difficulty": "Medium",
+    "data_structure": "Tree, BFS",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Same as above. 2 while loops. the inner one is for each level",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 7,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-tree-level-order-traversal/"
+      "row": 7
     }
   },
   {
     "url": "https://leetcode.com/problems/course-schedule/",
-    "title": null,
-    "notes": null,
+    "slug": "course-schedule",
+    "name": "Course Schedule",
+    "difficulty": "Medium",
+    "data_structure": "Graph, DFS",
+    "time_complexity": "O(N+E)",
+    "things_to_remember": "Way 1: (DFS recursive) have a map with each course mapping to an array of prereq. Then for each course run dfs. Base case is if crs is in visited - false. if prereq array is empty - true. then loop through prereqs and run dfs again. after the loop, remove from visited, and make prereq empty",
+    "extra_notes": [
+      "Way 2: (DFS recursive 2) have a map with each course mapping to an array of prereq. Then for each course run dfs. Also have a states array for each course state. 0 - unvisited, 1 - visiting, 2 - visisted. Base case is if crs state is visiting - false. if crs state is visited - true. then loop through prereqs and run dfs again. after the loop, change from visiting to visited"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 8,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/course-schedule/"
+      "row": 8
     }
   },
   {
     "url": "https://leetcode.com/problems/course-schedule-ii/",
-    "title": null,
-    "notes": null,
+    "slug": "course-schedule-ii",
+    "name": "Course Schedule 2",
+    "difficulty": "Medium",
+    "data_structure": "Graph, DFS",
+    "time_complexity": "O(N+E)",
+    "things_to_remember": "Basically same as above. Make dfs still return true or false. if not true, return empty. If loop finishes in dfs, add the current course to result",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 9,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/course-schedule-ii/"
+      "row": 9
     }
   },
   {
     "url": "https://leetcode.com/problems/clone-graph/",
-    "title": null,
-    "notes": null,
+    "slug": "clone-graph",
+    "name": "Clone Graph",
+    "difficulty": "Medium",
+    "data_structure": "Graph, DFS",
+    "time_complexity": "O(N+E)",
+    "things_to_remember": "Similar to top two. Maintain a hashmap of old node to the copy. if the map contains, return that node. otherwise loop through each neighbor and call dfs on each and add to neighbors of the new node",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 10,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/clone-graph/"
+      "row": 10
     }
   },
   {
     "url": "https://leetcode.com/problems/graph-valid-tree/",
-    "title": null,
-    "notes": null,
+    "slug": "graph-valid-tree",
+    "name": "Graph valid tree",
+    "difficulty": "Medium",
+    "data_structure": "Graph, DFS",
+    "time_complexity": null,
+    "things_to_remember": "Similar again. need to maintain prev, so you don't count a node twice since it is not directed",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 11,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/graph-valid-tree/"
+      "row": 11
     }
   },
   {
     "url": "https://leetcode.com/problems/find-the-celebrity/",
-    "title": null,
-    "notes": null,
+    "slug": "find-the-celebrity",
+    "name": "Find the celebrity",
+    "difficulty": "Medium",
+    "data_structure": "Graph",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Easy, brute force is simply checking every pair. Otherwise get a candidate from 1 pass - if one person knows anyone else, they cannot be the candidate. Second pass you can use to check if they are actually the celebrity. Can also do with caching",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 12,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/find-the-celebrity/"
+      "row": 12
     }
   },
   {
     "url": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
-    "title": null,
-    "notes": null,
+    "slug": "number-of-connected-components-in-an-undirected-graph",
+    "name": "Number of connected components",
+    "difficulty": "Medium",
+    "data_structure": "Graph, DFS",
+    "time_complexity": "O(N+E)",
+    "things_to_remember": "Similar graph problem. maintain visited",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 13,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/"
+      "row": 13
     }
   },
   {
     "url": "https://leetcode.com/problems/minimum-height-trees/",
-    "title": null,
-    "notes": null,
+    "slug": "minimum-height-trees",
+    "name": "Minimum height trees",
+    "difficulty": "Medium",
+    "data_structure": "Tree, BFS",
+    "time_complexity": null,
+    "things_to_remember": "BFS to find height, brute force is intuitive but very time consuming. Soln - create adj map and edge count map. Add leaf nodes (edge cnt <=1) to a queue and start bfs. Base case is when number of nodes remaining is <= 2 then return leaf queue. dec n when you pop an ele from q",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 14,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/minimum-height-trees/"
+      "row": 14
     }
   },
   {
     "url": "https://leetcode.com/problems/evaluate-division/description/",
-    "title": null,
-    "notes": null,
+    "slug": "evaluate-division",
+    "name": "Evaluate Division",
+    "difficulty": "Medium",
+    "data_structure": "Graph, BFS",
+    "time_complexity": null,
+    "things_to_remember": "The equations are directed weighted graph. basically need to find if there is a path between two nodes and multiply the weights",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 15,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/evaluate-division/description/"
+      "row": 15
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-tree-inorder-traversal",
+    "name": "In-order binary tree traversal",
+    "difficulty": "Easy",
+    "data_structure": "Tree, DFS",
+    "time_complexity": "O(n)",
+    "things_to_remember": "2 while loops",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 16,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-tree-inorder-traversal/"
+      "row": 16
     }
   },
   {
     "url": "https://leetcode.com/problems/network-delay-time/description/",
-    "title": null,
-    "notes": null,
+    "slug": "network-delay-time",
+    "name": "Network delay time",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 17,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/network-delay-time/description/"
+      "row": 17
     }
   },
   {
     "url": "https://leetcode.com/problems/path-with-minimum-effort/description/",
-    "title": null,
-    "notes": null,
+    "slug": "path-with-minimum-effort",
+    "name": "Path with minimum effort",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 18,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/path-with-minimum-effort/description/"
+      "row": 18
     }
   },
   {
     "url": "https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/description/",
-    "title": null,
-    "notes": null,
+    "slug": "shortest-path-in-a-grid-with-obstacles-elimination",
+    "name": "Shortest path in a grid with obstacles",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 19,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/description/"
+      "row": 19
     }
   },
   {
     "url": "https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/",
-    "title": null,
-    "notes": null,
+    "slug": "most-stones-removed-with-same-row-or-column",
+    "name": "most stones removed",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 20,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/"
+      "row": 20
     }
   },
   {
     "url": "https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/",
-    "title": null,
-    "notes": null,
+    "slug": "step-by-step-directions-from-a-binary-tree-node-to-another",
+    "name": "Step-by-step direction",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 21,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/"
+      "row": 21
     }
   },
   {
     "url": "https://leetcode.com/problems/implement-trie-prefix-tree/description/",
-    "title": null,
-    "notes": null,
+    "slug": "implement-trie-prefix-tree",
+    "name": "Implement Trie prefix tree",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 22,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/implement-trie-prefix-tree/description/"
+      "row": 22
     }
   },
   {
     "url": "https://leetcode.com/problems/design-add-and-search-words-data-structure/description/",
-    "title": null,
-    "notes": null,
+    "slug": "design-add-and-search-words-data-structure",
+    "name": "Design add and search words DS",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 23,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/design-add-and-search-words-data-structure/description/"
+      "row": 23
     }
   },
   {
     "url": "https://leetcode.com/problems/count-complete-tree-nodes/description/",
-    "title": null,
-    "notes": null,
+    "slug": "count-complete-tree-nodes",
+    "name": "Count complete tree nodes",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 24,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/count-complete-tree-nodes/description/"
+      "row": 24
     }
   },
   {
     "url": "https://leetcode.com/problems/diameter-of-binary-tree/description/",
-    "title": null,
-    "notes": null,
+    "slug": "diameter-of-binary-tree",
+    "name": "Diameter of a Binary Tree",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 25,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/diameter-of-binary-tree/description/"
+      "row": 25
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-tree-paths/description/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-tree-paths",
+    "name": "Binary Tree paths",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 26,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-tree-paths/description/"
+      "row": 26
     }
   },
   {
     "url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/",
-    "title": null,
-    "notes": null,
+    "slug": "kth-smallest-element-in-a-bst",
+    "name": "kth smallest element in a BST",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 27,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/"
+      "row": 27
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-tree-maximum-path-sum/description/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-tree-maximum-path-sum",
+    "name": "Maximum path sum",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 28,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-tree-maximum-path-sum/description/"
+      "row": 28
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-tree-level-order-traversal-ii",
+    "name": "Level Order Traversal II",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 29,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/"
+      "row": 29
     }
   },
   {
     "url": "https://leetcode.com/problems/path-sum-ii/description/",
-    "title": null,
-    "notes": null,
+    "slug": "path-sum-ii",
+    "name": "Path sum II",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 30,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/path-sum-ii/description/"
+      "row": 30
     }
   },
   {
     "url": "https://leetcode.com/problems/rotting-oranges/description/",
-    "title": null,
-    "notes": null,
+    "slug": "rotting-oranges",
+    "name": "Rotting oranges",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 31,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/rotting-oranges/description/"
+      "row": 31
     }
   },
   {
     "url": "https://leetcode.com/problems/word-ladder/description/",
-    "title": null,
-    "notes": null,
+    "slug": "word-ladder",
+    "name": "Word ladder",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 32,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/word-ladder/description/"
+      "row": 32
     }
   },
   {
     "url": "https://leetcode.com/problems/flood-fill/description/",
-    "title": null,
-    "notes": null,
+    "slug": "flood-fill",
+    "name": "Flood Fill",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 33,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/flood-fill/description/"
+      "row": 33
     }
   },
   {
     "url": "https://leetcode.com/problems/number-of-islands/description/",
-    "title": null,
-    "notes": null,
+    "slug": "number-of-islands",
+    "name": "Number of Islands",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 34,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/number-of-islands/description/"
+      "row": 34
     }
   },
   {
     "url": "https://leetcode.com/problems/surrounded-regions/description/",
-    "title": null,
-    "notes": null,
+    "slug": "surrounded-regions",
+    "name": "Surrounded regions",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Graphs & Trees",
-      "row": 35,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/surrounded-regions/description/"
+      "row": 35
     }
   },
   {
     "url": "https://leetcode.com/problems/kth-largest-element-in-a-stream/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "kth-largest-element-in-a-stream",
+    "name": "kth largest element in a stream",
+    "difficulty": "Easy",
+    "data_structure": "min heap",
+    "time_complexity": "O(n logk)",
+    "things_to_remember": "Use a min heap of size k. then the kth largest will always be at the root",
+    "extra_notes": [
+      "minheap - new PriorityQueue<>();     maxheap - new PriorityQueue<>(Collections.reverseOrder());"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Heaps",
-      "row": 2,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/kth-largest-element-in-a-stream/description/"
+      "row": 2
     }
   },
   {
     "url": "https://leetcode.com/problems/meeting-rooms-ii/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "meeting-rooms-ii",
+    "name": "Meeting Rooms II",
+    "difficulty": "Medium",
+    "data_structure": "min heap, sorting",
+    "time_complexity": "O(n logn)",
+    "things_to_remember": "Sort array based on start times, minheap of end times",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Heaps",
-      "row": 3,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/meeting-rooms-ii/"
+      "row": 3
     }
   },
   {
     "url": "https://leetcode.com/problems/top-k-frequent-elements/",
-    "title": null,
-    "notes": null,
+    "slug": "top-k-frequent-elements",
+    "name": "Top k frequent elements",
+    "difficulty": "Medium",
+    "data_structure": "max heap",
+    "time_complexity": "O(n + nlogk)",
+    "things_to_remember": "Brute force I came up with - count map, inverse map, convert to 2d array, sort based on count, return top k keys....    Better: use a max heap - count map, inverse, insert count into prio queue, get top k",
+    "extra_notes": [
+      "**imp note** prio queues HAVE to be traversed in a while loop with q.poll() or q.peek()"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Heaps",
-      "row": 4,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/top-k-frequent-elements/"
+      "row": 4
     }
   },
   {
     "url": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
-    "title": null,
-    "notes": null,
+    "slug": "kth-largest-element-in-an-array",
+    "name": "kth largest element in an array",
+    "difficulty": "Medium",
+    "data_structure": "min heap",
+    "time_complexity": "O(nlogk) / O(n)",
+    "things_to_remember": "Similar to #1. Can be done with max heap and poll till we hit k. Or use a min heap and only insert if < size k (so min heap of size k)",
+    "extra_notes": [
+      "Another soln: quick select: similar to quick sort - choose a pivot element (rightmost). Go through the array, if nums[i] is less than pivot, then swap with p otherwise keep as is. after the loop, swap pivot with p element. Then do it recursively till k == p. Average time O(n) but worst time O(n2)"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Heaps",
-      "row": 5,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/kth-largest-element-in-an-array/"
+      "row": 5
     }
   },
   {
     "url": "https://leetcode.com/problems/find-median-from-data-stream/description/",
-    "title": null,
-    "notes": null,
+    "slug": "find-median-from-data-stream",
+    "name": "Find median from Data stream",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Heaps",
-      "row": 6,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/find-median-from-data-stream/description/"
+      "row": 6
     }
   },
   {
     "url": "https://leetcode.com/problems/merge-k-sorted-lists/description/",
-    "title": null,
-    "notes": null,
+    "slug": "merge-k-sorted-lists",
+    "name": "Merge k sorted Lists",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Heaps",
-      "row": 7,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/merge-k-sorted-lists/description/"
+      "row": 7
     }
   },
   {
     "url": "https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/",
-    "title": null,
-    "notes": null,
+    "slug": "find-k-pairs-with-smallest-sums",
+    "name": "Find k pairs with smallest sums",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Heaps",
-      "row": 8,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/"
+      "row": 8
     }
   },
   {
     "url": "https://leetcode.com/problems/word-search/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "word-search",
+    "name": "Word Search",
+    "difficulty": "Medium",
+    "data_structure": "Backtracking, DFS",
+    "time_complexity": "O(m*n*3^w)",
+    "things_to_remember": "Follows the basic backtracking structure. Have a visited matrix where you vist the current pos, check all 4 paths and if not, unvisit that position and proceed. Choice: each of 4 directions, choice to visit this index. Base cond: if end of word, true. if out of bounds OR not matching char OR already visited, false.",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 2,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/word-search/description/"
+      "row": 2
     }
   },
   {
     "url": "https://leetcode.com/problems/generate-parentheses/description/",
-    "title": null,
-    "notes": "Things to remember",
+    "slug": "generate-parentheses",
+    "name": "Generate Parentheses",
+    "difficulty": "Medium",
+    "data_structure": "Backtracking",
+    "time_complexity": "O(4^n/sqrt(n))",
+    "things_to_remember": "Choice: add \"(\" or \")\", constraint: should be valid - can add \"(\" if openCt < n and can add \")\" if closeCt < openCt. Base cond: if openCt==closeCt ==n, we have found a res",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 3,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/generate-parentheses/description/"
+      "row": 3
     }
   },
   {
     "url": "https://leetcode.com/problems/strobogrammatic-number-ii/description/",
-    "title": null,
-    "notes": null,
+    "slug": "strobogrammatic-number-ii",
+    "name": "Strobogrammatic number II",
+    "difficulty": "Medium",
+    "data_structure": "Recursion",
+    "time_complexity": null,
+    "things_to_remember": "Base case: n=0, empty string and n=1, string of 0,1,8. Recursive step: call the same function by n-2 and append strobo of each rotatable number to start and end",
+    "extra_notes": null,
+    "done": "DONE but REVISIT",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 4,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/strobogrammatic-number-ii/description/"
+      "row": 4
     }
   },
   {
     "url": "https://leetcode.com/problems/android-unlock-patterns/description/",
-    "title": null,
-    "notes": null,
+    "slug": "android-unlock-patterns",
+    "name": "Android unlock pattern",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 5,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/android-unlock-patterns/description/"
+      "row": 5
     }
   },
   {
     "url": "https://leetcode.com/problems/construct-quad-tree/description/",
-    "title": null,
-    "notes": null,
+    "slug": "construct-quad-tree",
+    "name": "Construct quad tree",
+    "difficulty": "Medium",
+    "data_structure": "Recursion",
+    "time_complexity": "O(n2)",
+    "things_to_remember": "2 ways of recursion - 1st: At each call, check if the grid has all same values, if not then divide into 4 recursively. 2nd: divide by 4 recursively till you reach length 1 when you return the value and is leaf. The later check if all 4 vals are same, if so, then can be combined into a single leaf, otherwise no",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 6,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/construct-quad-tree/description/"
+      "row": 6
     }
   },
   {
     "url": "https://leetcode.com/problems/longest-increasing-subsequence/description/",
-    "title": null,
-    "notes": null,
+    "slug": "longest-increasing-subsequence",
+    "name": "Longest Increasing Subsequence",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 7,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/longest-increasing-subsequence/description/"
+      "row": 7
     }
   },
   {
     "url": "https://leetcode.com/problems/edit-distance/description/",
-    "title": null,
-    "notes": null,
+    "slug": "edit-distance",
+    "name": "Edit Distance",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 8,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/edit-distance/description/"
+      "row": 8
     }
   },
   {
     "url": "https://leetcode.com/problems/maximum-product-subarray/description/",
-    "title": null,
-    "notes": null,
+    "slug": "maximum-product-subarray",
+    "name": "Maximum Product Subarray",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 9,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/maximum-product-subarray/description/"
+      "row": 9
     }
   },
   {
     "url": "https://leetcode.com/problems/word-break/description/",
-    "title": null,
-    "notes": null,
+    "slug": "word-break",
+    "name": "Word Break",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 10,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/word-break/description/"
+      "row": 10
     }
   },
   {
     "url": "https://leetcode.com/problems/coin-change/description/",
-    "title": null,
-    "notes": null,
+    "slug": "coin-change",
+    "name": "Coin change",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 11,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/coin-change/description/"
+      "row": 11
     }
   },
   {
     "url": "https://leetcode.com/problems/partition-equal-subset-sum/description/",
-    "title": null,
-    "notes": null,
+    "slug": "partition-equal-subset-sum",
+    "name": "Partition Equal Subset sum",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 12,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/partition-equal-subset-sum/description/"
+      "row": 12
     }
   },
   {
     "url": "https://leetcode.com/problems/word-search-ii/description/",
-    "title": null,
-    "notes": null,
+    "slug": "word-search-ii",
+    "name": "Word Search II",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 13,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/word-search-ii/description/"
+      "row": 13
     }
   },
   {
     "url": "https://leetcode.com/problems/permutations/description/",
-    "title": null,
-    "notes": null,
+    "slug": "permutations",
+    "name": "Permutations",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 14,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/permutations/description/"
+      "row": 14
     }
   },
   {
     "url": "https://leetcode.com/problems/sudoku-solver/description/",
-    "title": null,
-    "notes": null,
+    "slug": "sudoku-solver",
+    "name": "Sudoku Solver",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 16,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/sudoku-solver/description/"
+      "row": 16
     }
   },
   {
     "url": "https://leetcode.com/problems/fibonacci-number/description/",
-    "title": null,
-    "notes": null,
+    "slug": "fibonacci-number",
+    "name": "Fibonacci Number",
+    "difficulty": "Easy",
+    "data_structure": "DP, recursion, memo",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Just recursion - most time consuming. I did recursion with memo, space O(n). Better way, use 2 variables to store n-1 and n-2 ans and do iterative - space O(1)",
+    "extra_notes": [
+      "memo[n] = fib_rec(n - 1, memo) + fib_rec(n-2, memo);"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 17,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/fibonacci-number/description/"
+      "row": 17
     }
   },
   {
     "url": "https://leetcode.com/problems/pascals-triangle/description/",
-    "title": null,
-    "notes": null,
+    "slug": "pascals-triangle",
+    "name": "Pascals triangle",
+    "difficulty": "Easy",
+    "data_structure": "DP, Iterative",
+    "time_complexity": "O(n2)",
+    "things_to_remember": "Iterative DP: Idea is to use prev row to calculate the current row. So you go through each row twice - once when building it and once when building next row, hence O(n2)",
+    "extra_notes": [
+      "currRow.add(prevRow.get(j - 1) + prevRow.get(j));"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 18,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/pascals-triangle/description/"
+      "row": 18
     }
   },
   {
     "url": "https://leetcode.com/problems/min-cost-climbing-stairs/description/",
-    "title": null,
-    "notes": null,
+    "slug": "min-cost-climbing-stairs",
+    "name": "Min cost climbing stirs",
+    "difficulty": "Easy",
+    "data_structure": "DP",
+    "time_complexity": "O(n)",
+    "things_to_remember": "I did Iterative DP, using mentioned formula at every step. Can also do recursive with memo.",
+    "extra_notes": [
+      "minCost[i] = cost[i] + Math.min(minCost[i - 1], minCost[i - 2]);"
+    ],
+    "done": "DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 19,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/min-cost-climbing-stairs/description/"
+      "row": 19
     }
   },
   {
     "url": "https://leetcode.com/problems/counting-bits/description/",
-    "title": null,
-    "notes": null,
+    "slug": "counting-bits",
+    "name": "Counting bits",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 20,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/counting-bits/description/"
+      "row": 20
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-watch/description/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-watch",
+    "name": "Binary watch",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 21,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-watch/description/"
+      "row": 21
     }
   },
   {
     "url": "https://leetcode.com/problems/sum-of-all-subset-xor-totals/description/",
-    "title": null,
-    "notes": null,
+    "slug": "sum-of-all-subset-xor-totals",
+    "name": "Sum of all subset xor totals",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 22,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/sum-of-all-subset-xor-totals/description/"
+      "row": 22
     }
   },
   {
     "url": "https://leetcode.com/problems/letter-case-permutation/description/",
-    "title": null,
-    "notes": null,
+    "slug": "letter-case-permutation",
+    "name": "letter case permumtation",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 23,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/letter-case-permutation/description/"
+      "row": 23
     }
   },
   {
     "url": "https://leetcode.com/problems/binary-tree-paths/description/",
-    "title": null,
-    "notes": null,
+    "slug": "binary-tree-paths",
+    "name": "Binary tree paths",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 24,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/binary-tree-paths/description/"
+      "row": 24
     }
   },
   {
     "url": "https://leetcode.com/problems/number-of-1-bits/description/",
-    "title": null,
-    "notes": null,
+    "slug": "number-of-1-bits",
+    "name": "Number of 1 bits",
+    "difficulty": "Easy",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 25,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/number-of-1-bits/description/"
+      "row": 25
     }
   },
   {
     "url": "https://leetcode.com/problems/climbing-stairs/",
-    "title": null,
-    "notes": null,
+    "slug": "climbing-stairs",
+    "name": "Climbing stairs",
+    "difficulty": "Easy",
+    "data_structure": "DP",
+    "time_complexity": "O(n)",
+    "things_to_remember": "Only recursion is O(2^n). recursion with memoization is the same as DP",
+    "extra_notes": null,
+    "done": "DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 26,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/climbing-stairs/"
+      "row": 26
     }
   },
   {
     "url": "https://leetcode.com/problems/non-overlapping-intervals/description/",
-    "title": null,
-    "notes": null,
+    "slug": "non-overlapping-intervals",
+    "name": "Non overlapping intervals",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 27,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/non-overlapping-intervals/description/"
+      "row": 27
     }
   },
   {
     "url": "https://leetcode.com/problems/subsets/description/",
-    "title": null,
-    "notes": null,
+    "slug": "subsets",
+    "name": "Subsets",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 28,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/subsets/description/"
+      "row": 28
     }
   },
   {
     "url": "https://leetcode.com/problems/n-queens/description/",
-    "title": null,
-    "notes": null,
+    "slug": "n-queens",
+    "name": "n-queens",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 29,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/n-queens/description/"
+      "row": 29
     }
   },
   {
     "url": "https://leetcode.com/problems/longest-common-subsequence/description/",
-    "title": null,
-    "notes": null,
+    "slug": "longest-common-subsequence",
+    "name": "Longest common subsequence",
+    "difficulty": "Medium",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 30,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/longest-common-subsequence/description/"
+      "row": 30
     }
   },
   {
     "url": "https://leetcode.com/problems/burst-balloons/description/",
-    "title": null,
-    "notes": null,
+    "slug": "burst-balloons",
+    "name": "Burst balloons",
+    "difficulty": "Hard",
+    "data_structure": null,
+    "time_complexity": null,
+    "things_to_remember": null,
+    "extra_notes": null,
+    "done": "NOT DONE",
     "context": {
       "sheet": "Recursion & DP",
-      "row": 31,
-      "col": 6,
-      "cell_content": "https://leetcode.com/problems/burst-balloons/description/"
+      "row": 31
     }
   }
 ]

@@ -1,22 +1,17 @@
-# Binary Tree Paths
+# Binary tree paths
 
-**Problem Link:** [Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [Binary tree paths](https://leetcode.com/problems/binary-tree-paths/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Easy
+- **Status**: NOT DONE
 
-## Implementation
-```java
-public List<String> binaryTreePaths(TreeNode root) {
-    List<String> result = new ArrayList<>();
-    if (root != null) dfs(root, "", result);
-    return result;
-}
+## Approach
+### Data Structure
+- *To be determined*
 
-private void dfs(TreeNode node, String path, List<String> result) {
-    if (node.left == null && node.right == null) {
-        result.add(path + node.val);
-        return;
-    }
-    if (node.left != null) dfs(node.left, path + node.val + "->", result);
-    if (node.right != null) dfs(node.right, path + node.val + "->", result);
-}
-```
+### Time Complexity
+- O(?)
+
+## Things to Remember
+- *Add your key insights after solving*

@@ -1,31 +1,17 @@
-# Reverse Nodes in K-Group
+# Reverse Nodes In K Group
 
-**Problem Link:** [Reverse Nodes in K-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/)
-**Category:** Linked Lists
+## Problem Info
+- **Link**: [Reverse Nodes In K Group](https://leetcode.com/problems/reverse-nodes-in-k-group/description/)
+- **Category**: Linked Lists
+- **Difficulty**: Hard
+- **Status**: NOT DONE
 
-## Implementation
-```java
-public ListNode reverseKGroup(ListNode head, int k) {
-    ListNode curr = head;
-    int count = 0;
-    while (curr != null && count < k) {
-        curr = curr.next;
-        count++;
-    }
-    if (count == k) {
-        curr = reverseKGroup(curr, k);
-        while (count-- > 0) {
-            ListNode next = head.next;
-            head.next = curr;
-            curr = head;
-            head = next;
-        }
-        head = curr;
-    }
-    return head;
-}
-```
+## Approach
+### Data Structure
+- *To be determined*
 
-## Complexity
-- **Time**: O(n)
-- **Space**: O(n/k)
+### Time Complexity
+- O(?)
+
+## Things to Remember
+- *Add your key insights after solving*

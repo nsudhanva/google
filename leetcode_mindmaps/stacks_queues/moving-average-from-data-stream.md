@@ -1,25 +1,20 @@
-# Moving Average from Data Stream
+# Moving Average from Data stream
 
-**Problem Link:** [Moving Average from Data Stream](https://leetcode.com/problems/moving-average-from-data-stream/)
-**Category:** Stacks & Queues
+## Problem Info
+- **Link**: [Moving Average from Data stream](https://leetcode.com/problems/moving-average-from-data-stream/description/)
+- **Category**: Stacks & Queues
+- **Difficulty**: Easy
+- **Status**: DONE
 
-## Implementation
-```java
-class MovingAverage {
-    Queue<Integer> queue = new LinkedList<>();
-    int size, sum = 0;
-    
-    public MovingAverage(int size) { this.size = size; }
-    
-    public double next(int val) {
-        if (queue.size() == size) sum -= queue.poll();
-        queue.offer(val);
-        sum += val;
-        return (double) sum / queue.size();
-    }
-}
-```
+## Approach
+### Data Structure
+- Queues
 
-## Complexity
-- **Time**: O(1)
-- **Space**: O(size)
+### Time Complexity
+- O(m)
+
+## Things to Remember
+- Queue to hold values equal to size. And currentSum to have sum of size elements
+
+## Additional Notes
+- Can also be done using Circular queue

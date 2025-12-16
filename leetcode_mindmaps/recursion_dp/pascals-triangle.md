@@ -1,25 +1,21 @@
-# Pascal's Triangle
+# Pascals triangle
 
-**Problem Link:** [Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [Pascals triangle](https://leetcode.com/problems/pascals-triangle/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Easy
+- **Status**: DONE
 
-## Implementation
-```java
-public List<List<Integer>> generate(int numRows) {
-    List<List<Integer>> result = new ArrayList<>();
-    
-    for (int i = 0; i < numRows; i++) {
-        List<Integer> row = new ArrayList<>();
-        for (int j = 0; j <= i; j++) {
-            if (j == 0 || j == i) row.add(1);
-            else row.add(result.get(i-1).get(j-1) + result.get(i-1).get(j));
-        }
-        result.add(row);
-    }
-    return result;
-}
-```
+## Approach
+### Data Structure
+- DP, Iterative
 
-## Complexity
-- **Time**: O(n²)
-- **Space**: O(n²)
+### Time Complexity
+- O(n2)
+
+## Things to Remember
+- Iterative DP: Idea is to use prev row to calculate the current row.
+- So you go through each row twice - once when building it and once when building next row, hence O(n2).
+
+## Additional Notes
+- currRow.add(prevRow.get(j - 1) + prevRow.get(j));

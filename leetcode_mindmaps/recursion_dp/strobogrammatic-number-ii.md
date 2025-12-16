@@ -1,28 +1,18 @@
-# Strobogrammatic Number II
+# Strobogrammatic number II
 
-**Problem Link:** [Strobogrammatic Number II](https://leetcode.com/problems/strobogrammatic-number-ii/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [Strobogrammatic number II](https://leetcode.com/problems/strobogrammatic-number-ii/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Medium
+- **Status**: DONE but REVISIT
 
-## Implementation
-```java
-public List<String> findStrobogrammatic(int n) {
-    return helper(n, n);
-}
+## Approach
+### Data Structure
+- Recursion
 
-private List<String> helper(int n, int m) {
-    if (n == 0) return new ArrayList<>(Arrays.asList(""));
-    if (n == 1) return new ArrayList<>(Arrays.asList("0", "1", "8"));
-    
-    List<String> middles = helper(n - 2, m);
-    List<String> result = new ArrayList<>();
-    
-    for (String middle : middles) {
-        if (n != m) result.add("0" + middle + "0");
-        result.add("1" + middle + "1");
-        result.add("6" + middle + "9");
-        result.add("8" + middle + "8");
-        result.add("9" + middle + "6");
-    }
-    return result;
-}
-```
+### Time Complexity
+- O(?)
+
+## Things to Remember
+- Base case: n=0, empty string and n=1, string of 0,1,8.
+- Recursive step: call the same function by n-2 and append strobo of each rotatable number to start and end.

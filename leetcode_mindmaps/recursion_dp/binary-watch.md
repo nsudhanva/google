@@ -1,19 +1,17 @@
-# Binary Watch
+# Binary watch
 
-**Problem Link:** [Binary Watch](https://leetcode.com/problems/binary-watch/)
-**Category:** Recursion & DP
+## Problem Info
+- **Link**: [Binary watch](https://leetcode.com/problems/binary-watch/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Easy
+- **Status**: NOT DONE
 
-## Implementation
-```java
-public List<String> readBinaryWatch(int turnedOn) {
-    List<String> result = new ArrayList<>();
-    for (int h = 0; h < 12; h++) {
-        for (int m = 0; m < 60; m++) {
-            if (Integer.bitCount(h) + Integer.bitCount(m) == turnedOn) {
-                result.add(String.format("%d:%02d", h, m));
-            }
-        }
-    }
-    return result;
-}
-```
+## Approach
+### Data Structure
+- *To be determined*
+
+### Time Complexity
+- O(?)
+
+## Things to Remember
+- *Add your key insights after solving*

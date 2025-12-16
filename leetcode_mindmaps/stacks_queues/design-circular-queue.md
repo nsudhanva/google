@@ -1,34 +1,17 @@
-# Design Circular Queue
+# Design a circular queue
 
-**Problem Link:** [Design Circular Queue](https://leetcode.com/problems/design-circular-queue/)
-**Category:** Stacks & Queues
+## Problem Info
+- **Link**: [Design a circular queue](https://leetcode.com/problems/design-circular-queue/description/)
+- **Category**: Stacks & Queues
+- **Difficulty**: Medium
+- **Status**: NOT DONE
 
-## Implementation
-```java
-class MyCircularQueue {
-    int[] data;
-    int head = 0, tail = -1, size = 0;
-    
-    public MyCircularQueue(int k) { data = new int[k]; }
-    
-    public boolean enQueue(int value) {
-        if (isFull()) return false;
-        tail = (tail + 1) % data.length;
-        data[tail] = value;
-        size++;
-        return true;
-    }
-    
-    public boolean deQueue() {
-        if (isEmpty()) return false;
-        head = (head + 1) % data.length;
-        size--;
-        return true;
-    }
-    
-    public int Front() { return isEmpty() ? -1 : data[head]; }
-    public int Rear() { return isEmpty() ? -1 : data[tail]; }
-    public boolean isEmpty() { return size == 0; }
-    public boolean isFull() { return size == data.length; }
-}
-```
+## Approach
+### Data Structure
+- *To be determined*
+
+### Time Complexity
+- O(?)
+
+## Things to Remember
+- *Add your key insights after solving*

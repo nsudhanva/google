@@ -1,58 +1,20 @@
-# Find The Celebrity
+# Find the celebrity
 
-**Problem Link:** [Find The Celebrity](https://leetcode.com/problems/find-the-celebrity/)
+## Problem Info
+- **Link**: [Find the celebrity](https://leetcode.com/problems/find-the-celebrity/)
+- **Category**: Graphs & Trees
+- **Difficulty**: Medium
+- **Status**: DONE
 
-**Category:** Graphs & Trees
+## Approach
+### Data Structure
+- Graph
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Find The Celebrity))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
-```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
+### Time Complexity
+- O(n)
 
 ## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+- Easy, brute force is simply checking every pair.
+- Otherwise get a candidate from 1 pass - if one person knows anyone else, they cannot be the candidate.
+- Second pass you can use to check if they are actually the celebrity.
+- Can also do with caching.

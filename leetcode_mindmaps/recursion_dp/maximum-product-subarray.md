@@ -1,34 +1,17 @@
 # Maximum Product Subarray
 
-**Problem Link:** [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
-**Category:** Recursion & DP
-
-## Problem Understanding
-- Find contiguous subarray with largest product
+## Problem Info
+- **Link**: [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Medium
+- **Status**: NOT DONE
 
 ## Approach
-### Track Min and Max
-- Negative * Negative can become max
+### Data Structure
+- *To be determined*
 
-## Implementation
-```java
-public int maxProduct(int[] nums) {
-    int maxProd = nums[0], minProd = nums[0], result = nums[0];
-    
-    for (int i = 1; i < nums.length; i++) {
-        if (nums[i] < 0) {
-            int temp = maxProd;
-            maxProd = minProd;
-            minProd = temp;
-        }
-        maxProd = Math.max(nums[i], maxProd * nums[i]);
-        minProd = Math.min(nums[i], minProd * nums[i]);
-        result = Math.max(result, maxProd);
-    }
-    return result;
-}
-```
+### Time Complexity
+- O(?)
 
-## Complexity
-- **Time**: O(n)
-- **Space**: O(1)
+## Things to Remember
+- *Add your key insights after solving*

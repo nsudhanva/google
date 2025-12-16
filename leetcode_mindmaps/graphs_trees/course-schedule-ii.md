@@ -1,58 +1,20 @@
-# Course Schedule Ii
+# Course Schedule 2
 
-**Problem Link:** [Course Schedule Ii](https://leetcode.com/problems/course-schedule-ii/)
+## Problem Info
+- **Link**: [Course Schedule 2](https://leetcode.com/problems/course-schedule-ii/)
+- **Category**: Graphs & Trees
+- **Difficulty**: Medium
+- **Status**: DONE
 
-**Category:** Graphs & Trees
+## Approach
+### Data Structure
+- Graph, DFS
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Course Schedule Ii))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
-```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
+### Time Complexity
+- O(N+E)
 
 ## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+- Basically same as above.
+- Make dfs still return true or false.
+- if not true, return empty.
+- If loop finishes in dfs, add the current course to result.

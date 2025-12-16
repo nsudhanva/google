@@ -1,35 +1,17 @@
 # Longest Increasing Subsequence
 
-**Problem Link:** [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
-**Category:** Recursion & DP
-
-## Problem Understanding
-- Find length of longest strictly increasing subsequence
+## Problem Info
+- **Link**: [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/description/)
+- **Category**: Recursion & DP
+- **Difficulty**: Medium
+- **Status**: NOT DONE
 
 ## Approach
+### Data Structure
+- *To be determined*
 
-### Binary Search + DP
-- Maintain array of smallest tail for each length
+### Time Complexity
+- O(?)
 
-## Implementation
-```java
-public int lengthOfLIS(int[] nums) {
-    List<Integer> tails = new ArrayList<>();
-    
-    for (int num : nums) {
-        int pos = Collections.binarySearch(tails, num);
-        if (pos < 0) pos = -(pos + 1);
-        
-        if (pos == tails.size()) {
-            tails.add(num);
-        } else {
-            tails.set(pos, num);
-        }
-    }
-    return tails.size();
-}
-```
-
-## Complexity
-- **Time**: O(n log n)
-- **Space**: O(n)
+## Things to Remember
+- *Add your key insights after solving*

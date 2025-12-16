@@ -1,58 +1,25 @@
 # Course Schedule
 
-**Problem Link:** [Course Schedule](https://leetcode.com/problems/course-schedule/)
+## Problem Info
+- **Link**: [Course Schedule](https://leetcode.com/problems/course-schedule/)
+- **Category**: Graphs & Trees
+- **Difficulty**: Medium
+- **Status**: DONE
 
-**Category:** Graphs & Trees
+## Approach
+### Data Structure
+- Graph, DFS
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Course Schedule))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
-```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
+### Time Complexity
+- O(N+E)
 
 ## Things to Remember
+- Way 1: (DFS recursive) have a map with each course mapping to an array of prereq.
+- Then for each course run dfs.
+- Base case is if crs is in visited - false.
+- if prereq array is empty - true.
+- then loop through prereqs and run dfs again.
+- after the loop, remove from visited, and make prereq empty.
 
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+## Additional Notes
+- Way 2: (DFS recursive 2) have a map with each course mapping to an array of prereq. Then for each course run dfs. Also have a states array for each course state. 0 - unvisited, 1 - visiting, 2 - visisted. Base case is if crs state is visiting - false. if crs state is visited - true. then loop through prereqs and run dfs again. after the loop, change from visiting to visited

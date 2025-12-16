@@ -1,30 +1,21 @@
 # Copy List with Random Pointer
 
-**Problem Link:** [Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
-**Category:** Linked Lists
+## Problem Info
+- **Link**: [Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/description/)
+- **Category**: Linked Lists
+- **Difficulty**: Medium
+- **Status**: DONE
 
-## Implementation
-```java
-public Node copyRandomList(Node head) {
-    if (head == null) return null;
-    Map<Node, Node> map = new HashMap<>();
-    
-    Node curr = head;
-    while (curr != null) {
-        map.put(curr, new Node(curr.val));
-        curr = curr.next;
-    }
-    
-    curr = head;
-    while (curr != null) {
-        map.get(curr).next = map.get(curr.next);
-        map.get(curr).random = map.get(curr.random);
-        curr = curr.next;
-    }
-    return map.get(head);
-}
-```
+## Approach
+### Data Structure
+- Linked List, Hashmap
 
-## Complexity
-- **Time**: O(n)
-- **Space**: O(n)
+### Time Complexity
+- O(n)
+
+## Things to Remember
+- I used a hashmap to store old and new nodes.
+- Copied as a normal list while adding to the map and traversing again and assigning random pointers by looking at the map.
+
+## Additional Notes
+- This can also be done recursively with a hashmap - check if map contains, then return. otherwise create a new node, save it in the map, then call func recursively on next and random while assigning them. With constant space: traverse the list while creating copy and storing each copy as next of old node. Then go through again and assign randoms to the new ones. Then decouple the two lists and return

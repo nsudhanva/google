@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script to fetch LeetCode problems from Google Sheet and create mindmaps.
+Script to fetch LeetCode problems from Google Sheet with full structured data.
 """
 
 import json
@@ -54,6 +54,14 @@ def extract_leetcode_url(text):
     return match.group(0) if match else None
 
 
+def get_problem_slug(url):
+    """Extract problem slug from URL."""
+    if not url:
+        return None
+    match = re.search(r"/problems/([\w-]+)/?", url)
+    return match.group(1) if match else None
+
+
 def fetch_all_sheets():
     """Fetch all sheet data from the Google Spreadsheet."""
     try:
@@ -69,6 +77,12 @@ def fetch_all_sheets():
         print(f"Found {len(sheets)} sheets:")
         for sheet in sheets:
             sheet_title = sheet["properties"]["title"]
+            
+            # Skip non-problem sheets
+            if sheet_title == "Java Syntax stuff":
+                print(f"  - {sheet_title} (skipped)")
+                continue
+                
             print(f"  - {sheet_title}")
 
             # Fetch data from each sheet
@@ -77,7 +91,7 @@ def fetch_all_sheets():
                 .values()
                 .get(
                     spreadsheetId=SPREADSHEET_ID,
-                    range=f"'{sheet_title}'!A1:Z1000",  # Adjust range as needed
+                    range=f"'{sheet_title}'!A1:Z1000",
                 )
                 .execute()
             )
@@ -93,51 +107,93 @@ def fetch_all_sheets():
 
 
 def extract_problems(all_data):
-    """Extract LeetCode problems from all sheets."""
+    """Extract LeetCode problems from all sheets with full structured data."""
     problems = []
 
     for sheet_name, rows in all_data.items():
         print(f"\nProcessing sheet: {sheet_name}")
+        
+        if not rows:
+            continue
+            
+        # First row is header
+        header = rows[0] if rows else []
+        
+        # Find column indices (case-insensitive)
+        def find_col(name):
+            for i, h in enumerate(header):
+                if name.lower() in h.lower():
+                    return i
+            return -1
+        
+        link_col = find_col("link")
+        name_col = find_col("name")
+        difficulty_col = find_col("difficulty")
+        ds_col = find_col("datastructure") if find_col("datastructure") >= 0 else find_col("data structure")
+        time_col = find_col("time")
+        remember_col = find_col("remember")
+        done_col = find_col("done")
+        
+        # If no link column found, try to find URLs anywhere
+        if link_col == -1:
+            link_col = 5  # Default to column F
+        
+        for row_idx, row in enumerate(rows[1:], start=2):  # Skip header
+            # Get link
+            url = None
+            if link_col < len(row):
+                url = extract_leetcode_url(row[link_col])
+            
+            # If no URL in expected column, search all columns
+            if not url:
+                for cell in row:
+                    url = extract_leetcode_url(cell)
+                    if url:
+                        break
+            
+            if not url:
+                continue
+            
+            # Extract all structured data
+            def get_cell(col_idx):
+                if col_idx >= 0 and col_idx < len(row):
+                    return row[col_idx].strip() if row[col_idx] else None
+                return None
+            
+            problem_name = get_cell(name_col)
+            difficulty = get_cell(difficulty_col)
+            data_structure = get_cell(ds_col)
+            time_complexity = get_cell(time_col)
+            things_to_remember = get_cell(remember_col)
+            done_status = get_cell(done_col)
+            
+            # Also collect any extra notes from columns after "Things to remember"
+            extra_notes = []
+            if remember_col >= 0:
+                for col_idx in range(remember_col + 1, len(row)):
+                    note = row[col_idx].strip() if row[col_idx] else None
+                    if note:
+                        extra_notes.append(note)
+            
+            slug = get_problem_slug(url)
+            
+            problems.append({
+                "url": url,
+                "slug": slug,
+                "name": problem_name,
+                "difficulty": difficulty,
+                "data_structure": data_structure,
+                "time_complexity": time_complexity,
+                "things_to_remember": things_to_remember,
+                "extra_notes": extra_notes if extra_notes else None,
+                "done": done_status,
+                "context": {
+                    "sheet": sheet_name,
+                    "row": row_idx,
+                }
+            })
 
-        for row_idx, row in enumerate(rows):
-            for col_idx, cell in enumerate(row):
-                # Look for LeetCode URLs
-                url = extract_leetcode_url(cell)
-                if url:
-                    # Try to find title (could be in the same cell or nearby)
-                    title = None
-                    notes = None
-
-                    # Check if there's text before the URL in the same cell
-                    text_before_url = str(cell).split(url)[0].strip()
-                    if text_before_url and len(text_before_url) < 100:
-                        title = text_before_url
-
-                    # Check surrounding cells for more context
-                    context = {
-                        "sheet": sheet_name,
-                        "row": row_idx + 1,
-                        "col": col_idx + 1,
-                        "cell_content": cell,
-                    }
-
-                    # Look for "Things to remember" or similar in nearby cells
-                    for i in range(max(0, row_idx - 2), min(len(rows), row_idx + 3)):
-                        for j in range(
-                            max(0, col_idx - 1), min(len(rows[i]), col_idx + 2)
-                        ):
-                            if i < len(rows) and j < len(rows[i]):
-                                cell_text = str(rows[i][j]).lower()
-                                if "remember" in cell_text or "note" in cell_text:
-                                    notes = rows[i][j]
-
-                    problems.append(
-                        {"url": url, "title": title, "notes": notes, "context": context}
-                    )
-
-                    print(f"  Found: {url}")
-                    if title:
-                        print(f"    Title: {title}")
+            print(f"  Found: {slug or url}")
 
     return problems
 

@@ -1,58 +1,18 @@
 # Evaluate Division
 
-**Problem Link:** [Evaluate Division](https://leetcode.com/problems/evaluate-division/description/)
+## Problem Info
+- **Link**: [Evaluate Division](https://leetcode.com/problems/evaluate-division/description/)
+- **Category**: Graphs & Trees
+- **Difficulty**: Medium
+- **Status**: DONE
 
-**Category:** Graphs & Trees
+## Approach
+### Data Structure
+- Graph, BFS
 
-## Problem-Solving Mindmap
-
-```mermaid
-mindmap
-  root((Evaluate Division))
-    Problem Understanding
-      Read carefully
-      Identify inputs/outputs
-      Note constraints
-      Ask clarifying questions
-    Approach
-      Brute Force
-        Think simple first
-        Analyze complexity
-      Optimization
-        Look for patterns
-        Consider data structures
-        Think about edge cases
-    Implementation
-      Write clean code
-      Handle edge cases
-      Test with examples
-    Complexity Analysis
-      Time complexity
-      Space complexity
-    Common Pitfalls
-      Off-by-one errors
-      Edge cases
-      Integer overflow
-```
-
-## Key Insights
-
-- **Pattern Recognition**: Identify the problem type (array, string, tree, graph, DP, etc.)
-- **Data Structure Choice**: Choose the right data structure for optimal solution
-- **Algorithm Strategy**: Greedy, two-pointers, sliding window, DFS/BFS, dynamic programming, etc.
+### Time Complexity
+- O(?)
 
 ## Things to Remember
-
-*Add your notes after solving the problem*
-
-## Template Approach
-
-1. **Understand**: Read the problem and examples
-2. **Plan**: Choose approach and data structures  
-3. **Code**: Implement solution
-4. **Test**: Verify with test cases
-5. **Optimize**: Improve time/space complexity if needed
-
----
-
-*This mindmap was auto-generated. Update it with problem-specific insights after solving.*
+- The equations are directed weighted graph.
+- basically need to find if there is a path between two nodes and multiply the weights.
