@@ -367,12 +367,168 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #5568d3;
         }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                width: 85%;
+                max-width: 320px;
+                height: 100vh;
+                z-index: 1000;
+                transition: left 0.3s ease;
+                border-right: none;
+                box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .sidebar-overlay.open {
+                display: block;
+            }
+
+            .mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 1rem;
+            }
+
+            .mobile-header h1 {
+                font-size: 1.2rem;
+            }
+
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+
+            .hamburger span {
+                width: 25px;
+                height: 3px;
+                background: white;
+                border-radius: 2px;
+                transition: all 0.3s;
+            }
+
+            .header {
+                padding: 1.5rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.3rem;
+            }
+
+            .stats {
+                gap: 0.5rem;
+            }
+
+            .stat {
+                padding: 0.4rem 0.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.2rem;
+            }
+
+            .problem-header {
+                padding: 1rem;
+            }
+
+            .problem-title {
+                font-size: 1.3rem !important;
+            }
+
+            .problem-meta {
+                flex-direction: column;
+                gap: 0.5rem !important;
+            }
+
+            .problem-category,
+            .problem-link,
+            .expand-toggle-btn {
+                font-size: 0.8rem !important;
+                padding: 0.4rem 0.8rem !important;
+            }
+
+            .mindmap-container {
+                padding: 0.5rem;
+            }
+
+            #mindmap {
+                border-radius: 10px;
+            }
+
+            .close-sidebar {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: white;
+                z-index: 10;
+            }
+        }
+
+        @media (min-width: 769px) {
+
+            .mobile-header,
+            .sidebar-overlay,
+            .close-sidebar {
+                display: none;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="sidebar">
+        <!-- Mobile Header -->
+        <div class="mobile-header">
+            <h1>🧠 LeetCode Mindmaps</h1>
+            <div class="hamburger" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Overlay for mobile -->
+        <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+        <div class="sidebar" id="sidebar">
+            <span class="close-sidebar" onclick="toggleSidebar()">✕</span>
             <div class="header">
                 <h1>🧠 LeetCode Mindmaps</h1>
                 <p>Click nodes to expand/collapse</p>
@@ -433,6 +589,12 @@
     <script>
         let problemsData = null;
         let currentMarkmap = null;
+
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebar-overlay').classList.toggle('open');
+        }
 
         // Load problems data
         async function loadProblems() {
@@ -559,6 +721,10 @@
 
             // Render mindmap
             renderMindmap(title, problem);
+
+            // Close sidebar on mobile
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebar-overlay').classList.remove('open');
         }
 
         // Create mindmap markdown content (FALLBACK ONLY)
@@ -691,7 +857,7 @@ Please ensure the markdown file exists in the correct category folder.`;
                     },
                     duration: 500,
                     maxWidth: 300,
-                    initialExpandLevel: currentExpanded ? -1 : 1,
+                    initialExpandLevel: currentExpanded ? 999 : 1,
                 },
                 currentRootData
             );
