@@ -5,7 +5,6 @@
 - **Category**: Arrays & Strings
 - **Difficulty**: Easy
 - **Status**: DONE
-
 ## Approach
 ### Data Structure
 - Arrays, sorting
@@ -14,7 +13,7 @@
 - O(nlogn)
 
 ## Things to Remember
-- Sort based on start times and then check for overlapping meetings
+- Sort based on start times and then check for overlapping meetings - false if meetings overlap
 
 ## Additional Notes
 - Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0])); ---- sorting based on start times

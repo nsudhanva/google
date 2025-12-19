@@ -5,7 +5,6 @@
 - **Category**: Hashmaps & HashSets
 - **Difficulty**: Easy
 - **Status**: DONE
-
 ## Approach
 ### Data Structure
 - Hashmap

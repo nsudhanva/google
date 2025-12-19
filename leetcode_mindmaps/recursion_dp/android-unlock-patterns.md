@@ -5,7 +5,6 @@
 - **Category**: Recursion & DP
 - **Difficulty**: Medium
 - **Status**: NOT DONE
-
 ## Approach
 ### Data Structure
 - *To be determined*

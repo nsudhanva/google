@@ -5,7 +5,6 @@
 - **Category**: Heaps
 - **Difficulty**: Medium
 - **Status**: DONE
-
 ## Approach
 ### Data Structure
 - min heap, sorting

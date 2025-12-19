@@ -6,6 +6,8 @@ Script to fetch LeetCode problems from Google Sheet with full structured data.
 import json
 import os
 import re
+import time
+import requests
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -60,6 +62,38 @@ def get_problem_slug(url):
         return None
     match = re.search(r"/problems/([\w-]+)/?", url)
     return match.group(1) if match else None
+
+
+def get_problem_content(title_slug):
+    """Fetch problem content from LeetCode GraphQL API."""
+    if not title_slug:
+        return None
+        
+    url = "https://leetcode.com/graphql"
+    query = """
+    query questionData($titleSlug: String!) {
+        question(titleSlug: $titleSlug) {
+            content
+        }
+    }
+    """
+    variables = {"titleSlug": title_slug}
+    headers = {
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+    }
+    
+    try:
+        response = requests.post(url, json={"query": query, "variables": variables}, headers=headers, timeout=10)
+        if response.status_code == 200:
+            data = response.json()
+            return data.get("data", {}).get("question", {}).get("content")
+        else:
+            print(f"    Error fetching content: {response.status_code}")
+            return None
+    except Exception as e:
+        print(f"    Exception fetching content: {e}")
+        return None
 
 
 def fetch_all_sheets():
@@ -177,6 +211,16 @@ def extract_problems(all_data):
             
             slug = get_problem_slug(url)
             
+            # Fetch content
+            print(f"  Found: {slug or url}")
+            description = None
+            if slug:
+                # Small delay to be polite
+                time.sleep(0.5) 
+                description = get_problem_content(slug)
+                if description:
+                     print(f"    Fetched description ({len(description)} chars)")
+            
             problems.append({
                 "url": url,
                 "slug": slug,
@@ -187,13 +231,12 @@ def extract_problems(all_data):
                 "things_to_remember": things_to_remember,
                 "extra_notes": extra_notes if extra_notes else None,
                 "done": done_status,
+                "description": description,
                 "context": {
                     "sheet": sheet_name,
                     "row": row_idx,
                 }
             })
-
-            print(f"  Found: {slug or url}")
 
     return problems
 

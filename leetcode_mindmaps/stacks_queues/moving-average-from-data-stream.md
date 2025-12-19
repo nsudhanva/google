@@ -5,7 +5,6 @@
 - **Category**: Stacks & Queues
 - **Difficulty**: Easy
 - **Status**: DONE
-
 ## Approach
 ### Data Structure
 - Queues

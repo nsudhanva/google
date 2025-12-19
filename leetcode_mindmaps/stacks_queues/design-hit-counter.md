@@ -5,7 +5,6 @@
 - **Category**: Stacks & Queues
 - **Difficulty**: Medium
 - **Status**: DONE
-
 ## Approach
 ### Data Structure
 - Queue, Deque

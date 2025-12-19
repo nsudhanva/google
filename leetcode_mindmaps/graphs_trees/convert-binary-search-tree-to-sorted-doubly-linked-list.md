@@ -5,7 +5,6 @@
 - **Category**: Graphs & Trees
 - **Difficulty**: Medium
 - **Status**: NOT DONE
-
 ## Approach
 ### Data Structure
 - *To be determined*
