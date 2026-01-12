@@ -3,7 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LeetCode Maps">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="Interactive LeetCode problem mindmaps for algorithmic learning">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+    <link rel="manifest" href="manifest.json">
+    <!-- Preconnect to CDNs for faster loading -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <title>LeetCode Problem Mindmaps - Interactive</title>
     <style>
         * {
@@ -377,24 +388,28 @@
             .container {
                 grid-template-columns: 1fr;
                 height: 100vh;
+                height: 100dvh; /* Dynamic viewport height for mobile */
                 border-radius: 0;
+                overflow: hidden;
             }
 
             .sidebar {
                 position: fixed;
-                left: -100%;
+                left: 0;
                 top: 0;
                 width: 85%;
                 max-width: 320px;
                 height: 100vh;
+                height: 100dvh; /* Dynamic viewport height for mobile */
                 z-index: 1000;
-                transition: left 0.3s ease;
+                transform: translateX(-100%);
+                transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
                 border-right: none;
                 box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
             }
 
             .sidebar.open {
-                left: 0;
+                transform: translateX(0);
             }
 
             .sidebar-overlay {
@@ -551,21 +566,35 @@
             }
 
             .problem-header {
-                padding: 1rem;
+                padding: 0.75rem 1rem;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+                background: white;
             }
 
             .problem-title {
-                font-size: 1.25rem !important;
+                font-size: 1.1rem !important;
                 line-height: 1.3;
+                margin-bottom: 0.35rem !important;
             }
 
             .problem-meta {
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: wrap;
                 gap: 0.5rem !important;
-                align-items: stretch;
+                align-items: center;
             }
 
-            .problem-category,
+            .problem-category {
+                font-size: 0.75rem !important;
+                padding: 0.35rem 0.75rem !important;
+                min-height: 32px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
             .problem-link,
             .expand-toggle-btn {
                 font-size: 0.85rem !important;
@@ -579,11 +608,17 @@
             .mindmap-container {
                 padding: 0.5rem;
                 touch-action: manipulation;
+                /* Account for mobile header and bottom bar */
+                min-height: calc(100vh - 48px - 70px - env(safe-area-inset-bottom, 0));
+                min-height: calc(100dvh - 48px - 70px - env(safe-area-inset-bottom, 0));
             }
 
             #mindmap {
                 border-radius: 10px;
                 touch-action: pan-x pan-y pinch-zoom;
+                /* Ensure proper sizing */
+                min-height: 300px;
+                height: 100%;
             }
 
             .close-sidebar {
@@ -810,6 +845,286 @@
                 transform: translateX(-50%) translateY(0);
             }
         }
+
+        /* === MOBILE OPTIMIZATION ADDITIONS === */
+
+        /* Hardware acceleration for animations */
+        .sidebar,
+        .problem-item,
+        .category-header,
+        .hamburger,
+        .close-sidebar {
+            will-change: transform;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* Better touch feedback */
+        .problem-item:active,
+        .category-header:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        /* Full-screen mode for mindmap */
+        .mindmap-fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 2000 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: white !important;
+            border-radius: 0 !important;
+        }
+
+        .mindmap-fullscreen #mindmap {
+            border-radius: 0 !important;
+        }
+
+        /* Fullscreen exit button */
+        .fullscreen-exit-btn {
+            position: fixed;
+            top: env(safe-area-inset-top, 10px);
+            right: 10px;
+            z-index: 2001;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.25rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .mindmap-fullscreen ~ .fullscreen-exit-btn,
+        .fullscreen-exit-btn.visible {
+            display: flex;
+        }
+
+        /* Bottom action bar for mobile */
+        .mobile-action-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e9ecef;
+            padding: 0.5rem;
+            padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0));
+            z-index: 100;
+            gap: 0.5rem;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-action-bar button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            min-height: 44px;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        .mobile-action-bar button:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-action-bar .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .mobile-action-bar .btn-secondary {
+            background: #f0f4ff;
+            color: #667eea;
+        }
+
+        .mobile-action-bar .btn-outline {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-action-bar {
+                display: flex;
+            }
+
+            /* Main content takes full height minus mobile header */
+            .main-content {
+                height: calc(100vh - 48px);
+                height: calc(100dvh - 48px);
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Mindmap container is scrollable and takes remaining space */
+            .mindmap-container {
+                flex: 1;
+                overflow: auto;
+                padding-bottom: calc(70px + env(safe-area-inset-bottom, 0));
+            }
+
+            /* Hide the problem-meta buttons on mobile - moved to bottom bar */
+            .problem-meta .expand-toggle-btn,
+            .problem-meta .problem-link {
+                display: none !important;
+            }
+        }
+
+        /* Skeleton loading animation */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton-item {
+            height: 44px;
+            margin: 0.25rem 0;
+        }
+
+        /* Pull-to-refresh indicator */
+        .pull-indicator {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0 0 10px 10px;
+            font-size: 0.85rem;
+            z-index: 1002;
+            transition: transform 0.3s;
+        }
+
+        .pull-indicator.active {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Better scrolling on iOS */
+        .problem-list {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+        }
+
+        /* Safe area handling for notched devices */
+        @supports (padding: env(safe-area-inset-top)) {
+            .mobile-header {
+                padding-top: calc(0.5rem + env(safe-area-inset-top));
+            }
+
+            .sidebar {
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+
+        /* Double-tap hint for mindmap */
+        .tap-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .tap-hint.visible {
+            opacity: 1;
+        }
+
+        /* Loading overlay for mindmap */
+        .mindmap-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            border-radius: 15px;
+        }
+
+        /* Improve contrast for mobile outdoor use */
+        @media (max-width: 1024px) {
+            .problem-name {
+                font-weight: 500;
+            }
+
+            .category-header {
+                font-weight: 700;
+            }
+        }
+
+        /* Floating fullscreen button */
+        .fullscreen-fab {
+            display: none;
+            position: fixed;
+            bottom: calc(80px + env(safe-area-inset-bottom, 0));
+            right: 1rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            cursor: pointer;
+            z-index: 99;
+            font-size: 1.25rem;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .fullscreen-fab:active {
+            transform: scale(0.9);
+        }
+
+        @media (max-width: 1024px) {
+            .fullscreen-fab.visible {
+                display: flex;
+            }
+        }
     </style>
 </head>
 
@@ -889,9 +1204,33 @@
                     </div>
                 </div>
                 <svg id="mindmap" class="hidden"></svg>
+                <div class="tap-hint" id="tap-hint">Double-tap to zoom</div>
             </div>
         </div>
     </div>
+
+    <!-- Mobile Bottom Action Bar -->
+    <div class="mobile-action-bar" id="mobile-action-bar">
+        <button class="btn-secondary" onclick="toggleSidebar()" aria-label="Browse problems">
+            📋 Problems
+        </button>
+        <button class="btn-primary" id="mobile-expand-btn" onclick="toggleExpandAll()" aria-label="Expand or collapse all">
+            📖 Expand
+        </button>
+        <button class="btn-outline" id="mobile-link-btn" onclick="openCurrentProblem()" aria-label="Open on LeetCode">
+            🔗 LeetCode
+        </button>
+    </div>
+
+    <!-- Fullscreen FAB -->
+    <button class="fullscreen-fab" id="fullscreen-fab" onclick="toggleFullscreen()" aria-label="Toggle fullscreen">
+        ⛶
+    </button>
+
+    <!-- Fullscreen exit button -->
+    <button class="fullscreen-exit-btn" id="fullscreen-exit" onclick="toggleFullscreen()" aria-label="Exit fullscreen">
+        ✕
+    </button>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
@@ -902,12 +1241,32 @@
         let currentMarkmap = null;
         let currentExpanded = false;
         let currentRootData = null;
+        let currentProblem = null;
+        let isFullscreen = false;
+
+        // Check if mobile
+        const isMobile = () => window.innerWidth <= 1024;
+        const isTouch = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        // Haptic feedback helper (where supported)
+        function hapticFeedback(type = 'light') {
+            if ('vibrate' in navigator) {
+                const patterns = {
+                    light: [10],
+                    medium: [20],
+                    heavy: [30],
+                    success: [10, 50, 10]
+                };
+                navigator.vibrate(patterns[type] || [10]);
+            }
+        }
 
         // Mobile sidebar toggle with body scroll lock
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
 
+            hapticFeedback('light');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('open');
 
@@ -919,12 +1278,78 @@
             }
         }
 
+        // Toggle fullscreen mode for mindmap
+        function toggleFullscreen() {
+            const container = document.querySelector('.mindmap-container');
+            const exitBtn = document.getElementById('fullscreen-exit');
+            const fab = document.getElementById('fullscreen-fab');
+            const actionBar = document.getElementById('mobile-action-bar');
+
+            hapticFeedback('medium');
+            isFullscreen = !isFullscreen;
+
+            if (isFullscreen) {
+                container.classList.add('mindmap-fullscreen');
+                exitBtn.classList.add('visible');
+                fab.classList.remove('visible');
+                actionBar.style.display = 'none';
+                document.body.style.overflow = 'hidden';
+
+                // Try native fullscreen API
+                if (container.requestFullscreen) {
+                    container.requestFullscreen().catch(() => {});
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                }
+            } else {
+                container.classList.remove('mindmap-fullscreen');
+                exitBtn.classList.remove('visible');
+                if (isMobile()) {
+                    fab.classList.add('visible');
+                    actionBar.style.display = 'flex';
+                }
+                document.body.style.overflow = '';
+
+                // Exit native fullscreen
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().catch(() => {});
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+
+            // Re-fit mindmap after toggle
+            setTimeout(() => {
+                if (currentMarkmap) {
+                    currentMarkmap.fit();
+                }
+            }, 300);
+        }
+
+        // Handle native fullscreen changes
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement && isFullscreen) {
+                toggleFullscreen();
+            }
+        });
+
+        // Open current problem on LeetCode
+        function openCurrentProblem() {
+            const link = document.getElementById('current-problem-link');
+            if (link && link.href && link.href !== '#') {
+                hapticFeedback('light');
+                window.open(link.href, '_blank');
+            }
+        }
+
         // Touch gesture handling for sidebar swipe
         let touchStartX = 0;
+        let touchStartY = 0;
         let touchEndX = 0;
 
         function handleTouchStart(e) {
             touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
         }
 
         function handleTouchEnd(e) {
@@ -936,8 +1361,8 @@
             const swipeThreshold = 50;
             const sidebarOpen = document.getElementById('sidebar').classList.contains('open');
 
-            // Swipe right to open (from left edge only)
-            if (!sidebarOpen && touchStartX < 30 && touchEndX - touchStartX > swipeThreshold) {
+            // Swipe right to open (from left edge only, expanded zone for easier access)
+            if (!sidebarOpen && touchStartX < 50 && touchEndX - touchStartX > swipeThreshold) {
                 toggleSidebar();
             }
 
@@ -951,6 +1376,23 @@
         document.addEventListener('touchstart', handleTouchStart, { passive: true });
         document.addEventListener('touchend', handleTouchEnd, { passive: true });
 
+        // Double-tap to zoom on mindmap
+        let lastTap = 0;
+        function handleMindmapDoubleTap(e) {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+
+            if (tapLength < 300 && tapLength > 0) {
+                // Double tap detected
+                hapticFeedback('medium');
+                if (currentMarkmap) {
+                    currentMarkmap.fit();
+                }
+                e.preventDefault();
+            }
+            lastTap = currentTime;
+        }
+
         // Keyboard support for hamburger menu
         document.querySelector('.hamburger')?.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -959,9 +1401,16 @@
             }
         });
 
+        // Escape key to close fullscreen
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isFullscreen) {
+                toggleFullscreen();
+            }
+        });
+
         // Show mobile hint on first mindmap load
         function showMobileHint() {
-            if (window.innerWidth <= 768 && !localStorage.getItem('mindmapHintShown')) {
+            if (isMobile() && !localStorage.getItem('mindmapHintShown')) {
                 const hint = document.createElement('div');
                 hint.className = 'mobile-hint';
                 hint.innerHTML = '👆 Pinch to zoom • Tap nodes to expand';
@@ -969,6 +1418,19 @@
 
                 setTimeout(() => hint.remove(), 4000);
                 localStorage.setItem('mindmapHintShown', 'true');
+            }
+        }
+
+        // Show/hide fullscreen FAB based on mindmap visibility
+        function updateFabVisibility() {
+            const fab = document.getElementById('fullscreen-fab');
+            const mindmap = document.getElementById('mindmap');
+            const hasMindmap = !mindmap.classList.contains('hidden');
+
+            if (isMobile() && hasMindmap && !isFullscreen) {
+                fab.classList.add('visible');
+            } else {
+                fab.classList.remove('visible');
             }
         }
 
@@ -1075,9 +1537,11 @@
                 categoryProblems.forEach((problem) => {
                     const slug = getProblemSlug(problem.url);
                     const title = slugToTitle(slug);
+                    // Use index to avoid inline JSON issues with HTML in description
+                    const problemIndex = problems.findIndex(p => p.url === problem.url);
 
                     html += `
-                        <div class="problem-item" onclick='selectProblem(${JSON.stringify(problem)})' role="button" tabindex="0">
+                        <div class="problem-item" data-problem-index="${problemIndex}" onclick="selectProblemByIndex(${problemIndex})" role="button" tabindex="0">
                             <div class="problem-name">${title}</div>
                         </div>
                     `;
@@ -1102,6 +1566,13 @@
             });
         }
 
+        // Select problem by index (avoids inline JSON issues with HTML in descriptions)
+        function selectProblemByIndex(index) {
+            if (problemsData && problemsData[index]) {
+                selectProblem(problemsData[index]);
+            }
+        }
+
         // Toggle category with accessibility update
         function toggleCategory(categoryId) {
             const element = document.getElementById(categoryId);
@@ -1118,6 +1589,9 @@
             const title = slugToTitle(slug);
             const category = problem.context.sheet;
 
+            // Store current problem
+            currentProblem = problem;
+
             // Update header
             document.getElementById('problem-header').style.display = 'block';
             document.getElementById('current-problem-title').textContent = title;
@@ -1132,7 +1606,13 @@
             document.querySelectorAll('.problem-item').forEach(item => {
                 item.classList.remove('active');
             });
-            event.target.closest('.problem-item').classList.add('active');
+            if (event && event.target) {
+                const problemItem = event.target.closest('.problem-item');
+                if (problemItem) problemItem.classList.add('active');
+            }
+
+            // Haptic feedback
+            hapticFeedback('success');
 
             // Render mindmap
             renderMindmap(title, problem);
@@ -1143,6 +1623,9 @@
             sidebar.classList.remove('open');
             overlay.classList.remove('open');
             document.body.style.overflow = '';
+
+            // Update FAB visibility
+            updateFabVisibility();
         }
 
         // Create mindmap markdown content (FALLBACK ONLY)
@@ -1172,6 +1655,18 @@ Please ensure the markdown file exists in the correct category folder.`;
 
         // Render Markmap
         async function renderMindmap(title, problem) {
+            const container = document.querySelector('.mindmap-container');
+            const svg = d3.select('#mindmap');
+
+            // Show loading state
+            const existingLoader = container.querySelector('.mindmap-loading');
+            if (existingLoader) existingLoader.remove();
+
+            const loader = document.createElement('div');
+            loader.className = 'mindmap-loading';
+            loader.innerHTML = '<div class="spinner"></div>';
+            container.appendChild(loader);
+
             try {
                 // Try to fetch specific content first
                 let markdown = await fetchMindmapContent(problem);
@@ -1187,7 +1682,6 @@ Please ensure the markdown file exists in the correct category folder.`;
                 // Transform markdown to markmap data
                 const { root, features } = transformer.transform(markdown);
 
-                const svg = d3.select('#mindmap');
                 svg.selectAll('*').remove(); // Clear previous
 
                 // Load assets if needed
@@ -1198,22 +1692,37 @@ Please ensure the markdown file exists in the correct category folder.`;
                 // Save root data for expand/collapse toggle
                 currentRootData = root;
                 currentExpanded = false;
-                document.getElementById('expand-toggle').innerHTML = '📖 Expand All';
+
+                const expandBtn = document.getElementById('expand-toggle');
+                const mobileExpandBtn = document.getElementById('mobile-expand-btn');
+                if (expandBtn) expandBtn.innerHTML = '📖 Expand All';
+                if (mobileExpandBtn) mobileExpandBtn.innerHTML = '📖 Expand';
+
+                // Mobile-optimized options
+                const mobile = isMobile();
+                const markmapOptions = {
+                    color: (node) => {
+                        const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
+                        return colors[node.depth % colors.length];
+                    },
+                    duration: mobile ? 300 : 500,
+                    maxWidth: mobile ? 180 : 300,
+                    initialExpandLevel: 1,
+                    paddingX: mobile ? 12 : 20,
+                    spacingHorizontal: mobile ? 60 : 80,
+                    spacingVertical: mobile ? 8 : 10,
+                    autoFit: true,
+                };
 
                 // Create markmap
                 currentMarkmap = markmap.Markmap.create(
                     svg.node(),
-                    {
-                        color: (node) => {
-                            const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
-                            return colors[node.depth % colors.length];
-                        },
-                        duration: 500,
-                        maxWidth: 300,
-                        initialExpandLevel: 1,
-                    },
+                    markmapOptions,
                     root
                 );
+
+                // Remove loading state
+                loader.remove();
 
                 // Fit to view
                 setTimeout(() => {
@@ -1224,7 +1733,8 @@ Please ensure the markdown file exists in the correct category folder.`;
                 showMobileHint();
             } catch (error) {
                 console.error('Error rendering mindmap:', error);
-                document.getElementById('mindmap').innerHTML = `
+                loader.remove();
+                svg.node().innerHTML = `
                     <text x="50%" y="50%" text-anchor="middle" fill="#dc3545">
                         Error rendering mindmap: ${error.message}
                     </text>
@@ -1260,7 +1770,10 @@ Please ensure the markdown file exists in the correct category folder.`;
         function toggleExpandAll() {
             if (!currentMarkmap || !currentRootData) return;
 
+            hapticFeedback('light');
+
             const btn = document.getElementById('expand-toggle');
+            const mobileBtn = document.getElementById('mobile-expand-btn');
             currentExpanded = !currentExpanded;
 
             // Clear and recreate with new expand level
@@ -1274,19 +1787,61 @@ Please ensure the markdown file exists in the correct category folder.`;
                         const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
                         return colors[node.depth % colors.length];
                     },
-                    duration: 500,
-                    maxWidth: 300,
+                    duration: isMobile() ? 300 : 500, // Faster on mobile
+                    maxWidth: isMobile() ? 200 : 300, // Narrower on mobile
                     initialExpandLevel: currentExpanded ? 999 : 1,
                 },
                 currentRootData
             );
 
-            btn.innerHTML = currentExpanded ? '📕 Collapse All' : '📖 Expand All';
+            const expandText = currentExpanded ? '📕 Collapse' : '📖 Expand';
+            btn.innerHTML = expandText + ' All';
+            if (mobileBtn) mobileBtn.innerHTML = expandText;
             setTimeout(() => currentMarkmap.fit(), 100);
+        }
+
+        // Initialize mobile features
+        function initMobile() {
+            // Add double-tap listener to mindmap
+            const mindmapEl = document.getElementById('mindmap');
+            if (mindmapEl && isTouch()) {
+                mindmapEl.addEventListener('touchend', handleMindmapDoubleTap, { passive: false });
+            }
+
+            // Handle resize
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    updateFabVisibility();
+                    if (currentMarkmap) {
+                        currentMarkmap.fit();
+                    }
+                }, 250);
+            });
+
+            // Handle orientation change
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    if (currentMarkmap) {
+                        currentMarkmap.fit();
+                    }
+                }, 300);
+            });
+        }
+
+        // Register service worker for offline support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => console.log('SW registered'))
+                    .catch((err) => console.log('SW registration failed:', err));
+            });
         }
 
         // Load problems on page load
         loadProblems();
+        initMobile();
     </script>
 </body>
 

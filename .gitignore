@@ -25,6 +25,7 @@ replay_pid*
 
 *.json
 !leetcode_problems.json
+!manifest.json
 
 # Credentials (never commit these)
 credentials.json
