@@ -2,7 +2,7 @@
 // Strategies for L5 AI/ML SWE Applicants (2024–2026)". Every item keeps its provenance,
 // because most public GHA "questions" are illustrative or prep-site reconstructions.
 
-export type Section = "likert" | "triple" | "scenario" | "fact";
+export type Section = "likert" | "triple" | "scenario";
 
 export interface Step {
 	prompt: string;
@@ -33,10 +33,6 @@ export const SECTIONS: Record<Section, { name: string; blurb: string }> = {
 	scenario: {
 		name: "Scenarios",
 		blurb: "Pick what you'd most likely do, then what you'd least likely do.",
-	},
-	fact: {
-		name: "The test itself",
-		blurb: "Format, timing, cooldowns and what passers reported.",
 	},
 };
 
@@ -91,24 +87,6 @@ function pair(
 			{ prompt: mostPrompt, answer: most[0], why: most[1] },
 			{ prompt: leastPrompt, answer: least[0], why: least[1] },
 		],
-		source,
-	};
-}
-
-function fact(
-	id: string,
-	text: string,
-	options: string[],
-	answer: number,
-	why: string,
-	source: string,
-): Question {
-	return {
-		id,
-		section: "fact",
-		text,
-		options,
-		steps: [{ prompt: "Pick one", answer, why }],
 		source,
 	};
 }
@@ -478,209 +456,6 @@ export const QUESTIONS: readonly Question[] = [
 		],
 		[3, "Speakerphone broadcasts confidential details to everyone nearby."],
 		"Topic from 1point3acres' aggregated 2026 list, not a quote. Options are reconstructed.",
-	),
-
-	// The test itself
-	fact(
-		"f-coding",
-		"Does the Google Hiring Assessment include coding?",
-		[
-			"Yes, two LeetCode-style problems",
-			"Yes, but only for SWE roles",
-			"No. It's a non-coding, role-agnostic workstyle test",
-			"Only for L5 and above",
-		],
-		2,
-		"Every 2026 report describes a workstyle test with no coding and no SWE, ML or level-specific content. Coding comes from a separate role-related assessment.",
-		"1point3acres GHA page (2026); Google's own description.",
-	),
-	fact(
-		"f-format-2026",
-		"What can the mid-to-late 2026 GHA contain?",
-		[
-			"Only Likert statements",
-			"Most/Least Like Me triples, Likert statements and Most/Least Likely scenarios",
-			"A coding exercise plus a personality quiz",
-			"A recorded video interview",
-		],
-		1,
-		"Up to three parts, in varying order. Some variants skip a part; a Jan 2026 report had only Likert plus scenarios.",
-		"1point3acres (Sept 2026); Medium, Jul 2026; Medium, Jan 2026.",
-	),
-	fact(
-		"f-triple-format",
-		"How does a Most/Least Like Me triple work?",
-		[
-			"Rank all three statements 1 to 3",
-			"Pick Most like me, then Least like me from the remaining two",
-			"Rate each statement on a 5-point scale",
-			"Pick the one statement that's false",
-		],
-		1,
-		"Three usually all-positive statements. You choose Most, then Least from the two left.",
-		"1point3acres reply, May 21, 2026, reposted on PracHub.",
-	),
-	fact(
-		"f-scenarios",
-		"What does the scenario part look like?",
-		[
-			"About 10–15 scenarios, 4 options each, pick Most and Least likely",
-			"One long case study with an essay answer",
-			"Scenarios with a single correct option",
-			"Video scenarios with a timer",
-		],
-		0,
-		"About 10–15 workplace scenarios with 4 options, each answered with a Most Likely and a Least Likely.",
-		"1point3acres GHA page (2026).",
-	),
-	fact(
-		"f-extremes",
-		"How did passers answer Likert statements?",
-		[
-			"Mostly Neutral, to look balanced",
-			"Mostly Agree, avoiding extremes",
-			"About 99% Strongly Agree or Strongly Disagree",
-			"Randomly, since there are no right answers",
-		],
-		2,
-		'"99% only Strongly Agree or Strongly Disagree, with 1–2 exceptions." It\'s the consensus heuristic, not a guarantee: one Blind poster failed answering only at the extremes.',
-		"1point3acres, Nov 2025 (passed); Medium, Jan 2026 (passed); Blind counter-reports.",
-	),
-	fact(
-		"f-persona",
-		"What's the default persona ranking for an L5 SWE?",
-		[
-			"Adaptable problem solver > ambiguity handling > communication > reliability",
-			"Reliable executor > communication/collaboration > ambiguity handling > adaptable problem solver",
-			"Leadership > decisiveness > everything else",
-			"Answer each triple on its own merits, without a ranking",
-		],
-		1,
-		"Fix this ranking before you start and never flip it across reshuffled triples. It's consistent with every report, though the Reddit post it came from couldn't be verified.",
-		"Your Reddit source (unverified); matches the May 2026 persona templates.",
-	),
-	fact(
-		"f-loop",
-		'One candidate saw a triple whose three options were all statements they had already picked as "Most like me." Why does that matter?',
-		[
-			"It was a bug in the test",
-			"The test cross-checks earlier choices, so a consistent ranking matters",
-			"It means you should pick at random",
-			"It signals you're close to the end",
-		],
-		1,
-		"Triples recombine your earlier picks. Contradicting yourself is visible.",
-		"Reported observation. 1point3acres reply, May 21, 2026.",
-	),
-	fact(
-		"f-scenario-rule",
-		"In scenarios, what's the reliable Most Likely pick?",
-		[
-			"Whatever keeps the deadline",
-			"Whatever keeps the client happy",
-			"The option that follows policy, even at a cost to deadline or comfort, done proactively",
-			"Escalate everything to your manager immediately",
-		],
-		2,
-		'Least Likely is usually the option with a plausible excuse: "everyone does it," "it\'s anonymized," "to avoid embarrassment," "verbal OK."',
-		"Synthesis of passer reports (Medium 2026, 1point3acres 2025–2026).",
-	),
-	fact(
-		"f-cooldown",
-		"If you fail, how long until you can retake the GHA?",
-		["30 days", "3 months", "6 months", "12 months"],
-		2,
-		"Google's fail email says you can't retake it for six months, and you're ineligible for other active applications that require it.",
-		"Google's fail email as quoted on Blind, Feb 2024.",
-	),
-	fact(
-		"f-validity",
-		"How long is a pass valid, according to most reports?",
-		["6 months", "1 year", "2 years", "Forever"],
-		2,
-		"Blind posters (Jan 2024, Mar 2025) and Janice He (2026) say 24 months. Some reports give 12 or 6 months.",
-		"Blind, Jan 2024 and Mar 2025; Medium, Jan 2026.",
-	),
-	fact(
-		"f-window",
-		"How long do you usually have to take the GHA after the invite?",
-		["24 hours", "About 4 days", "2 weeks", "No deadline"],
-		1,
-		"Invites allow about 4 days. You can exit and re-enter, though the guide recommends one calm sitting.",
-		"Blind, Feb 2024 and Mar 2025; 1point3acres, Nov 2025.",
-	),
-	fact(
-		"f-time-limit",
-		"Is there a hard time limit?",
-		[
-			"Yes, 15 minutes",
-			"Yes, 30 minutes and it auto-submits",
-			"No. About 30 minutes is suggested but not enforced",
-			"Yes, 2 hours",
-		],
-		2,
-		"Passers spent anywhere from 5–10 minutes to about an hour. Don't rush.",
-		"Medium, Jan 2026; several Blind posts.",
-	),
-	fact(
-		"f-results",
-		"When do results usually arrive?",
-		["Within 24–48 hours", "After 2 weeks", "At the onsite", "Never shown"],
-		0,
-		'Reports range from "less than 24 hours" to "1–2 days." The portal shows "Assessment passed."',
-		"Blind, Jan 2024.",
-	),
-	fact(
-		"f-senior",
-		"Is there a separate GHA for L5 or senior candidates?",
-		[
-			"Yes, it adds system design questions",
-			"Yes, it has leadership-only scenarios",
-			"No. Senior candidates get the same test",
-			"Seniors are exempt",
-		],
-		2,
-		"An Engineering Manager, a 15-YOE candidate and a Staff-level poster all took the same test.",
-		"Blind (undated); no level-specific version reported.",
-	),
-	fact(
-		"f-scheduled",
-		"What can happen to already-scheduled interviews if you fail?",
-		[
-			"Nothing, interviews go ahead",
-			"They can be canceled",
-			"They're moved to a different team",
-			"They become optional",
-		],
-		1,
-		"A secondhand Blind report says a candidate who failed had his scheduled interview canceled.",
-		"Blind, Feb 1, 2024.",
-	),
-	fact(
-		"f-pipeline",
-		"Where does the GHA sit in 2026 Google SWE loops?",
-		[
-			"After the onsite",
-			"At the front, before the recruiter and technical phone screens",
-			"Between the phone screen and the onsite",
-			"After the offer",
-		],
-		1,
-		"It's a gate, not a signal of interest. Passing often leads to weeks of silence.",
-		"1point3acres 2026 SWE roundup; Blind, Feb 2024.",
-	),
-	fact(
-		"f-fifty",
-		'What is "I am fluent in over fifty languages" testing?',
-		[
-			"Language skills for international roles",
-			"Attention, or whether you're a bot",
-			"Humility",
-			"Nothing. It's a filler item",
-		],
-		1,
-		"An impossible claim. Strongly Disagree.",
-		"Blind, Feb 2024.",
 	),
 ];
 

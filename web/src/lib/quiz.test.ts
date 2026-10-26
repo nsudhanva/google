@@ -11,7 +11,7 @@ import {
 
 const single: Question = {
 	id: "single",
-	section: "fact",
+	section: "scenario",
 	text: "Pick B",
 	options: ["A", "B", "C"],
 	steps: [{ prompt: "Pick one", answer: 1, why: "" }],
