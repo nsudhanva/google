@@ -2,13 +2,28 @@
 .venv/
 __pycache__/
 *.py[cod]
-.ruff_cache/
 *.egg-info/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
 dist/
 build/
 
-# JS (web/ has its own .gitignore for build output)
+# JS / TanStack Start (web/ has its own .gitignore too)
 node_modules/
+.tanstack/
+.output/
+.nitro/
+.vinxi/
+.wrangler/
+*.tsbuildinfo
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+bun-debug.log*
 
 # Secrets
 .env
@@ -20,6 +35,9 @@ client_secret*.json
 
 # OS / editors
 .DS_Store
+.idea/
+.vscode/
+*.swp
 
 # Claude Code local settings
 .claude/settings.local.json

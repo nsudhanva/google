@@ -11,7 +11,8 @@
 			"web/src/**",
 			"web/vite.config.ts",
 			"!web/src/routeTree.gen.ts",
-			"!web/src/styles.css"
+			"!web/src/styles.css",
+			"!web/src/components/ui"
 		]
 	},
 	"formatter": {

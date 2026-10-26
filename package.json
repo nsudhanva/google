@@ -10,7 +10,8 @@
     "preview": "bun --filter web preview",
     "typecheck": "bun --filter web typecheck",
     "check": "biome check",
-    "fix": "biome check --write"
+    "fix": "biome check --write",
+    "test": "bun --filter web test"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.5"
