@@ -1,11 +1,49 @@
 [project]
 name = "google"
 version = "0.1.0"
-description = "Add your description here"
+description = "Python package for the google project"
 readme = "README.md"
-requires-python = ">=3.14"
-dependencies = [
-    "google-api-python-client>=2.187.0",
-    "google-auth-httplib2>=0.2.1",
-    "google-auth-oauthlib>=1.2.3",
+authors = [{ name = "Sudhanva Narayana", email = "nsudhanva@gmail.com" }]
+requires-python = ">=3.15"
+dependencies = []
+
+[project.scripts]
+google = "google:main"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "debugpy>=1.8.22",
+    "ruff>=0.17.2",
+    "ty>=0.0.92",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py315"
+extend-exclude = ["web"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "SIM", # flake8-simplify
+    "RUF", # ruff-specific
+]
+
+[tool.ruff.format]
+quote-style = "double"
+docstring-code-format = true
+
+[tool.ty.environment]
+python-version = "3.15"
+
+[tool.ty.src]
+include = ["src"]

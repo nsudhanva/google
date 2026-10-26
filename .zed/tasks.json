@@ -1,0 +1,30 @@
+// Tasks (`task: spawn`, alt-shift-t).
+[
+  {
+    "label": "web: dev server",
+    "command": "bun run dev",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "web: check (biome + tsc)",
+    "command": "bun run check && bun run typecheck",
+    "cwd": "$ZED_WORKTREE_ROOT"
+  },
+  {
+    "label": "py: run google",
+    "command": "uv run google",
+    "cwd": "$ZED_WORKTREE_ROOT"
+  },
+  {
+    "label": "py: check (ruff + ty)",
+    "command": "uv run ruff check && uv run ruff format --check && uv run ty check",
+    "cwd": "$ZED_WORKTREE_ROOT"
+  },
+  {
+    "label": "py: fix (ruff)",
+    "command": "uv run ruff check --fix && uv run ruff format",
+    "cwd": "$ZED_WORKTREE_ROOT"
+  }
+]

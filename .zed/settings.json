@@ -1,0 +1,51 @@
+// Project settings for Zed. Ruff, ty and debugpy are resolved from .venv (uv sync),
+// Biome from node_modules (bun install), so editor and CLI run the same versions.
+{
+  "languages": {
+    "Python": {
+      "language_servers": ["ty", "ruff", "!basedpyright", "!pyright", "!pylsp", "..."],
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "ruff" } },
+      "code_actions_on_format": {
+        "source.organizeImports.ruff": true
+      }
+    },
+    "TypeScript": {
+      "language_servers": ["vtsls", "biome", "!eslint", "..."],
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    },
+    "TSX": {
+      "language_servers": ["vtsls", "biome", "!eslint", "..."],
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    },
+    "JavaScript": {
+      "language_servers": ["vtsls", "biome", "!eslint", "..."],
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    }
+  },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.DS_Store",
+    "**/node_modules",
+    "**/.venv",
+    "**/.ruff_cache",
+    "**/__pycache__",
+    "web/dist",
+    "web/.tanstack"
+  ]
+}
