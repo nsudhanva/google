@@ -23,11 +23,13 @@ RUN find /srv -type f \( -name '*.js' -o -name '*.css' -o -name '*.svg' \) \
 	-exec gzip -9 -k {} \; -exec brotli -q 11 -k {} \; -exec zstd -19 -q -k {} \;
 
 FROM caddy:2-alpine AS caddy
+LABEL org.opencontainers.image.source=https://github.com/nsudhanva/google
 COPY --from=static /srv /srv
 COPY Caddyfile /etc/caddy/Caddyfile
 
 # Only the node binary on plain Alpine: no npm, yarn or corepack.
 FROM alpine:3.22 AS web
+LABEL org.opencontainers.image.source=https://github.com/nsudhanva/google
 RUN apk add --no-cache libstdc++ \
 	&& addgroup -S node && adduser -S -G node node
 COPY --from=node:24-alpine /usr/local/bin/node /usr/local/bin/node
