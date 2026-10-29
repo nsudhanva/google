@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 # Two small images for small machines (built for a 1 GB e2-micro):
-#   web   - the node binary on Alpine, running the self-contained server bundle
+#   web   - the node binary on Alpine, running the self-contained server bundle; it keeps a
+#           copy of the static files for the moments when Caddy runs a different build
 #   caddy - Caddy with the static files baked in, compressed ahead of time
 # Build one with `docker build --target web|caddy .`; CI publishes both to GHCR.
 
@@ -13,7 +14,8 @@ COPY web web
 RUN bun run build \
 	&& mkdir -p /out/node_modules \
 	&& cp -rL web/node_modules/srvx /out/node_modules/srvx \
-	&& cp -r web/dist/server /out/server
+	&& cp -r web/dist/server /out/server \
+	&& cp -r web/dist/client /out/client
 
 # Compress once at build time so Caddy serves .br/.zst/.gz files without spending CPU.
 FROM alpine:3.22 AS static
@@ -44,4 +46,4 @@ COPY data/problems.json data/approaches.json data/
 RUN mkdir -p /state && chown node:node /state
 USER node
 EXPOSE 3000
-CMD ["node", "node_modules/srvx/bin/srvx.mjs", "serve", "--prod", "--entry", "server/server.js", "--port", "3000"]
+CMD ["node", "node_modules/srvx/bin/srvx.mjs", "serve", "--prod", "--entry", "server/server.js", "--static", "../client", "--port", "3000"]

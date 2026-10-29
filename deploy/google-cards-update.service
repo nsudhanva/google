@@ -1,4 +1,5 @@
 # Pulls the images CI publishes to GHCR and recreates only the containers whose image changed.
+# Install deploy/update.sh as /opt/google-cards/update.sh.
 [Unit]
 Description=Update google-cards from GHCR
 After=docker.service network-online.target
@@ -8,6 +9,4 @@ Requires=docker.service
 [Service]
 Type=oneshot
 WorkingDirectory=/opt/google-cards
-ExecStart=/usr/bin/docker compose pull --quiet
-ExecStart=/usr/bin/docker compose up -d --remove-orphans
-ExecStartPost=/usr/bin/docker image prune -f
+ExecStart=/opt/google-cards/update.sh

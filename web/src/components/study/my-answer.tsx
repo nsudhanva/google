@@ -1,5 +1,11 @@
 import { NotebookPenIcon } from "lucide-react";
-import { type KeyboardEvent, type ReactNode, useState } from "react";
+import {
+	type KeyboardEvent,
+	type ReactNode,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 import { cn } from "@/lib/utils";
@@ -82,6 +88,14 @@ function NoteEditor({
 	const [draft, setDraft] = useState(initial);
 	const [saving, setSaving] = useState(false);
 	const [failed, setFailed] = useState(false);
+	const field = useRef<HTMLTextAreaElement>(null);
+
+	// Opening the editor is the user's own action, so the cursor goes there, after the text.
+	useEffect(() => {
+		const textarea = field.current;
+		textarea?.focus();
+		textarea?.setSelectionRange(textarea.value.length, textarea.value.length);
+	}, []);
 
 	async function save() {
 		setSaving(true);
@@ -113,8 +127,8 @@ function NoteEditor({
 				}}
 			>
 				<textarea
+					ref={field}
 					aria-label="My answer"
-					autoFocus
 					value={draft}
 					maxLength={4000}
 					placeholder="What you understood: the idea, the steps, the catch."

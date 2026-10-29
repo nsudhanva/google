@@ -18,7 +18,7 @@ Progress lives in SQLite; a background scorer tracks how ready you are.
 │   └── progress.db      # your progress (SQLite, git-ignored)
 ├── web/                 # TanStack Start app (React, Vite, Tailwind, shadcn/ui)
 ├── Dockerfile, docker-compose.yml, Caddyfile
-├── deploy/              # systemd timer that keeps the server on the latest images
+├── deploy/              # update script and systemd timer that keep the server on the latest images
 └── .zed/                # Zed settings, debug configs, tasks
 ```
 
@@ -49,10 +49,13 @@ Built for the smallest machines; it runs on a free GCP e2-micro (1 GB RAM) with 
   `SITE_ADDRESS=google.sudhanva.me`, `BIND=0.0.0.0` and `TZ=...`, then run
   `docker compose up -d`. Caddy gets the HTTPS certificate itself; the DNS record is a plain
   (not proxied) A record.
-- **Continuous deployment**: the systemd timer in `deploy/` runs every 5 minutes, pulls new
-  images from GHCR and recreates only the containers that changed, so a push to `main` is live
-  within about 10 minutes. Install it with
-  `sudo cp deploy/google-cards-update.* /etc/systemd/system/ && sudo systemctl enable --now google-cards-update.timer`.
+- **Continuous deployment**: CI moves the `latest` tag of both images together, only after both
+  are built. The systemd timer in `deploy/` runs every 5 minutes, pulls `latest`, and recreates
+  the containers that changed, but only when both images come from the same commit. A page from
+  one build names asset files that only that build has; for the second or two while the two
+  containers restart, Caddy fetches any file it lacks from the app's own copy. A push to `main`
+  is live within about 10 minutes. Install it with
+  `sudo cp deploy/update.sh /opt/google-cards/ && sudo cp deploy/google-cards-update.* /etc/systemd/system/ && sudo systemctl daemon-reload && sudo systemctl enable --now google-cards-update.timer`.
 - **GCP**: e2-micro and a 30 GB standard disk in `us-central1` (Always Free), a static IP in use
   by that VM, and a firewall rule for 80/443. Keep the VM running: a reserved IP is only free
   while attached.
