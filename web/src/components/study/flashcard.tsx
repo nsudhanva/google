@@ -210,6 +210,7 @@ export function Flashcard({
 					<MyAnswer
 						note={note}
 						editing={editing}
+						onEdit={editNote}
 						onSave={saveNote}
 						onCancel={() => setEditing(false)}
 					/>

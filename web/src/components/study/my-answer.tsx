@@ -1,48 +1,71 @@
-import { type KeyboardEvent, useState } from "react";
+import { NotebookPenIcon } from "lucide-react";
+import { type KeyboardEvent, type ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
-import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-const BOX =
-	"shrink-0 rounded-sm border-l-2 border-primary/70 bg-primary/5 px-3 py-2 text-sm";
-
 /**
- * Your answer to the problem, in your own words. Hidden when you have not written one;
- * edited in place. Cmd/Ctrl+Enter saves, Escape cancels.
+ * Your answer to the problem, in your own words, written on the card's ruled lines.
+ * Hidden when you have not written one; edited in place in the same box.
+ * Cmd/Ctrl+Enter saves, Escape cancels.
  */
 export function MyAnswer({
 	note,
 	editing,
+	onEdit,
 	onSave,
 	onCancel,
-	className,
 }: {
 	note: string | null;
 	editing: boolean;
+	onEdit: () => void;
 	onSave: (text: string) => Promise<void>;
 	onCancel: () => void;
-	className?: string;
 }) {
 	if (editing)
 		return (
-			<NoteEditor
-				initial={note ?? ""}
-				onSave={onSave}
-				onCancel={onCancel}
-				className={className}
-			/>
+			<NoteEditor initial={note ?? ""} onSave={onSave} onCancel={onCancel} />
 		);
 	if (!note) return null;
 	return (
-		<section
-			aria-labelledby="my-answer-heading"
-			className={cn(BOX, "max-h-[40%] overflow-y-auto", className)}
+		<NoteBox
+			action={
+				<Button variant="ghost" size="xs" onClick={onEdit}>
+					Edit
+					<Kbd className="hidden sm:inline-flex">M</Kbd>
+				</Button>
+			}
 		>
-			<h2 id="my-answer-heading" className="font-semibold text-primary">
+			<p className="card-ruled max-h-[11.9em] overflow-y-auto whitespace-pre-wrap">
+				{note}
+			</p>
+		</NoteBox>
+	);
+}
+
+function NoteBox({
+	action,
+	children,
+	className,
+}: {
+	action?: ReactNode;
+	children: ReactNode;
+	className?: string;
+}) {
+	return (
+		<section
+			aria-label="My answer"
+			className={cn(
+				"shrink-0 rounded-md border border-dashed border-primary/40 px-3 pt-1.5 pb-2 text-sm",
+				className,
+			)}
+		>
+			<header className="flex h-6 items-center gap-1.5 text-xs font-medium text-muted-foreground">
+				<NotebookPenIcon className="size-3.5 text-primary" aria-hidden />
 				My answer
-			</h2>
-			<p className="whitespace-pre-wrap">{note}</p>
+				<span className="ml-auto">{action}</span>
+			</header>
+			{children}
 		</section>
 	);
 }
@@ -51,12 +74,10 @@ function NoteEditor({
 	initial,
 	onSave,
 	onCancel,
-	className,
 }: {
 	initial: string;
 	onSave: (text: string) => Promise<void>;
 	onCancel: () => void;
-	className?: string;
 }) {
 	const [draft, setDraft] = useState(initial);
 	const [saving, setSaving] = useState(false);
@@ -79,44 +100,44 @@ function NoteEditor({
 	}
 
 	return (
-		<form
-			className={cn(BOX, "space-y-2", className)}
-			onSubmit={(event) => {
-				event.preventDefault();
-				save();
-			}}
+		<NoteBox
+			className="border-solid border-primary/70"
+			action={
+				!draft.trim() && initial && <span>Saving it empty deletes it</span>
+			}
 		>
-			<label htmlFor="my-answer" className="block font-semibold text-primary">
-				My answer
-			</label>
-			<Textarea
-				id="my-answer"
-				autoFocus
-				value={draft}
-				maxLength={4000}
-				placeholder="What you understood: the idea, the steps, the catch."
-				onChange={(event) => setDraft(event.target.value)}
-				onKeyDown={onKeyDown}
-				className="max-h-[30vh] min-h-20 bg-card"
-			/>
-			<div className="flex items-center gap-2">
-				<Button type="submit" size="sm" disabled={saving}>
-					Save
-					<Kbd className="hidden sm:inline-flex">⌘↵</Kbd>
-				</Button>
-				<Button type="button" size="sm" variant="ghost" onClick={onCancel}>
-					Cancel
-					<Kbd className="hidden sm:inline-flex">Esc</Kbd>
-				</Button>
-				{failed && (
-					<p role="alert" className="text-destructive">
-						Not saved. Try again.
-					</p>
-				)}
-				{!draft.trim() && initial && (
-					<p className="text-muted-foreground">Saving empty text deletes it.</p>
-				)}
-			</div>
-		</form>
+			<form
+				onSubmit={(event) => {
+					event.preventDefault();
+					save();
+				}}
+			>
+				<textarea
+					aria-label="My answer"
+					autoFocus
+					value={draft}
+					maxLength={4000}
+					placeholder="What you understood: the idea, the steps, the catch."
+					onChange={(event) => setDraft(event.target.value)}
+					onKeyDown={onKeyDown}
+					className="card-ruled block field-sizing-content max-h-[11.9em] min-h-[3.4em] w-full resize-none bg-transparent [background-attachment:local] outline-none placeholder:text-muted-foreground"
+				/>
+				<div className="mt-2 flex items-center gap-2">
+					<Button type="submit" size="xs" disabled={saving}>
+						Save
+						<Kbd className="hidden sm:inline-flex">⌘↵</Kbd>
+					</Button>
+					<Button type="button" size="xs" variant="ghost" onClick={onCancel}>
+						Cancel
+						<Kbd className="hidden sm:inline-flex">Esc</Kbd>
+					</Button>
+					{failed && (
+						<p role="alert" className="text-xs text-destructive">
+							Not saved. Try again.
+						</p>
+					)}
+				</div>
+			</form>
+		</NoteBox>
 	);
 }
