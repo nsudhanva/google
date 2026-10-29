@@ -23,6 +23,13 @@ export const attemptSchema = z.object({
 });
 export type AttemptInput = z.output<typeof attemptSchema>;
 
+/** Your answer to a problem, in your own words; empty text deletes it. */
+export const noteSchema = z.object({
+	slug: z.string().min(1),
+	text: z.string().max(4000).trim(),
+});
+export type NoteInput = z.output<typeof noteSchema>;
+
 /** Clear one problem (`slug`) or everything (`all`); unknown keys are rejected, never ignored. */
 export const resetSchema = z.union([
 	z.strictObject({ slug: z.string().min(1) }),

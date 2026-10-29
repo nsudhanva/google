@@ -10,7 +10,7 @@ import { StudyBar } from "@/components/study/study-bar";
 import { buttonVariants } from "@/components/ui/button";
 import { STUDY_SETS } from "@/lib/scheduler";
 import { type StudySearch, studySearchSchema } from "@/lib/schemas";
-import { getDeck, recordAttempt } from "@/server/functions";
+import { getDeck, recordAttempt, saveNote } from "@/server/functions";
 
 export const Route = createFileRoute("/")({
 	validateSearch: studySearchSchema,
@@ -71,6 +71,9 @@ function Study() {
 					canGoBack={history.length > 0}
 					onBack={back}
 					onAnswer={answer}
+					onSaveNote={async (text) =>
+						(await saveNote({ data: { slug: card.problem.slug, text } })).note
+					}
 				/>
 			) : (
 				<EmptySet setLabel={STUDY_SETS[search.set]} />

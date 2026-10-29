@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import {
 	attemptSchema,
+	noteSchema,
 	resetSchema,
 	searchSchema,
 	studySearchSchema,
@@ -16,6 +17,10 @@ export const getDeck = createServerFn({ method: "GET" })
 export const recordAttempt = createServerFn({ method: "POST" })
 	.validator(attemptSchema)
 	.handler(({ data }) => service.recordAttempt(data));
+
+export const saveNote = createServerFn({ method: "POST" })
+	.validator(noteSchema)
+	.handler(({ data }) => service.saveNote(data));
 
 export const resetProgress = createServerFn({ method: "POST" })
 	.validator(resetSchema)

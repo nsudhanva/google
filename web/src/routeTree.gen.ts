@@ -15,6 +15,7 @@ import { Route as ProblemsRouteImport } from './routes/problems'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as ApiAttemptsRouteImport } from './routes/api/attempts'
 import { Route as ApiDeckRouteImport } from './routes/api/deck'
+import { Route as ApiNotesRouteImport } from './routes/api/notes'
 import { Route as ApiProgressRouteImport } from './routes/api/progress'
 import { Route as ApiReportRouteImport } from './routes/api/report'
 import { Route as ApiSearchRouteImport } from './routes/api/search'
@@ -51,6 +52,11 @@ const ApiDeckRoute = ApiDeckRouteImport.update({
   path: '/api/deck',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiNotesRoute = ApiNotesRouteImport.update({
+  id: '/api/notes',
+  path: '/api/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiProgressRoute = ApiProgressRouteImport.update({
   id: '/api/progress',
   path: '/api/progress',
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/progress': typeof ProgressRoute
   '/api/attempts': typeof ApiAttemptsRoute
   '/api/deck': typeof ApiDeckRoute
+  '/api/notes': typeof ApiNotesRoute
   '/api/progress': typeof ApiProgressRoute
   '/api/report': typeof ApiReportRoute
   '/api/search': typeof ApiSearchRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/progress': typeof ProgressRoute
   '/api/attempts': typeof ApiAttemptsRoute
   '/api/deck': typeof ApiDeckRoute
+  '/api/notes': typeof ApiNotesRoute
   '/api/progress': typeof ApiProgressRoute
   '/api/report': typeof ApiReportRoute
   '/api/search': typeof ApiSearchRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/progress': typeof ProgressRoute
   '/api/attempts': typeof ApiAttemptsRoute
   '/api/deck': typeof ApiDeckRoute
+  '/api/notes': typeof ApiNotesRoute
   '/api/progress': typeof ApiProgressRoute
   '/api/report': typeof ApiReportRoute
   '/api/search': typeof ApiSearchRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/api/attempts'
     | '/api/deck'
+    | '/api/notes'
     | '/api/progress'
     | '/api/report'
     | '/api/search'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/api/attempts'
     | '/api/deck'
+    | '/api/notes'
     | '/api/progress'
     | '/api/report'
     | '/api/search'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/api/attempts'
     | '/api/deck'
+    | '/api/notes'
     | '/api/progress'
     | '/api/report'
     | '/api/search'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   ProgressRoute: typeof ProgressRoute
   ApiAttemptsRoute: typeof ApiAttemptsRoute
   ApiDeckRoute: typeof ApiDeckRoute
+  ApiNotesRoute: typeof ApiNotesRoute
   ApiProgressRoute: typeof ApiProgressRoute
   ApiReportRoute: typeof ApiReportRoute
   ApiSearchRoute: typeof ApiSearchRoute
@@ -217,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiDeckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/notes': {
+      id: '/api/notes'
+      path: '/api/notes'
+      fullPath: '/api/notes'
+      preLoaderRoute: typeof ApiNotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/progress': {
       id: '/api/progress'
       path: '/api/progress'
@@ -262,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgressRoute: ProgressRoute,
   ApiAttemptsRoute: ApiAttemptsRoute,
   ApiDeckRoute: ApiDeckRoute,
+  ApiNotesRoute: ApiNotesRoute,
   ApiProgressRoute: ApiProgressRoute,
   ApiReportRoute: ApiReportRoute,
   ApiSearchRoute: ApiSearchRoute,

@@ -98,7 +98,8 @@ uv run ruff check && uv run ruff format --check && uv run ty check
 - **Backend** (`web/src/server/`): plain service functions over `node:sqlite`, exposed twice as
   thin wrappers: TanStack Start server functions for the UI and a JSON API for scripts. The
   attempt log is the only state: card state, lists and scores are all derived from it, so
-  clearing progress is a delete.
+  clearing progress is a delete. Your own answers ("My answer") live in a separate `notes` table,
+  so clearing progress keeps them.
 
 ## API
 
@@ -109,6 +110,7 @@ uv run ruff check && uv run ruff format --check && uv run ty check
 | `GET /api/problems/:slug` | One full card: statement, topics, approach, hints, state |
 | `GET /api/deck?period=30d&set=again&topic=Graph+Theory&difficulty=Hard` | The next card in a study set |
 | `POST /api/attempts` `{slug, grade, guessed, hints}` | Grade (`again`, `good`, `less`) or `skip` a card |
+| `PUT /api/notes` `{slug, text}` | Save your own answer to a problem (empty text deletes it) |
 | `DELETE /api/progress?slug=two-sum` or `?all=true` | Clear one problem, or everything |
 | `GET /api/report` | Readiness, coverage, accuracy, streak, weak topics, daily trend |
 
@@ -117,5 +119,5 @@ Bad input returns 400 with the validation issues; an unknown problem returns 404
 ## Keys
 
 `Enter` show answer, `H` hint, `S` skip, `1` visit again, `2` got it, `3` visit less often,
-`B` back (hides the answer, or goes to the previous card), `←`/`→` statement pages, `/` or ⌘K
+`B` back (hides the answer, or goes to the previous card), `M` my answer, `←`/`→` statement pages, `/` or ⌘K
 search.

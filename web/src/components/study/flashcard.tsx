@@ -7,6 +7,7 @@ import { InlineCode } from "@/components/inline-code";
 import { Segmented } from "@/components/segmented";
 import { Answer } from "@/components/study/answer";
 import { CardHistory } from "@/components/study/card-history";
+import { MyAnswer } from "@/components/study/my-answer";
 import { TopicPicker } from "@/components/study/topic-picker";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
@@ -57,6 +58,7 @@ export function Flashcard({
 	canGoBack,
 	onBack,
 	onAnswer,
+	onSaveNote,
 }: {
 	card: StudyCard;
 	topics: string[];
@@ -64,6 +66,8 @@ export function Flashcard({
 	canGoBack: boolean;
 	onBack: () => void;
 	onAnswer: (answer: Answered) => void;
+	/** Stores your answer and returns what was kept (null once deleted). */
+	onSaveNote: (text: string) => Promise<string | null>;
 }) {
 	const { problem, approach, state } = card;
 	const hints = approach?.hints ?? [];
@@ -71,6 +75,8 @@ export function Flashcard({
 	const [hintsShown, setHintsShown] = useState(0);
 	const [revealed, setRevealed] = useState(false);
 	const [pane, setPane] = useState<"problem" | "answer">("problem");
+	const [note, setNote] = useState(card.note);
+	const [editing, setEditing] = useState(false);
 
 	const toggle = (topic: string) =>
 		setGuessed((g) =>
@@ -86,6 +92,14 @@ export function Flashcard({
 		setRevealed(true);
 		setPane("answer");
 	};
+	const editNote = () => {
+		setEditing(true);
+		setPane("problem");
+	};
+	const saveNote = async (text: string) => {
+		setNote(await onSaveNote(text));
+		setEditing(false);
+	};
 	const back = () => {
 		if (revealed) setRevealed(false);
 		else if (canGoBack) onBack();
@@ -93,6 +107,7 @@ export function Flashcard({
 
 	useHotkeys({
 		b: back,
+		m: editNote,
 		...(revealed
 			? Object.fromEntries(
 					GRADE_ACTIONS.map((a) => [a.key, () => answer(a.grade)]),
@@ -145,7 +160,7 @@ export function Flashcard({
 			<div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
 				<Pane visible={pane === "problem"} className="px-4 py-3 sm:px-6">
 					{problem.description ? (
-						<FitPages arrowKeys className="statement h-full">
+						<FitPages arrowKeys className="statement min-h-0 flex-1">
 							<div
 								// biome-ignore lint/security/noDangerouslySetInnerHtml: statements are allowlist-sanitized at ingest (src/google/sanitize.py)
 								dangerouslySetInnerHTML={{ __html: problem.description }}
@@ -157,6 +172,13 @@ export function Flashcard({
 							here. Open it on LeetCode to read it.
 						</p>
 					)}
+					<MyAnswer
+						note={note}
+						editing={editing}
+						onSave={saveNote}
+						onCancel={() => setEditing(false)}
+						className="mt-3"
+					/>
 				</Pane>
 
 				<Pane
@@ -203,6 +225,13 @@ export function Flashcard({
 					shortcut="B"
 					onClick={back}
 					disabled={(!revealed && !canGoBack) || busy}
+				/>
+				<Action
+					variant="ghost"
+					label="My answer"
+					shortcut="M"
+					onClick={editNote}
+					disabled={editing}
 				/>
 				{revealed ? (
 					<div className="ml-auto flex flex-wrap justify-end gap-2">

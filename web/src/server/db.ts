@@ -26,6 +26,11 @@ CREATE TABLE IF NOT EXISTS daily_scores (
 	coverage REAL NOT NULL,
 	accuracy REAL
 );
+CREATE TABLE IF NOT EXISTS notes (
+	slug TEXT PRIMARY KEY,
+	text TEXT NOT NULL,
+	at INTEGER NOT NULL
+);
 `;
 
 let db: DatabaseSync | undefined;
@@ -123,4 +128,27 @@ export function dailyScores(limit = 60): DailyScore[] {
 		)
 		.all(limit) as unknown as DailyScore[];
 	return rows.reverse();
+}
+
+/** Your own answer to a problem. Notes are not progress: clearing progress keeps them. */
+export function noteFor(slug: string): string | null {
+	const row = open()
+		.prepare("SELECT text FROM notes WHERE slug = ?")
+		.get(slug) as { text: string } | undefined;
+	return row?.text ?? null;
+}
+
+/** Saves a note; empty text deletes it. */
+export function saveNote(slug: string, text: string, at: number) {
+	const database = open();
+	if (!text) {
+		database.prepare("DELETE FROM notes WHERE slug = ?").run(slug);
+		return;
+	}
+	database
+		.prepare(
+			`INSERT INTO notes (slug, text, at) VALUES (?, ?, ?)
+			ON CONFLICT (slug) DO UPDATE SET text = excluded.text, at = excluded.at`,
+		)
+		.run(slug, text, at);
 }

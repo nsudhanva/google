@@ -16,6 +16,7 @@ const SHORTCUTS: [string, string][] = [
 	["2", "Got it: next box (1, 3, 7, 16, 35, 90 days)"],
 	["3", "Visit less often: two boxes up, double wait"],
 	["B", "Back: hide the answer, or go to the previous card"],
+	["M", "Write your own answer; it shows on the card from then on"],
 	["← →", "Turn the pages of a long statement"],
 	["/ or ⌘K", "Search by number, title, topic or text"],
 ];

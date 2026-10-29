@@ -8,9 +8,9 @@ async function api(path: string, init?: RequestInit) {
 	return { status: response.status, body: text ? JSON.parse(text) : null };
 }
 
-function post(path: string, body: unknown) {
+function send(method: string, path: string, body: unknown) {
 	return api(path, {
-		method: "POST",
+		method,
 		headers: { "content-type": "application/json" },
 		body: JSON.stringify(body),
 	});
@@ -55,7 +55,7 @@ describe("HTTP API, end to end", () => {
 	});
 
 	it("records grades, validates input, and moves cards between sets", async () => {
-		const graded = await post("/api/attempts", {
+		const graded = await send("POST", "/api/attempts", {
 			slug: "two-sum",
 			grade: "good",
 			guessed: ["Array", "Hash Table"],
@@ -64,10 +64,12 @@ describe("HTTP API, end to end", () => {
 		expect(graded).toEqual({ status: 201, body: { score: 1 } });
 
 		expect(
-			(await post("/api/attempts", { slug: "two-sum", grade: "x" })).status,
+			(await send("POST", "/api/attempts", { slug: "two-sum", grade: "x" }))
+				.status,
 		).toBe(400);
 		expect(
-			(await post("/api/attempts", { slug: "nope", grade: "good" })).status,
+			(await send("POST", "/api/attempts", { slug: "nope", grade: "good" }))
+				.status,
 		).toBe(404);
 		const badJson = await api("/api/attempts", { method: "POST", body: "{" });
 		expect(badJson.status).toBe(400);
@@ -76,7 +78,10 @@ describe("HTTP API, end to end", () => {
 			"add-two-numbers",
 		);
 		expect((await api("/api/deck?set=again")).body.card).toBeNull();
-		await post("/api/attempts", { slug: "add-two-numbers", grade: "again" });
+		await send("POST", "/api/attempts", {
+			slug: "add-two-numbers",
+			grade: "again",
+		});
 		const again = await api("/api/deck?set=again");
 		expect(again.body.card.problem.slug).toBe("add-two-numbers");
 		expect(again.body.card.state.list).toBe("again");
@@ -90,16 +95,34 @@ describe("HTTP API, end to end", () => {
 		expect(body.history).toHaveLength(1);
 	});
 
+	it("saves your own answer on the card, and deletes it with empty text", async () => {
+		const note = (body: unknown) => send("PUT", "/api/notes", body);
+		expect(
+			await note({ slug: "two-sum", text: "  Map value to index.  " }),
+		).toEqual({ status: 200, body: { note: "Map value to index." } });
+		expect((await api("/api/problems/two-sum")).body.note).toBe(
+			"Map value to index.",
+		);
+		expect((await api("/api/problems/add-two-numbers")).body.note).toBeNull();
+		expect((await note({ slug: "two-sum" })).status).toBe(400);
+		expect((await note({ slug: "nope", text: "x" })).status).toBe(404);
+	});
+
 	it("clears one problem, refuses an unclear target, then clears everything", async () => {
 		const del = (query: string) =>
 			api(`/api/progress${query}`, { method: "DELETE" });
 		expect((await del("?slug=two-sum")).status).toBe(204);
-		expect((await api("/api/problems/two-sum")).body.state).toBeNull();
+		const cleared = await api("/api/problems/two-sum");
+		expect(cleared.body.state).toBeNull();
+		expect(cleared.body.note).toBe("Map value to index.");
 		expect((await del("")).status).toBe(400);
 		expect((await del("?Slug=add-two-numbers")).status).toBe(400);
 		expect((await api("/api/report")).body.report.graded).toBe(1);
 		expect((await del("?all=true")).status).toBe(204);
 		expect((await api("/api/report")).body.report.graded).toBe(0);
+
+		await send("PUT", "/api/notes", { slug: "two-sum", text: " " });
+		expect((await api("/api/problems/two-sum")).body.note).toBeNull();
 	});
 
 	it("renders the study page on the server", async () => {

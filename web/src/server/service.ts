@@ -6,7 +6,7 @@ import {
 	cardStatus,
 	queue,
 } from "@/lib/scheduler";
-import type { AttemptInput, StudySearch } from "@/lib/schemas";
+import type { AttemptInput, NoteInput, StudySearch } from "@/lib/schemas";
 import { scoreTopics } from "@/lib/scorer";
 import { type SearchHit, search } from "@/lib/search";
 import type { Approach, Problem } from "@/lib/types";
@@ -16,6 +16,8 @@ import {
 	dailyScores,
 	deleteAttempts,
 	insertAttempt,
+	noteFor,
+	saveNote as storeNote,
 } from "@/server/db";
 import { currentReport, invalidateReport } from "@/server/scorer";
 
@@ -30,6 +32,8 @@ export interface StudyCard {
 	problem: Problem;
 	approach: Approach | null;
 	state: CardState | null;
+	/** Your own answer, or null when you have not written one. */
+	note: string | null;
 }
 
 export interface StudyDeck {
@@ -51,6 +55,7 @@ function cardFor(problem: Problem, state: CardState | undefined): StudyCard {
 		problem,
 		approach: getContent().approaches[problem.slug] ?? null,
 		state: state ?? null,
+		note: noteFor(problem.slug),
 	};
 }
 
@@ -87,6 +92,13 @@ export function recordAttempt(data: AttemptInput): { score: number | null } {
 	});
 	invalidateReport();
 	return { score };
+}
+
+/** Stores your answer to a problem; empty text deletes it. */
+export function saveNote(data: NoteInput): { note: string | null } {
+	problemOf(data.slug);
+	storeNote(data.slug, data.text, Date.now());
+	return { note: data.text || null };
 }
 
 /** Clears one problem's history, or everything when no slug is given. */
