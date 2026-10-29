@@ -18,14 +18,16 @@ const PAGER_HEIGHT = 28;
 interface Layout {
 	fontSize: number;
 	pages: number;
-	/** Column width while paged; 0 when everything fits on one page. */
+	/** Column width and height while paged; 0 when everything fits on one page. */
 	width: number;
+	height: number;
 }
 
 /**
  * Fits its content in the box it is given, with no scrolling: it first shrinks the text,
  * then splits the content into side-by-side pages with a pager. With `arrowKeys`, ← and →
- * turn the pages.
+ * turn the pages. The box may be a fixed height or a shrinkable flex item that is only as
+ * tall as its content.
  */
 export function FitPages({
 	children,
@@ -42,6 +44,7 @@ export function FitPages({
 		fontSize: FONT_SIZES[0],
 		pages: 1,
 		width: 0,
+		height: 0,
 	});
 	const [page, setPage] = useState(0);
 
@@ -62,14 +65,15 @@ export function FitPages({
 			};
 			const fontSize = FONT_SIZES.find(fits);
 			if (fontSize) {
-				setLayout({ fontSize, pages: 1, width: 0 });
+				setLayout({ fontSize, pages: 1, width: 0, height: 0 });
 				return;
 			}
 			const smallest = FONT_SIZES[FONT_SIZES.length - 1];
 			const width = box.clientWidth;
+			const height = box.clientHeight - PAGER_HEIGHT;
 			Object.assign(inner.style, {
 				fontSize: `${smallest}px`,
-				height: `${box.clientHeight - PAGER_HEIGHT}px`,
+				height: `${height}px`,
 				columnWidth: `${width}px`,
 				columnGap: `${COLUMN_GAP}px`,
 			});
@@ -77,7 +81,7 @@ export function FitPages({
 				1,
 				Math.round((inner.scrollWidth + COLUMN_GAP) / (width + COLUMN_GAP)),
 			);
-			setLayout({ fontSize: smallest, pages, width });
+			setLayout({ fontSize: smallest, pages, width, height });
 			setPage((p) => Math.min(p, pages - 1));
 		}
 
@@ -103,7 +107,7 @@ export function FitPages({
 	const style: CSSProperties = paged
 		? {
 				fontSize: layout.fontSize,
-				height: `calc(100% - ${PAGER_HEIGHT}px)`,
+				height: layout.height,
 				columnWidth: layout.width,
 				columnGap: COLUMN_GAP,
 				columnFill: "auto",
@@ -114,6 +118,8 @@ export function FitPages({
 	return (
 		<div
 			ref={viewport}
+			// The pager sits in the bottom padding, so a content-sized box keeps its height.
+			style={paged ? { paddingBottom: PAGER_HEIGHT } : undefined}
 			className={cn("relative min-h-0 overflow-hidden", className)}
 		>
 			<div

@@ -94,7 +94,7 @@ export function Flashcard({
 	};
 	const editNote = () => {
 		setEditing(true);
-		setPane("problem");
+		setPane("answer");
 	};
 	const saveNote = async (text: string) => {
 		setNote(await onSaveNote(text));
@@ -160,7 +160,7 @@ export function Flashcard({
 			<div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
 				<Pane visible={pane === "problem"} className="px-4 py-3 sm:px-6">
 					{problem.description ? (
-						<FitPages arrowKeys className="statement min-h-0 flex-1">
+						<FitPages arrowKeys className="statement h-full">
 							<div
 								// biome-ignore lint/security/noDangerouslySetInnerHtml: statements are allowlist-sanitized at ingest (src/google/sanitize.py)
 								dangerouslySetInnerHTML={{ __html: problem.description }}
@@ -172,13 +172,6 @@ export function Flashcard({
 							here. Open it on LeetCode to read it.
 						</p>
 					)}
-					<MyAnswer
-						note={note}
-						editing={editing}
-						onSave={saveNote}
-						onCancel={() => setEditing(false)}
-						className="mt-3"
-					/>
 				</Pane>
 
 				<Pane
@@ -186,7 +179,7 @@ export function Flashcard({
 					className="gap-3 px-4 py-3 sm:px-6 lg:border-l lg:border-dashed"
 				>
 					{revealed ? (
-						<FitPages className="flex-1">
+						<FitPages>
 							<Answer
 								result={scoreTopics(guessed, problem.topics)}
 								approach={approach}
@@ -199,7 +192,6 @@ export function Flashcard({
 								topics={topics}
 								selected={guessed}
 								onToggle={toggle}
-								className="flex-1"
 							/>
 							{hintsShown > 0 && (
 								<ul className="space-y-1 rounded-md border border-warning/40 bg-warning-wash px-3 py-2 text-sm text-warning">
@@ -215,6 +207,12 @@ export function Flashcard({
 							)}
 						</>
 					)}
+					<MyAnswer
+						note={note}
+						editing={editing}
+						onSave={saveNote}
+						onCancel={() => setEditing(false)}
+					/>
 				</Pane>
 			</div>
 

@@ -65,7 +65,7 @@ export function TopicPicker({
 				/>
 			</div>
 			{/* Remount when the list changes so FitPages measures the new chips. */}
-			<FitPages key={`${needle}|${scope}|${visible.length}`} className="flex-1">
+			<FitPages key={`${needle}|${scope}|${visible.length}`}>
 				{/* Inline chips, not flex, so they flow across FitPages columns. */}
 				<ul aria-label="Topics">
 					{visible.map((topic) => {
