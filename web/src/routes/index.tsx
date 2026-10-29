@@ -1,151 +1,99 @@
 import {
-	ClientOnly,
 	createFileRoute,
 	Link,
 	stripSearchParams,
+	useRouter,
 } from "@tanstack/react-router";
 import { useState } from "react";
-import { z } from "zod";
-import { PageHeader } from "@/components/page-header";
-import { Quiz } from "@/components/quiz/quiz";
+import { type Answered, Flashcard } from "@/components/study/flashcard";
+import { StudyBar } from "@/components/study/study-bar";
 import { buttonVariants } from "@/components/ui/button";
-import { QUESTIONS, SECTION_IDS, SECTIONS, type Section } from "@/data/gha";
-import { masteryOf } from "@/lib/progress";
-import { useProgress } from "@/lib/progress-store";
-import { cn } from "@/lib/utils";
-
-const searchSchema = z.object({
-	section: z
-		.enum(["all", ...SECTION_IDS])
-		.default("all")
-		.catch("all"),
-	mode: z.enum(["all", "review"]).default("all").catch("all"),
-});
-
-type PracticeSearch = z.infer<typeof searchSchema>;
+import { STUDY_SETS } from "@/lib/scheduler";
+import { type StudySearch, studySearchSchema } from "@/lib/schemas";
+import { getDeck, recordAttempt } from "@/server/functions";
 
 export const Route = createFileRoute("/")({
-	validateSearch: searchSchema,
-	search: { middlewares: [stripSearchParams({ section: "all", mode: "all" })] },
-	head: () => ({ meta: [{ title: "Practice | GHA practice" }] }),
-	component: PracticePage,
+	validateSearch: studySearchSchema,
+	search: { middlewares: [stripSearchParams({ set: "smart" })] },
+	loaderDeps: ({ search }) => search,
+	loader: ({ deps }) => getDeck({ data: deps }),
+	component: Study,
 });
 
-function PracticePage() {
-	const { section, mode } = Route.useSearch();
+function Study() {
+	const { card, remaining, topics } = Route.useLoaderData();
+	const search = Route.useSearch();
+	const navigate = Route.useNavigate();
+	const router = useRouter();
+	const [history, setHistory] = useState<string[]>([]);
+	const [busy, setBusy] = useState(false);
+
+	const go = (next: Partial<StudySearch>) =>
+		navigate({ search: (prev) => ({ ...prev, ...next }) });
+
+	async function answer(answered: Answered) {
+		if (!card) return;
+		setBusy(true);
+		try {
+			await recordAttempt({ data: { slug: card.problem.slug, ...answered } });
+			setHistory((h) => [...h, card.problem.slug]);
+			// A pinned card (opened from the list, or reached with Back) returns to the queue.
+			if (search.slug) await go({ slug: undefined });
+			else await router.invalidate();
+		} finally {
+			setBusy(false);
+		}
+	}
+
+	function back() {
+		const previous = history.at(-1);
+		if (!previous) return;
+		setHistory((h) => h.slice(0, -1));
+		go({ slug: previous });
+	}
 
 	return (
-		<>
-			<PageHeader title="Practice">
-				{QUESTIONS.length} questions from candidate reports of the Google Hiring
-				Assessment. Pick an answer to see whether it's right and why.
-			</PageHeader>
-			<Filters section={section} mode={mode} />
-			<ClientOnly fallback={<QuizSkeleton />}>
-				<PracticeSession
-					key={`${section}:${mode}`}
-					section={section}
-					mode={mode}
+		<div className="flex h-full min-h-0 flex-col gap-3">
+			<StudyBar
+				search={search}
+				topics={topics}
+				remaining={remaining}
+				onChange={go}
+			/>
+			{card ? (
+				<Flashcard
+					key={`${card.problem.slug}:${card.state?.lastAt ?? 0}`}
+					card={card}
+					topics={topics}
+					busy={busy}
+					canGoBack={history.length > 0}
+					onBack={back}
+					onAnswer={answer}
 				/>
-			</ClientOnly>
-		</>
-	);
-}
-
-function Filters({ section, mode }: PracticeSearch) {
-	const count = (s: "all" | Section) =>
-		s === "all"
-			? QUESTIONS.length
-			: QUESTIONS.filter((q) => q.section === s).length;
-
-	return (
-		<div className="mb-8 space-y-3">
-			<nav aria-label="Sections" className="flex flex-wrap gap-2">
-				{(["all", ...SECTION_IDS] as const).map((s) => (
-					<Link
-						key={s}
-						to="/"
-						search={(prev) => ({ ...prev, section: s })}
-						aria-current={s === section ? "page" : undefined}
-						className={cn(
-							buttonVariants({
-								variant: s === section ? "default" : "outline",
-								size: "sm",
-							}),
-							"rounded-full",
-						)}
-					>
-						{s === "all" ? "All" : SECTIONS[s].name}
-						<span className="tabular-nums opacity-70">{count(s)}</span>
-					</Link>
-				))}
-			</nav>
-			<nav aria-label="Question set" className="flex flex-wrap gap-1">
-				{(
-					[
-						["all", "All questions"],
-						["review", "Not yet mastered"],
-					] as const
-				).map(([m, label]) => (
-					<Link
-						key={m}
-						to="/"
-						search={(prev) => ({ ...prev, mode: m })}
-						aria-current={m === mode ? "page" : undefined}
-						className={cn(
-							buttonVariants({ variant: "ghost", size: "sm" }),
-							m === mode ? "bg-muted text-foreground" : "text-muted-foreground",
-						)}
-					>
-						{label}
-					</Link>
-				))}
-			</nav>
+			) : (
+				<EmptySet setLabel={STUDY_SETS[search.set]} />
+			)}
 		</div>
 	);
 }
 
-function PracticeSession({ section, mode }: PracticeSearch) {
-	const progress = useProgress();
-	// Freeze the question set for this run so mastering a question mid-run doesn't remove it.
-	const [questions] = useState(() =>
-		QUESTIONS.filter(
-			(q) =>
-				(section === "all" || q.section === section) &&
-				(mode === "all" || masteryOf(progress.attempts[q.id]) !== "mastered"),
-		),
-	);
-
-	if (questions.length === 0) {
-		return (
-			<div className="rounded-xl border border-dashed p-8 text-center">
-				<p className="text-lg font-semibold">Everything here is mastered.</p>
-				<p className="mt-1 text-muted-foreground">
-					Practice the full set to keep it fresh, or pick another section.
-				</p>
-				<Link
-					to="/"
-					search={{ section, mode: "all" }}
-					className={cn(buttonVariants(), "mt-4")}
-				>
-					Practice all questions
-				</Link>
-			</div>
-		);
-	}
-
-	return <Quiz questions={questions} />;
-}
-
-function QuizSkeleton() {
+function EmptySet({ setLabel }: { setLabel: string }) {
 	return (
-		<div aria-hidden className="animate-pulse space-y-6">
-			<div className="h-1.5 rounded-full bg-muted" />
-			<div className="h-20 rounded-xl bg-muted" />
-			<div className="grid gap-2 sm:grid-cols-5">
-				{[0, 1, 2, 3, 4].map((i) => (
-					<div key={i} className="h-24 rounded-xl bg-muted" />
-				))}
+		<div className="rounded-sm border border-dashed bg-card/60 px-6 py-14 text-center">
+			<h1 className="text-2xl font-semibold tracking-tight">
+				Nothing left in “{setLabel}”
+			</h1>
+			<p className="mx-auto mt-2 max-w-md text-muted-foreground">
+				Every card in this set is scheduled for later. Pick another set, or
+				study all problems to work ahead.
+			</p>
+			<div className="mt-6 flex justify-center gap-2">
+				<Link to="/" search={{ set: "all" }} className={buttonVariants()}>
+					Study all problems
+				</Link>
+				<Link to="/progress" className={buttonVariants({ variant: "outline" })}>
+					See progress
+				</Link>
 			</div>
 		</div>
 	);

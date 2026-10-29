@@ -1,60 +1,95 @@
 # google
 
-A Python package (uv, Python 3.15) and a TanStack Start web app (bun) in one repo.
+Flashcards for the 793 LeetCode problems Google asked in the last six months. Read the problem,
+guess its topics, open a hint if you are stuck, then check a short solution approach written in
+ASD-STE100 Simplified Technical English. Every page fits one screen: long statements shrink, then
+split into pages. Search finds any problem by LeetCode number, title, topic or statement text.
+Progress lives in SQLite; a background scorer tracks how ready you are.
 
 ```
 .
-├── pyproject.toml   # Python project, ruff + ty config
-├── src/google/      # Python package (`uv run google` / `python -m google`)
-├── package.json     # bun workspace root, Biome
-├── biome.json       # JS/TS lint + format
-├── web/             # TanStack Start app (React, Vite, Tailwind, shadcn/ui)
-└── .zed/            # Zed settings, debug configs, tasks
+├── pyproject.toml       # Python tools (uv, Python 3.15): data ingest + approach lint
+├── src/google/          # `uv run google ingest | check`
+├── data/
+│   ├── problems.json    # built by `uv run google ingest` (list, statements, topics)
+│   ├── approaches.json  # one ASD-STE100 approach and hint per problem
+│   ├── approach-reviews.json  # review trail for every approach
+│   └── progress.db      # your progress (SQLite, git-ignored)
+├── web/                 # TanStack Start app (React, Vite, Tailwind, shadcn/ui)
+├── Dockerfile, docker-compose.yml, Caddyfile
+└── .zed/                # Zed settings, debug configs, tasks
 ```
 
-## Setup
+## Run it
 
 ```bash
-uv sync        # creates .venv with Python 3.15, ruff, ty, debugpy
-bun install    # installs web/ deps and Biome
+docker compose up -d --build     # then open http://google.localhost
 ```
 
-## Python
+Caddy serves the app at `http://google.localhost` on port 80 (plain HTTP, so there is no
+certificate to trust). Chrome, Firefox and curl resolve `*.localhost` to 127.0.0.1 by themselves;
+Safari needs `127.0.0.1 google.localhost` in `/etc/hosts`. If port 80 is taken, run with
+`HTTP_PORT=8080` and open `http://google.localhost:8080`. Set `TZ` (for example
+`TZ=America/Los_Angeles`) so day streaks roll over at your midnight. Progress persists in the
+`progress` volume.
+
+## Develop
 
 ```bash
-uv run google                                  # run
-uv run ruff check && uv run ruff format        # lint + format
-uv run ty check                                # typecheck
+uv sync && bun install
+bun run dev          # http://localhost:3000, progress in data/progress.db
+bun run check        # Biome lint + format check (bun run fix to apply)
+bun run typecheck    # tsc
+bun run test         # Vitest unit tests: scheduler, scorer, search
+bun run test:e2e     # builds, starts the server on a throwaway DB, tests the HTTP API
+uv run ruff check && uv run ruff format --check && uv run ty check
 ```
 
-## Web
+## How it works
 
-```bash
-bun run dev        # http://localhost:3000
-bun run build
-bun run check      # Biome lint + format check (bun run fix to apply)
-bun run typecheck  # tsc
-bun run test       # Vitest unit tests
-```
+- **Data** (`src/google/ingest.py`): the problem list, frequency and topics come from
+  [liquidslr/leetcode-company-wise-problems](https://github.com/liquidslr/leetcode-company-wise-problems)
+  (`Google/3. Six Months.csv`). Statements come from [doocs/leetcode](https://github.com/doocs/leetcode)
+  (CC BY-SA 4.0) and are allowlist-sanitized. Premium statements are left out.
+- **Approaches and hints** (`data/approaches.json`): Claude agents wrote one approach and one hint
+  per problem. A second set of Claude agents reviewed each approach against the statement and the
+  doocs reference solution. Codex CLI gave an independent second opinion on every approach and
+  on 550 of the 793 hints (it ran out of credits; a separate strict Claude reviewer covered the
+  other 243 hints). A Claude pass adjudicated every disagreement, and Codex rechecked the approach fixes
+  (`data/approach-reviews.json` keeps the trail). `uv run google check` enforces the mechanical
+  rules: ASD-STE100 sentence limits, no unapproved words, one big-O each, and hints that never
+  name the problem's technique tags.
+- **Search** (`web/src/lib/search.ts`): LeetCode number (`1`, `#1`, `lc 1`), title words and
+  prefixes, acronyms (`lis`), one- or two-letter typos, difficulty, topics and statement text.
+  Every word must match; ties go to the problem Google asks more often. Press `/` or ⌘K anywhere.
+- **Scheduling** (`web/src/lib/scheduler.ts`): Leitner boxes replayed from the attempt log.
+  *Visit again* returns a card in 10 minutes and puts it on the visit-again list. *Got it* moves it
+  up one box (1, 3, 7, 16, 35, 90 days). *Visit less often* jumps two boxes and doubles the wait.
+  *Skip* defers a card for an hour without grading it.
+- **Scoring** (`web/src/lib/scorer.ts`, `web/src/server/scorer.ts`): each graded card scores half
+  topic F1 (less a quarter for each hint opened), half your grade. Mastery fades with time since the last review. Readiness is mastery
+  weighted by Google frequency. The server recomputes it after every attempt and every 15 minutes,
+  and stores one point per day for the trend line.
+- **Backend** (`web/src/server/`): plain service functions over `node:sqlite`, exposed twice as
+  thin wrappers: TanStack Start server functions for the UI and a JSON API for scripts. The
+  attempt log is the only state: card state, lists and scores are all derived from it, so
+  clearing progress is a delete.
 
-The web app is a practice quiz for the Google Hiring Assessment, built with shadcn/ui
-(Base UI primitives). Add components with `cd web && bunx shadcn@latest add <name>`;
-they land in `web/src/components/ui/`, which Biome leaves alone.
+## API
 
-- `web/src/data/`: question bank and sources
-- `web/src/lib/`: pure quiz and progress logic (unit tested)
-- `web/src/hooks/`: quiz state and keyboard shortcuts
-- `web/src/components/`: navbar, theme, quiz UI
-- `web/src/routes/`: Practice (`/`), Progress (`/progress`), About (`/about`)
+| Method and path | Does |
+| --- | --- |
+| `GET /api/search?q=two+sum&limit=10` | Ranked problems for a free-text query |
+| `GET /api/problems` | Every problem with its progress (no topics) |
+| `GET /api/problems/:slug` | One full card: statement, topics, approach, hints, state |
+| `GET /api/deck?set=again&topic=Graph+Theory&difficulty=Hard` | The next card in a study set |
+| `POST /api/attempts` `{slug, grade, guessed, hints}` | Grade (`again`, `good`, `less`) or `skip` a card |
+| `DELETE /api/progress?slug=two-sum` or `?all=true` | Clear one problem, or everything |
+| `GET /api/report` | Readiness, coverage, accuracy, streak, weak topics, daily trend |
 
-Progress is stored in the browser's localStorage.
+Bad input returns 400 with the validation issues; an unknown problem returns 404.
 
-## Zed
+## Keys
 
-Open the repo root in Zed. Project settings in `.zed/` give you:
-
-- **Python**: ty (types) + Ruff (lint, format on save, import sorting), from `.venv`.
-- **Debugging**: F4 → "Python: google (module)" or "Python: current file" (debugpy from `.venv`).
-- **TS/TSX**: vtsls + Biome (format on save, fix-all, import sorting). Requires the Biome extension
-  (`zed: extensions` → Biome).
-- **Tasks**: `task: spawn` → web dev server, checks, etc.
+`Enter` show answer, `H` hint, `S` skip, `1` visit again, `2` got it, `3` visit less often,
+`B` back, `←`/`→` statement pages, `/` or ⌘K search.

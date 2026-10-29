@@ -3,7 +3,7 @@ import { createContext, type ReactNode, use, useEffect, useState } from "react";
 
 export type Theme = "light" | "dark" | "system";
 
-const STORAGE_KEY = "gha-practice:theme";
+const STORAGE_KEY = "leetcode-cards:theme";
 
 // Runs before first paint so a stored dark theme never flashes light.
 const themeScript = `(() => {

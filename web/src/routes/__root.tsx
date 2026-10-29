@@ -10,18 +10,20 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { buttonVariants } from "@/components/ui/button";
+import { getReadiness } from "@/server/functions";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
+	loader: () => getReadiness(),
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
 			{ name: "viewport", content: "width=device-width, initial-scale=1" },
-			{ title: "GHA practice" },
+			{ title: "Google LeetCode cards" },
 			{
 				name: "description",
 				content:
-					"Practice questions for the Google Hiring Assessment, built from candidate reports.",
+					"Flashcards for the LeetCode problems Google asked in the last six months.",
 			},
 		],
 		links: [{ rel: "stylesheet", href: appCss }],
@@ -31,6 +33,7 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: ReactNode }) {
+	const data = Route.useLoaderData();
 	return (
 		// The theme script sets the `dark` class before hydration.
 		<html lang="en" suppressHydrationWarning>
@@ -39,8 +42,9 @@ function RootDocument({ children }: { children: ReactNode }) {
 			</head>
 			<body>
 				<ThemeProvider>
-					<SiteHeader />
-					<main className="mx-auto max-w-3xl px-4 pt-8 pb-24 sm:px-6 sm:pt-12">
+					<SiteHeader readiness={data ?? 0} />
+					{/* Every page fits the screen below the 3rem header; overflow scrolls only on very small screens. */}
+					<main className="mx-auto flex h-[calc(100dvh-3rem)] w-full max-w-7xl flex-col overflow-y-auto px-3 py-3 sm:px-5">
 						{children}
 					</main>
 				</ThemeProvider>
@@ -65,7 +69,7 @@ function NotFound() {
 			<h1 className="text-3xl font-semibold tracking-tight">Page not found</h1>
 			<p className="text-muted-foreground">That page doesn't exist.</p>
 			<Link to="/" className={buttonVariants()}>
-				Go to practice
+				Go to study
 			</Link>
 		</div>
 	);

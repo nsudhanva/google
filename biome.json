@@ -9,6 +9,8 @@
 		"ignoreUnknown": false,
 		"includes": [
 			"web/src/**",
+			"web/e2e/**",
+			"web/vitest*.ts",
 			"web/vite.config.ts",
 			"!web/src/routeTree.gen.ts",
 			"!web/src/styles.css",

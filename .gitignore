@@ -41,3 +41,8 @@ client_secret*.json
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Flashcard data: fetched sources and the progress database
+data/.cache/
+data/*.db
+data/*.db-*

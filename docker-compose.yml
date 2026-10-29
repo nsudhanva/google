@@ -1,0 +1,26 @@
+# `docker compose up -d --build`, then open http://google.localhost
+# Set HTTP_PORT if something else already owns port 80 (then use http://google.localhost:$HTTP_PORT).
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    environment:
+      # Day boundaries for streaks and the daily trend, such as America/Los_Angeles.
+      TZ: ${TZ:-UTC}
+    volumes:
+      - progress:/state
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${HTTP_PORT:-80}:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+    depends_on:
+      - web
+
+volumes:
+  progress:
+  caddy-data:

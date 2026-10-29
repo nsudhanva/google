@@ -11,7 +11,11 @@
     "typecheck": "bun --filter web typecheck",
     "check": "biome check",
     "fix": "biome check --write",
-    "test": "bun --filter web test"
+    "test": "bun --filter web test",
+    "start": "bun --filter web start",
+    "up": "docker compose up -d --build",
+    "down": "docker compose down",
+    "test:e2e": "bun --filter web test:e2e"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.5"

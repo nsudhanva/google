@@ -1,78 +1,109 @@
 import { createFileRoute } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { PageHeader } from "@/components/page-header";
-import { Separator } from "@/components/ui/separator";
-import { SOURCES } from "@/data/sources";
+import { Kbd } from "@/components/ui/kbd";
 
 export const Route = createFileRoute("/about")({
-	head: () => ({ meta: [{ title: "About | GHA practice" }] }),
-	component: AboutPage,
+	head: () => ({ meta: [{ title: "About | Google LeetCode cards" }] }),
+	component: About,
 });
 
-function AboutPage() {
+const SHORTCUTS: [string, string][] = [
+	["Enter", "Show the answer"],
+	["H", "Show the hint (costs a quarter of the topic score)"],
+	["S", "Skip the card for an hour"],
+	["1", "Visit again: back in 10 minutes"],
+	["2", "Got it: next box (1, 3, 7, 16, 35, 90 days)"],
+	["3", "Visit less often: two boxes up, double wait"],
+	["B", "Back to the previous card"],
+	["← →", "Turn the pages of a long statement"],
+	["/ or ⌘K", "Search by number, title, topic or text"],
+];
+
+function Section({ title, children }: { title: string; children: ReactNode }) {
 	return (
-		<article className="max-w-prose">
-			<PageHeader title="About">
-				Practice for the Google Hiring Assessment, a non-coding workstyle test
-				given before interviews.
-			</PageHeader>
-
-			<div className="space-y-4 leading-relaxed">
-				<h2 className="text-xl font-semibold tracking-tight">
-					Where the questions come from
-				</h2>
-				<p>
-					Real GHA items are rarely posted verbatim. This bank combines the few
-					quoted items, the examples passers gave, prep-site scenarios and the
-					documented format. Every question shows its source after you answer,
-					so you can tell a quoted item from a reconstruction.
-				</p>
-				<p>
-					For many scenarios only the Most and Least answers were reported. The
-					other options were written to match the reported format and are marked
-					as reconstructed.
-				</p>
-
-				<h2 className="pt-4 text-xl font-semibold tracking-tight">
-					What the answers are based on
-				</h2>
-				<ul className="list-disc space-y-1.5 pl-5">
-					<li>
-						Pick one persona before you start and keep it across reshuffled
-						triples.
-					</li>
-					<li>
-						Answer statements at the extremes, and watch for absolutes and
-						reworded twins.
-					</li>
-					<li>
-						In scenarios, the Most Likely pick follows policy, even at the cost
-						of a deadline. The Least Likely pick is the shortcut that comes with
-						an excuse.
-					</li>
-				</ul>
-				<p className="text-muted-foreground">
-					That's the consensus from passer reports, not a guarantee. Some
-					candidates failed following it.
-				</p>
+		<section className="space-y-2">
+			<h2 className="font-semibold tracking-tight">{title}</h2>
+			<div className="space-y-2 text-sm text-muted-foreground [&_a]:text-primary [&_a]:underline [&_code]:font-mono [&_strong]:text-foreground">
+				{children}
 			</div>
+		</section>
+	);
+}
 
-			<Separator className="my-10" />
-
-			<h2 className="mb-4 text-xl font-semibold tracking-tight">Sources</h2>
-			<ol className="list-decimal space-y-2 pl-5 text-sm">
-				{SOURCES.map((s) => (
-					<li key={s.url}>
-						<a
-							href={s.url}
-							target="_blank"
-							rel="noreferrer"
-							className="underline-offset-4 hover:underline"
-						>
-							{s.title}
-						</a>
-					</li>
-				))}
-			</ol>
-		</article>
+function About() {
+	return (
+		<div className="flex h-full min-h-0 flex-col">
+			<PageHeader title="About">
+				Flashcards for the LeetCode problems Google asked in the last six
+				months. Read the problem, name its topics, then check the approach.
+			</PageHeader>
+			<div className="grid gap-x-10 gap-y-6 rounded-sm bg-card p-5 shadow-[0_1px_0_var(--border)] lg:grid-cols-2">
+				<div className="space-y-6">
+					<Section title="How a card works">
+						<p>
+							Pick the topics you think the problem uses, open the hint if you
+							are stuck, then show the answer. The card scores your guess
+							against LeetCode's tags and shows a short approach. Grade yourself{" "}
+							<strong>Visit again</strong>, <strong>Got it</strong> or{" "}
+							<strong>Visit less often</strong>; the grade decides when the card
+							returns and which list it joins.
+						</p>
+						<dl className="grid grid-cols-[auto_1fr] items-center gap-x-3 gap-y-1.5">
+							{SHORTCUTS.map(([key, action]) => (
+								<div key={key} className="contents">
+									<dt>
+										<Kbd>{key}</Kbd>
+									</dt>
+									<dd>{action}</dd>
+								</div>
+							))}
+						</dl>
+					</Section>
+					<Section title="Scoring">
+						<p>
+							Each graded card scores half its topic guess (F1 against the tags,
+							less a quarter per hint) and half your grade. Mastery fades with
+							time since the last review. <strong>Readiness</strong> weights
+							mastery by how often Google asks each problem.
+						</p>
+					</Section>
+				</div>
+				<div className="space-y-6">
+					<Section title="Approaches and hints">
+						<p>
+							Claude wrote every approach and hint in ASD-STE100 Simplified
+							Technical English. Claude agents reviewed each approach against
+							the problem and the doocs/leetcode reference solution. Codex CLI
+							gave an independent second opinion on every approach and most
+							hints; a separate Claude reviewer covered the hints Codex could
+							not reach. Every disagreement was settled by hand. Hints never
+							name the technique you are guessing. They can still be wrong;
+							check the LeetCode editorial when something looks off.
+						</p>
+					</Section>
+					<Section title="API">
+						<p>
+							The app serves JSON under <code>/api</code>:{" "}
+							<code>GET /api/search?q=</code>, <code>GET /api/problems</code>,{" "}
+							<code>GET /api/problems/:slug</code>, <code>GET /api/deck</code>,{" "}
+							<code>POST /api/attempts</code>, <code>DELETE /api/progress</code>{" "}
+							and <code>GET /api/report</code>.
+						</p>
+					</Section>
+					<Section title="Sources">
+						<p>
+							Problem list, frequency and topics:{" "}
+							<a href="https://github.com/liquidslr/leetcode-company-wise-problems">
+								liquidslr/leetcode-company-wise-problems
+							</a>{" "}
+							(Google, six months). Statements:{" "}
+							<a href="https://github.com/doocs/leetcode">doocs/leetcode</a>, CC
+							BY-SA 4.0. Premium statements are not included.
+						</p>
+					</Section>
+				</div>
+			</div>
+		</div>
 	);
 }

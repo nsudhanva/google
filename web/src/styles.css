@@ -2,61 +2,78 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/atkinson-hyperlegible-next";
+@import "@fontsource-variable/atkinson-hyperlegible-mono";
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * The study card is an index card: a red rule under the heading, blue rules on the
+ * answer side. The rest of the interface stays quiet slate so the card carries the page.
+ */
 :root {
-	--radius: 0.75rem;
+	--radius: 0.625rem;
 
-	--background: #f3f5f8;
-	--foreground: #17202b;
+	--background: #e6e9ee;
+	--foreground: #18212f;
 	--card: #ffffff;
-	--card-foreground: #17202b;
+	--card-foreground: #18212f;
 	--popover: #ffffff;
-	--popover-foreground: #17202b;
-	--primary: #17202b;
-	--primary-foreground: #f3f5f8;
-	--secondary: #e6eaf0;
-	--secondary-foreground: #17202b;
-	--muted: #e6eaf0;
-	--muted-foreground: #5a6576;
-	--accent: #e6eaf0;
-	--accent-foreground: #17202b;
+	--popover-foreground: #18212f;
+	--primary: #2b3f9e;
+	--primary-foreground: #f6f7fb;
+	--secondary: #d9dee7;
+	--secondary-foreground: #18212f;
+	--muted: #dde2ea;
+	--muted-foreground: #556072;
+	--accent: #dde2ea;
+	--accent-foreground: #18212f;
 	--destructive: #c2362b;
 	--destructive-wash: #fbe7e4;
-	--success: #18794e;
-	--success-wash: #e3f4ea;
-	--border: #d5dbe3;
-	--input: #d5dbe3;
-	--ring: #2f45c5;
+	--success: #17784d;
+	--success-wash: #e1f3e9;
+	--warning: #a35f00;
+	--warning-wash: #fbefdc;
+	--border: #cdd4de;
+	--input: #cdd4de;
+	--ring: #2b3f9e;
+
+	--card-rule: #cddbf0;
+	--card-margin: #dc4f64;
+	--ruled: 1.7em;
 }
 
 .dark {
-	--background: #12161c;
-	--foreground: #e7ecf2;
-	--card: #1a2028;
-	--card-foreground: #e7ecf2;
-	--popover: #1a2028;
-	--popover-foreground: #e7ecf2;
-	--primary: #e7ecf2;
-	--primary-foreground: #12161c;
-	--secondary: #232a34;
-	--secondary-foreground: #e7ecf2;
-	--muted: #232a34;
-	--muted-foreground: #9aa5b4;
-	--accent: #232a34;
-	--accent-foreground: #e7ecf2;
+	--background: #0e131a;
+	--foreground: #e6ebf2;
+	--card: #171e28;
+	--card-foreground: #e6ebf2;
+	--popover: #1b2330;
+	--popover-foreground: #e6ebf2;
+	--primary: #a4b4ff;
+	--primary-foreground: #0e131a;
+	--secondary: #222b37;
+	--secondary-foreground: #e6ebf2;
+	--muted: #222b37;
+	--muted-foreground: #98a3b3;
+	--accent: #222b37;
+	--accent-foreground: #e6ebf2;
 	--destructive: #f2766b;
 	--destructive-wash: #3a1916;
 	--success: #4cc38a;
 	--success-wash: #10301f;
-	--border: #2c3540;
-	--input: #2c3540;
-	--ring: #8e9cff;
+	--warning: #f0a84a;
+	--warning-wash: #3a2810;
+	--border: #2a3441;
+	--input: #2a3441;
+	--ring: #a4b4ff;
+
+	--card-rule: #223149;
+	--card-margin: #e0607a;
 }
 
 @theme inline {
 	--font-sans: "Atkinson Hyperlegible Next Variable", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "Atkinson Hyperlegible Mono Variable", ui-monospace, monospace;
 
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
@@ -76,9 +93,13 @@
 	--color-destructive-wash: var(--destructive-wash);
 	--color-success: var(--success);
 	--color-success-wash: var(--success-wash);
+	--color-warning: var(--warning);
+	--color-warning-wash: var(--warning-wash);
 	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
+	--color-card-rule: var(--card-rule);
+	--color-card-margin: var(--card-margin);
 
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
@@ -98,5 +119,86 @@
 	}
 	body {
 		@apply bg-background font-sans text-foreground antialiased;
+	}
+}
+
+@layer components {
+	/* The card's red header rule. */
+	.card-margin {
+		border-bottom: 2px solid var(--card-margin);
+	}
+
+	/* Blue rules, one per line of text set at --ruled. */
+	.card-ruled {
+		line-height: var(--ruled);
+		background-image: linear-gradient(
+			to bottom,
+			transparent calc(var(--ruled) - 1px),
+			var(--card-rule) calc(var(--ruled) - 1px)
+		);
+		background-size: 100% var(--ruled);
+		background-position: 0 -1px;
+	}
+
+	/* Problem statements arrive as sanitized LeetCode HTML. Sizes are relative so FitPages can scale them. */
+	.statement {
+		line-height: 1.55;
+	}
+	.statement p {
+		margin-block: 0.6em;
+	}
+	.statement pre {
+		@apply rounded-md bg-muted font-mono whitespace-pre-wrap;
+		overflow-wrap: anywhere;
+		margin-block: 0.6em;
+		padding: 0.5em 0.85em;
+		font-size: 0.85em;
+		line-height: 1.5;
+	}
+	.statement code {
+		@apply rounded bg-muted font-mono;
+		padding: 0.05em 0.25em;
+		font-size: 0.88em;
+	}
+	.statement pre code {
+		@apply bg-transparent p-0;
+	}
+	.statement ul,
+	.statement ol {
+		margin-block: 0.6em;
+		padding-left: 1.4em;
+	}
+	.statement ul {
+		@apply list-disc;
+	}
+	.statement ol {
+		@apply list-decimal;
+	}
+	.statement img {
+		@apply h-auto max-w-full rounded-md bg-white;
+		max-height: 11rem;
+		margin-block: 0.6em;
+	}
+	.statement table {
+		@apply border-collapse;
+		margin-block: 0.6em;
+	}
+	.statement th,
+	.statement td {
+		@apply border;
+		padding: 0.2em 0.5em;
+	}
+	.statement strong {
+		@apply font-semibold;
+	}
+	/* When FitPages splits a statement into pages, keep blocks whole and labels with them. */
+	.statement pre,
+	.statement img,
+	.statement table,
+	.statement li {
+		break-inside: avoid;
+	}
+	.statement p:has(+ pre, + ul, + img) {
+		break-after: avoid;
 	}
 }
