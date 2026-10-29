@@ -5,6 +5,16 @@ name: images
 on:
   push:
     branches: [main]
+    # Only changes that end up in an image trigger a build (and, through the server timer, a deploy).
+    paths:
+      - Dockerfile
+      - Caddyfile
+      - package.json
+      - bun.lock
+      - web/**
+      - data/problems.json
+      - data/approaches.json
+      - .github/workflows/images.yml
   workflow_dispatch:
 
 permissions:
