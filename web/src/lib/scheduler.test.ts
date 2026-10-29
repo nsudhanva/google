@@ -56,4 +56,29 @@ describe("scheduler", () => {
 		]);
 		expect(slugs({ set: "missed" })).toEqual(["p1"]);
 	});
+
+	it("limits a period to the problems asked in it, in that period's order", () => {
+		const problems = [
+			problem(1),
+			problem(2, {
+				asked: {
+					"6m": { rank: 2, frequency: 9 },
+					"30d": { rank: 2, frequency: 50 },
+				},
+			}),
+			problem(3, {
+				asked: {
+					"6m": { rank: 3, frequency: 8 },
+					"30d": { rank: 1, frequency: 90 },
+				},
+			}),
+		];
+		const order = queue(
+			problems,
+			new Map(),
+			{ set: "smart", period: "30d" },
+			T0,
+		);
+		expect(order.map((p) => p.slug)).toEqual(["p3", "p2"]);
+	});
 });

@@ -47,6 +47,9 @@ describe("HTTP API, end to end", () => {
 		expect(deck.body.card.problem.slug).toBe("two-sum");
 		expect(deck.body.remaining).toBe(793);
 		expect(deck.body.topics.length).toBeGreaterThan(100);
+		const recent = await api("/api/deck?period=30d");
+		expect(recent.body.remaining).toBe(154);
+		expect(recent.body.card.problem.asked["30d"].rank).toBe(1);
 		const stale = await api("/api/deck?slug=no-longer-listed");
 		expect(stale.body.card.problem.slug).toBe("two-sum");
 	});

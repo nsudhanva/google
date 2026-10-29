@@ -99,7 +99,7 @@ export function resetProgress(slug?: string) {
 export interface ProblemRow
 	extends Pick<
 		Problem,
-		"rank" | "id" | "slug" | "title" | "difficulty" | "frequency" | "premium"
+		"id" | "slug" | "title" | "difficulty" | "asked" | "premium"
 	> {
 	status: CardStatus;
 	list: CardList | null;
@@ -116,12 +116,11 @@ export function listProblems(): ProblemRow[] {
 	return getContent().problems.map((p) => {
 		const state = states.get(p.slug);
 		return {
-			rank: p.rank,
 			id: p.id,
 			slug: p.slug,
 			title: p.title,
 			difficulty: p.difficulty,
-			frequency: p.frequency,
+			asked: p.asked,
 			premium: p.premium,
 			status: cardStatus(state, now),
 			list: state?.list ?? null,

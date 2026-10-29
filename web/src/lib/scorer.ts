@@ -60,7 +60,7 @@ function retention(state: CardState, now: number): number {
 
 export interface ScoreReport {
 	computedAt: number;
-	/** Frequency-weighted mastery over the whole list, 0..1. */
+	/** Mastery weighted by 6-month Google frequency, 0..1. */
 	readiness: number;
 	/** Share of problems graded at least once. */
 	coverage: number;
@@ -153,7 +153,7 @@ export function scoreReport(
 	const states = cardStates(attempts);
 	const mastery = masteries(attempts, states, now);
 	const graded = attempts.filter((a) => a.grade !== "skip");
-	const weight = problems.reduce((sum, p) => sum + p.frequency, 0);
+	const weight = problems.reduce((sum, p) => sum + p.asked["6m"].frequency, 0);
 
 	const counts = { due: 0, new: 0, again: 0, less: 0 };
 	for (const p of problems) {
@@ -167,7 +167,8 @@ export function scoreReport(
 		computedAt: now,
 		readiness: weight
 			? problems.reduce(
-					(sum, p) => sum + p.frequency * (mastery.get(p.slug) ?? 0),
+					(sum, p) =>
+						sum + p.asked["6m"].frequency * (mastery.get(p.slug) ?? 0),
 					0,
 				) / weight
 			: 0,

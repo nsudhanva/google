@@ -15,7 +15,7 @@ const SHORTCUTS: [string, string][] = [
 	["1", "Visit again: back in 10 minutes"],
 	["2", "Got it: next box (1, 3, 7, 16, 35, 90 days)"],
 	["3", "Visit less often: two boxes up, double wait"],
-	["B", "Back to the previous card"],
+	["B", "Back: hide the answer, or go to the previous card"],
 	["← →", "Turn the pages of a long statement"],
 	["/ or ⌘K", "Search by number, title, topic or text"],
 ];
@@ -72,14 +72,14 @@ function About() {
 				<div className="space-y-6">
 					<Section title="Approaches and hints">
 						<p>
-							Claude wrote every approach and hint in ASD-STE100 Simplified
-							Technical English. Claude agents reviewed each approach against
-							the problem and the doocs/leetcode reference solution. Codex CLI
-							gave an independent second opinion on every approach and most
-							hints; a separate Claude reviewer covered the hints Codex could
-							not reach. Every disagreement was settled by hand. Hints never
-							name the technique you are guessing. They can still be wrong;
-							check the LeetCode editorial when something looks off.
+							Claude wrote every approach and hint. Claude agents reviewed each
+							approach against the problem and the doocs/leetcode reference
+							solution. Codex CLI gave an independent second opinion on every
+							approach and most hints; a separate Claude reviewer covered the
+							hints Codex could not reach. Every disagreement was settled by
+							hand. Hints never name the technique you are guessing. They can
+							still be wrong; check the LeetCode editorial when something looks
+							off.
 						</p>
 					</Section>
 					<Section title="API">

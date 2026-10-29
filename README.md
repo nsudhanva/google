@@ -1,6 +1,7 @@
 # google
 
-Flashcards for the 793 LeetCode problems Google asked in the last six months. Read the problem,
+Flashcards for the 793 LeetCode problems Google asked in the last six months, with filters for
+the 452 asked in the last 3 months and the 154 asked in the last 30 days. Read the problem,
 guess its topics, open a hint if you are stuck, then check a short solution approach written in
 ASD-STE100 Simplified Technical English. Every page fits one screen: long statements shrink, then
 split into pages. Search finds any problem by LeetCode number, title, topic or statement text.
@@ -11,7 +12,7 @@ Progress lives in SQLite; a background scorer tracks how ready you are.
 ├── pyproject.toml       # Python tools (uv, Python 3.15): data ingest + approach lint
 ├── src/google/          # `uv run google ingest | check`
 ├── data/
-│   ├── problems.json    # built by `uv run google ingest` (list, statements, topics)
+│   ├── problems.json    # built by `uv run google ingest` (lists, ranks, frequency, statements)
 │   ├── approaches.json  # one ASD-STE100 approach and hint per problem
 │   ├── approach-reviews.json  # review trail for every approach
 │   └── progress.db      # your progress (SQLite, git-ignored)
@@ -70,9 +71,10 @@ uv run ruff check && uv run ruff format --check && uv run ty check
 
 ## How it works
 
-- **Data** (`src/google/ingest.py`): the problem list, frequency and topics come from
+- **Data** (`src/google/ingest.py`): the problem lists, ranks, frequency and topics come from
   [liquidslr/leetcode-company-wise-problems](https://github.com/liquidslr/leetcode-company-wise-problems)
-  (`Google/3. Six Months.csv`). Statements come from [doocs/leetcode](https://github.com/doocs/leetcode)
+  (Google: 30 days, 3 months, 6 months). Each problem stores its rank and frequency for every
+  period it appears in; the study page and the Problems page filter and sort by period. Statements come from [doocs/leetcode](https://github.com/doocs/leetcode)
   (CC BY-SA 4.0) and are allowlist-sanitized. Premium statements are left out.
 - **Approaches and hints** (`data/approaches.json`): Claude agents wrote one approach and one hint
   per problem. A second set of Claude agents reviewed each approach against the statement and the
@@ -105,7 +107,7 @@ uv run ruff check && uv run ruff format --check && uv run ty check
 | `GET /api/search?q=two+sum&limit=10` | Ranked problems for a free-text query |
 | `GET /api/problems` | Every problem with its progress (no topics) |
 | `GET /api/problems/:slug` | One full card: statement, topics, approach, hints, state |
-| `GET /api/deck?set=again&topic=Graph+Theory&difficulty=Hard` | The next card in a study set |
+| `GET /api/deck?period=30d&set=again&topic=Graph+Theory&difficulty=Hard` | The next card in a study set |
 | `POST /api/attempts` `{slug, grade, guessed, hints}` | Grade (`again`, `good`, `less`) or `skip` a card |
 | `DELETE /api/progress?slug=two-sum` or `?all=true` | Clear one problem, or everything |
 | `GET /api/report` | Readiness, coverage, accuracy, streak, weak topics, daily trend |
@@ -115,4 +117,5 @@ Bad input returns 400 with the validation issues; an unknown problem returns 404
 ## Keys
 
 `Enter` show answer, `H` hint, `S` skip, `1` visit again, `2` got it, `3` visit less often,
-`B` back, `←`/`→` statement pages, `/` or ⌘K search.
+`B` back (hides the answer, or goes to the previous card), `←`/`→` statement pages, `/` or ⌘K
+search.

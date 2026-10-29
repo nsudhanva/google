@@ -1,6 +1,8 @@
-"""Build data/problems.json from the Google six-month list and doocs/leetcode statements.
+"""Build data/problems.json from the Google company lists and doocs/leetcode statements.
 
-The CSV (liquidslr/leetcode-company-wise-problems) gives rank order, frequency and topics.
+The CSVs (liquidslr/leetcode-company-wise-problems) give, for the last 30 days, 3 months and
+6 months, which problems Google asked, in frequency order, with their topics. The 6-month list
+is the full set; the shorter periods are subsets of it.
 doocs/leetcode (CC BY-SA 4.0) gives the problem statement. Premium problems keep no statement:
 the app links to LeetCode for those.
 """
@@ -18,10 +20,13 @@ from pathlib import Path
 
 from google.sanitize import sanitize_html
 
-CSV_URL = (
-    "https://raw.githubusercontent.com/liquidslr/leetcode-company-wise-problems/main/"
-    "Google/3.%20Six%20Months.csv"
-)
+LIST_URL = "https://raw.githubusercontent.com/liquidslr/leetcode-company-wise-problems/main/Google"
+# Period key -> CSV file name in the company folder. The last one is the full problem set.
+PERIODS = {
+    "30d": "1.%20Thirty%20Days.csv",
+    "3m": "2.%20Three%20Months.csv",
+    "6m": "3.%20Six%20Months.csv",
+}
 DOOCS_RAW = "https://raw.githubusercontent.com/doocs/leetcode/main"
 DOOCS_INDEX = f"{DOOCS_RAW}/solution/README_EN.md"
 
@@ -41,13 +46,19 @@ class DoocsEntry:
 
 
 @dataclass(frozen=True)
-class Problem:
+class Asked:
     rank: int
+    frequency: float
+
+
+@dataclass(frozen=True)
+class Problem:
     id: int
     slug: str
     title: str
     difficulty: str
-    frequency: float
+    # Rank and frequency for each period in which Google asked the problem.
+    asked: dict[str, Asked]
     url: str
     topics: list[str]
     premium: bool
@@ -97,8 +108,23 @@ def slug_from_url(url: str) -> str:
     return urllib.parse.urlparse(url).path.rstrip("/").rsplit("/", 1)[-1]
 
 
+def period_rows(period: str) -> list[dict[str, str]]:
+    text = fetch(f"{LIST_URL}/{PERIODS[period]}", f"google-{period}.csv")
+    return list(csv.DictReader(io.StringIO(text)))
+
+
+def asked_by_slug() -> dict[str, dict[str, Asked]]:
+    asked: dict[str, dict[str, Asked]] = {}
+    for period in PERIODS:
+        for rank, row in enumerate(period_rows(period), 1):
+            stat = Asked(rank=rank, frequency=float(row["Frequency"]))
+            asked.setdefault(slug_from_url(row["Link"]), {})[period] = stat
+    return asked
+
+
 def build_problems() -> list[Problem]:
-    rows = list(csv.DictReader(io.StringIO(fetch(CSV_URL, "google-six-months.csv"))))
+    rows = period_rows(list(PERIODS)[-1])
+    asked = asked_by_slug()
     index = parse_doocs_index(fetch(DOOCS_INDEX, "doocs-index.md"))
 
     missing = [row["Title"] for row in rows if title_key(row["Title"]) not in index]
@@ -111,18 +137,17 @@ def build_problems() -> list[Problem]:
 
     return [
         Problem(
-            rank=rank,
             id=entry.id,
             slug=slug_from_url(row["Link"]),
             title=row["Title"].strip(),
             difficulty=row["Difficulty"].capitalize(),
-            frequency=float(row["Frequency"]),
+            asked=asked[slug_from_url(row["Link"])],
             url=row["Link"],
             topics=[topic.strip() for topic in row["Topics"].split(",") if topic.strip()],
             premium=entry.premium,
             description=text,
         )
-        for rank, (row, entry, text) in enumerate(zip(rows, entries, descriptions, strict=True), 1)
+        for row, entry, text in zip(rows, entries, descriptions, strict=True)
     ]
 
 
@@ -130,7 +155,7 @@ def ingest() -> None:
     problems = build_problems()
     document = {
         "sources": {
-            "list": CSV_URL,
+            "lists": {period: f"{LIST_URL}/{name}" for period, name in PERIODS.items()},
             "statements": "https://github.com/doocs/leetcode (CC BY-SA 4.0)",
             "fetchedAt": datetime.now(UTC).date().isoformat(),
         },

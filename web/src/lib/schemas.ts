@@ -1,12 +1,13 @@
 import { z } from "zod";
 import { STUDY_SETS, type StudySet } from "@/lib/scheduler";
-import { DIFFICULTIES, GRADES } from "@/lib/types";
+import { DIFFICULTIES, GRADES, PERIODS } from "@/lib/types";
 
 const SET_KEYS = Object.keys(STUDY_SETS) as [StudySet, ...StudySet[]];
 
 /** Search params of the study page, and the input of the next-card call. */
 export const studySearchSchema = z.object({
 	set: z.enum(SET_KEYS).catch("smart").default("smart"),
+	period: z.enum(PERIODS).catch("6m").default("6m"),
 	topic: z.string().optional().catch(undefined),
 	difficulty: z.enum(DIFFICULTIES).optional().catch(undefined),
 	/** Show this problem instead of the next one in the queue. */

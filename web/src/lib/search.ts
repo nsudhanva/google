@@ -130,11 +130,11 @@ function snippet(plain: string, token: string): string {
 }
 
 function hit(doc: Doc, field: SearchField, snippetToken?: string): SearchHit {
-	const { slug, id, rank, title, difficulty } = doc.problem;
+	const { slug, id, asked, title, difficulty } = doc.problem;
 	return {
 		slug,
 		id,
-		rank,
+		rank: asked["6m"].rank,
 		title,
 		difficulty,
 		field,

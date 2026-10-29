@@ -8,11 +8,21 @@ import {
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { STUDY_SETS, type StudySet } from "@/lib/scheduler";
 import type { StudySearch } from "@/lib/schemas";
-import { DIFFICULTIES, type Difficulty } from "@/lib/types";
+import {
+	DIFFICULTIES,
+	type Difficulty,
+	PERIOD_LABEL,
+	PERIODS,
+	type Period,
+} from "@/lib/types";
 
 const SET_ITEMS = Object.entries(STUDY_SETS).map(([value, label]) => ({
 	value: value as StudySet,
 	label,
+}));
+const PERIOD_ITEMS = PERIODS.map((value) => ({
+	value,
+	label: `Asked in ${PERIOD_LABEL[value]}`,
 }));
 
 function Picker<T extends string | null>({
@@ -64,6 +74,12 @@ export function StudyBar({
 	];
 	return (
 		<div className="flex flex-wrap items-center gap-2">
+			<Picker<Period>
+				label="Asked in"
+				value={search.period}
+				items={PERIOD_ITEMS}
+				onChange={(period) => onChange({ period, slug: undefined })}
+			/>
 			<Picker
 				label="Study set"
 				value={search.set}

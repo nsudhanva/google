@@ -14,7 +14,9 @@ import { getDeck, recordAttempt } from "@/server/functions";
 
 export const Route = createFileRoute("/")({
 	validateSearch: studySearchSchema,
-	search: { middlewares: [stripSearchParams({ set: "smart" })] },
+	search: {
+		middlewares: [stripSearchParams({ set: "smart", period: "6m" })],
+	},
 	loaderDeps: ({ search }) => search,
 	loader: ({ deps }) => getDeck({ data: deps }),
 	component: Study,

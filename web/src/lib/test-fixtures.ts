@@ -4,12 +4,11 @@ export const T0 = Date.UTC(2026, 0, 1);
 
 export function problem(rank: number, extra: Partial<Problem> = {}): Problem {
 	return {
-		rank,
 		id: rank,
 		slug: `p${rank}`,
 		title: `Problem ${rank}`,
 		difficulty: "Medium",
-		frequency: 10,
+		asked: { "6m": { rank, frequency: 10 } },
 		url: "",
 		topics: ["Array"],
 		premium: false,

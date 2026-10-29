@@ -1,5 +1,6 @@
 import { ExternalLinkIcon, LightbulbIcon } from "lucide-react";
 import { type ComponentProps, type ReactNode, useState } from "react";
+import { AskedBadges } from "@/components/asked-badges";
 import { DifficultyBadge } from "@/components/difficulty-badge";
 import { FitPages } from "@/components/fit-pages";
 import { InlineCode } from "@/components/inline-code";
@@ -85,9 +86,13 @@ export function Flashcard({
 		setRevealed(true);
 		setPane("answer");
 	};
+	const back = () => {
+		if (revealed) setRevealed(false);
+		else if (canGoBack) onBack();
+	};
 
 	useHotkeys({
-		b: () => canGoBack && onBack(),
+		b: back,
 		...(revealed
 			? Object.fromEntries(
 					GRADE_ACTIONS.map((a) => [a.key, () => answer(a.grade)]),
@@ -108,8 +113,8 @@ export function Flashcard({
 					{problem.title}
 				</h1>
 				<div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-					<span className="tabular-nums">#{problem.rank} at Google</span>
 					<DifficultyBadge difficulty={problem.difficulty} />
+					<AskedBadges asked={problem.asked} />
 					<CardHistory state={state} />
 					<a
 						href={problem.url}
@@ -196,8 +201,8 @@ export function Flashcard({
 					variant="ghost"
 					label="Back"
 					shortcut="B"
-					onClick={onBack}
-					disabled={!canGoBack || busy}
+					onClick={back}
+					disabled={(!revealed && !canGoBack) || busy}
 				/>
 				{revealed ? (
 					<div className="ml-auto flex flex-wrap justify-end gap-2">

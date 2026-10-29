@@ -1,4 +1,4 @@
-import type { Attempt, Grade, Problem } from "@/lib/types";
+import type { Attempt, Grade, Period, Problem } from "@/lib/types";
 
 const MINUTE = 60_000;
 const HOUR = 60 * MINUTE;
@@ -129,18 +129,19 @@ export function inSet(
 
 /**
  * Queue order: due reviews (visit-again first, then oldest due), then new problems by
- * Google frequency rank, then cards not yet due (soonest first).
+ * Google frequency rank in the chosen period, then cards not yet due (soonest first).
  */
 function priority(
 	problem: Problem,
 	state: CardState | undefined,
 	now: number,
+	period: Period,
 ): number[] {
 	switch (cardStatus(state, now)) {
 		case "due":
 			return [0, state?.list === "again" ? 0 : 1, state?.due ?? 0];
 		case "new":
-			return [1, 0, problem.rank];
+			return [1, 0, problem.asked[period]?.rank ?? problem.asked["6m"].rank];
 		case "later":
 			return [2, 0, state?.due ?? 0];
 	}
@@ -155,6 +156,8 @@ function compare(a: number[], b: number[]) {
 
 export interface QueueFilter {
 	set: StudySet;
+	/** Only problems Google asked in this period; defaults to 6 months (all of them). */
+	period?: Period;
 	topic?: string;
 	difficulty?: Problem["difficulty"];
 }
@@ -166,6 +169,7 @@ export function matchesFilter(
 	now: number,
 ): boolean {
 	return (
+		(!filter.period || problem.asked[filter.period] !== undefined) &&
 		(!filter.topic || problem.topics.includes(filter.topic)) &&
 		(!filter.difficulty || problem.difficulty === filter.difficulty) &&
 		inSet(filter.set, state, now)
@@ -181,7 +185,10 @@ export function queue(
 ): Problem[] {
 	return problems
 		.filter((p) => matchesFilter(p, states.get(p.slug), filter, now))
-		.map((p) => ({ p, key: priority(p, states.get(p.slug), now) }))
+		.map((p) => ({
+			p,
+			key: priority(p, states.get(p.slug), now, filter.period ?? "6m"),
+		}))
 		.sort((a, b) => compare(a.key, b.key))
 		.map(({ p }) => p);
 }

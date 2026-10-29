@@ -4,8 +4,14 @@ import { scoreReport, scoreTopics } from "@/lib/scorer";
 import { attempt, problem, T0 } from "@/lib/test-fixtures";
 
 const problems = [
-	problem(1, { frequency: 90, topics: ["Array", "Graph"] }),
-	problem(2, { frequency: 10, difficulty: "Easy" }),
+	problem(1, {
+		asked: { "6m": { rank: 1, frequency: 90 } },
+		topics: ["Array", "Graph"],
+	}),
+	problem(2, {
+		asked: { "6m": { rank: 2, frequency: 10 } },
+		difficulty: "Easy",
+	}),
 ];
 
 describe("scorer", () => {

@@ -10,6 +10,7 @@ import { useRef, useState } from "react";
 import { DifficultyBadge } from "@/components/difficulty-badge";
 import { ListBadge } from "@/components/list-badge";
 import { PageHeader } from "@/components/page-header";
+import { Segmented } from "@/components/segmented";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -24,6 +25,7 @@ import { useFitCount } from "@/hooks/use-fit-count";
 import { useHotkeys } from "@/hooks/use-hotkeys";
 import { useSearch } from "@/hooks/use-search";
 import { percent, timeFrom } from "@/lib/format";
+import { PERIOD_LABEL, PERIODS, type Period } from "@/lib/types";
 import { listProblems, resetProgress } from "@/server/functions";
 import type { ProblemRow } from "@/server/service";
 
@@ -37,8 +39,13 @@ const ROW_HEIGHT = 37;
 /** Enough for every problem, so the pager counts all matches. */
 const SEARCH_LIMIT = 1000;
 
+const PERIOD_OPTIONS = PERIODS.map((value) => ({
+	value,
+	label: PERIOD_LABEL[value],
+}));
+
 function statusText(row: ProblemRow): string {
-	if (row.status === "new") return "New";
+	if (row.status === "new") return "";
 	if (row.status === "due" || row.due === null) return "Due now";
 	return `Due ${timeFrom(row.due)}`;
 }
@@ -47,19 +54,26 @@ function Problems() {
 	const rows = Route.useLoaderData();
 	const router = useRouter();
 	const [query, setQuery] = useState("");
+	const [period, setPeriod] = useState<Period>("6m");
 	const [page, setPage] = useState(0);
 	const tableArea = useRef<HTMLDivElement>(null);
 	// One row of the box holds the table header.
 	const pageSize = useFitCount(tableArea, ROW_HEIGHT) - 1;
 
 	const hits = useSearch(query, SEARCH_LIMIT);
-	const bySlug = new Map(rows.map((r) => [r.slug, r]));
+	// Only problems asked in the chosen period, in that period's frequency order.
+	const inPeriod = rows
+		.filter((r) => r.asked[period])
+		.sort(
+			(a, b) => (a.asked[period]?.rank ?? 0) - (b.asked[period]?.rank ?? 0),
+		);
+	const bySlug = new Map(inPeriod.map((r) => [r.slug, r]));
 	const results = query.trim()
 		? hits.flatMap((hit) => {
 				const row = bySlug.get(hit.slug);
 				return row ? [{ row, snippet: hit.snippet }] : [];
 			})
-		: rows.map((row) => ({ row, snippet: null }));
+		: inPeriod.map((row) => ({ row, snippet: null }));
 
 	const pages = Math.max(1, Math.ceil(results.length / pageSize));
 	const current = Math.min(page, pages - 1);
@@ -78,26 +92,38 @@ function Problems() {
 			<PageHeader
 				title="Problems"
 				actions={
-					<div className="relative w-full sm:w-80">
-						<SearchIcon
-							className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
-							aria-hidden
-						/>
-						<Input
-							value={query}
-							onChange={(e) => {
-								setQuery(e.target.value);
+					<div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+						<Segmented
+							label="Asked in"
+							value={period}
+							options={PERIOD_OPTIONS}
+							onChange={(next) => {
+								setPeriod(next);
 								setPage(0);
 							}}
-							placeholder="Number, title, topic, or problem text"
-							aria-label="Search problems"
-							className="bg-card pl-8"
 						/>
+						<div className="relative w-full sm:w-72">
+							<SearchIcon
+								className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
+								aria-hidden
+							/>
+							<Input
+								value={query}
+								onChange={(e) => {
+									setQuery(e.target.value);
+									setPage(0);
+								}}
+								placeholder="Number, title, topic, or problem text"
+								aria-label="Search problems"
+								className="bg-card pl-8"
+							/>
+						</div>
 					</div>
 				}
 			>
-				{rows.length} problems Google asked in the last six months, most
-				frequent first. Topics stay hidden unless you search for one.
+				{inPeriod.length} problems Google asked in the last{" "}
+				{PERIOD_LABEL[period]}, most frequent first. Topics stay hidden unless
+				you search for one.
 			</PageHeader>
 
 			<div
@@ -108,6 +134,9 @@ function Problems() {
 					<TableHeader>
 						<TableRow>
 							<TableHead className="w-12 text-right">Rank</TableHead>
+							<TableHead className="hidden w-14 text-right sm:table-cell">
+								Freq.
+							</TableHead>
 							<TableHead className="w-16">LC</TableHead>
 							<TableHead>Problem</TableHead>
 							<TableHead className="hidden sm:table-cell">Difficulty</TableHead>
@@ -124,7 +153,10 @@ function Problems() {
 						{visible.map(({ row, snippet }) => (
 							<TableRow key={row.slug} className="h-[37px]">
 								<TableCell className="text-right text-muted-foreground tabular-nums">
-									{row.rank}
+									{row.asked[period]?.rank}
+								</TableCell>
+								<TableCell className="hidden text-right text-muted-foreground tabular-nums sm:table-cell">
+									{Math.round(row.asked[period]?.frequency ?? 0)}
 								</TableCell>
 								<TableCell className="text-muted-foreground tabular-nums">
 									{row.id}

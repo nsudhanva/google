@@ -3,7 +3,8 @@ import { percent, timeFrom } from "@/lib/format";
 import type { CardState } from "@/lib/scheduler";
 
 export function CardHistory({ state }: { state: CardState | null }) {
-	if (!state?.reviews) return <span>{state ? "Skipped earlier" : "New"}</span>;
+	if (!state) return null;
+	if (!state.reviews) return <span>Skipped earlier</span>;
 	return (
 		<>
 			<span>
