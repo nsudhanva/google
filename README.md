@@ -17,6 +17,7 @@ Progress lives in SQLite; a background scorer tracks how ready you are.
 │   └── progress.db      # your progress (SQLite, git-ignored)
 ├── web/                 # TanStack Start app (React, Vite, Tailwind, shadcn/ui)
 ├── Dockerfile, docker-compose.yml, Caddyfile
+├── deploy/              # systemd timer that keeps the server on the latest images
 └── .zed/                # Zed settings, debug configs, tasks
 ```
 
@@ -43,10 +44,14 @@ Built for the smallest machines; it runs on a free GCP e2-micro (1 GB RAM) with 
   (`ssr.noExternal`, no `node_modules` but `srvx`) and a 64 MB heap cap, about 20 to 130 MB of
   RAM under load. `google-caddy` is Caddy with the static files baked in, precompressed with
   brotli, zstd and gzip, and served with year-long immutable caching.
-- **Server**: copy `docker-compose.yml` to the machine, add a `.env` with
-  `SITE_ADDRESS=google.sudhanva.me`, `BIND=0.0.0.0` and `TZ=...`, then
-  `docker compose pull && docker compose up -d`. Caddy gets the HTTPS certificate itself; the DNS
-  record is a plain (not proxied) A record.
+- **Server**: put `docker-compose.yml` in `/opt/google-cards` with a `.env` holding
+  `SITE_ADDRESS=google.sudhanva.me`, `BIND=0.0.0.0` and `TZ=...`, then run
+  `docker compose up -d`. Caddy gets the HTTPS certificate itself; the DNS record is a plain
+  (not proxied) A record.
+- **Continuous deployment**: the systemd timer in `deploy/` runs every 5 minutes, pulls new
+  images from GHCR and recreates only the containers that changed, so a push to `main` is live
+  within about 10 minutes. Install it with
+  `sudo cp deploy/google-cards-update.* /etc/systemd/system/ && sudo systemctl enable --now google-cards-update.timer`.
 - **GCP**: e2-micro and a 30 GB standard disk in `us-central1` (Always Free), a static IP in use
   by that VM, and a firewall rule for 80/443. Keep the VM running: a reserved IP is only free
   while attached.

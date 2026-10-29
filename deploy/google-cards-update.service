@@ -1,0 +1,13 @@
+# Pulls the images CI publishes to GHCR and recreates only the containers whose image changed.
+[Unit]
+Description=Update google-cards from GHCR
+After=docker.service network-online.target
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/google-cards
+ExecStart=/usr/bin/docker compose pull --quiet
+ExecStart=/usr/bin/docker compose up -d --remove-orphans
+ExecStartPost=/usr/bin/docker image prune -f

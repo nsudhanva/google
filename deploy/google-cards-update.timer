@@ -1,0 +1,11 @@
+# Checks for new images every 5 minutes, so a push to main is live within about 10 minutes.
+[Unit]
+Description=Check GHCR for new google-cards images
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+RandomizedDelaySec=30
+
+[Install]
+WantedBy=timers.target
