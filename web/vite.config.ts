@@ -8,6 +8,8 @@ import { defineConfig } from "vite";
 
 const config = defineConfig({
 	resolve: { tsconfigPaths: true },
+	// Bundle every dependency into the server build, so the runtime image needs no node_modules.
+	ssr: { noExternal: true },
 	plugins: [devtools(), tailwindcss(), tanstackStart(), viteReact()],
 });
 

@@ -23,7 +23,7 @@
     "cwd": "$ZED_WORKTREE_ROOT"
   },
   {
-    "label": "docker: up (http://google.localhost)",
+    "label": "docker: build and run locally (http://google.localhost)",
     "command": "docker compose up -d --build",
     "cwd": "$ZED_WORKTREE_ROOT"
   },

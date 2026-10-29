@@ -31,7 +31,25 @@ certificate to trust). Chrome, Firefox and curl resolve `*.localhost` to 127.0.0
 Safari needs `127.0.0.1 google.localhost` in `/etc/hosts`. If port 80 is taken, run with
 `HTTP_PORT=8080` and open `http://google.localhost:8080`. Set `TZ` (for example
 `TZ=America/Los_Angeles`) so day streaks roll over at your midnight. Progress persists in the
-`progress` volume.
+`progress` volume. `docker-compose.override.yml` builds the images locally; without it, compose
+runs the published ones.
+
+## Deploy (live at https://google.sudhanva.me)
+
+Built for the smallest machines; it runs on a free GCP e2-micro (1 GB RAM) with room to spare.
+
+- **Images** (published to GHCR by `.github/workflows/images.yml` on every push to `main`):
+  `google-web` is the bare `node` binary on Alpine with a self-contained 2 MB server bundle
+  (`ssr.noExternal`, no `node_modules` but `srvx`) and a 64 MB heap cap, about 20 to 130 MB of
+  RAM under load. `google-caddy` is Caddy with the static files baked in, precompressed with
+  brotli, zstd and gzip, and served with year-long immutable caching.
+- **Server**: copy `docker-compose.yml` to the machine, add a `.env` with
+  `SITE_ADDRESS=google.sudhanva.me`, `BIND=0.0.0.0` and `TZ=...`, then
+  `docker compose pull && docker compose up -d`. Caddy gets the HTTPS certificate itself; the DNS
+  record is a plain (not proxied) A record.
+- **GCP**: e2-micro and a 30 GB standard disk in `us-central1` (Always Free), a static IP in use
+  by that VM, and a firewall rule for 80/443. Keep the VM running: a reserved IP is only free
+  while attached.
 
 ## Develop
 

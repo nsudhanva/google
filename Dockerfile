@@ -1,11 +1,8 @@
 # syntax=docker/dockerfile:1
-# Builds the TanStack Start app with bun, then runs it on Node 24 (for the built-in node:sqlite).
-
-FROM oven/bun:1.3 AS deps
-WORKDIR /app
-COPY package.json bun.lock ./
-COPY web/package.json web/
-RUN bun install --frozen-lockfile --production --ignore-scripts
+# Two small images for small machines (built for a 1 GB e2-micro):
+#   web   - the node binary on Alpine, running the self-contained server bundle
+#   caddy - Caddy with the static files baked in, compressed ahead of time
+# Build one with `docker build --target web|caddy .`; CI publishes both to GHCR.
 
 FROM oven/bun:1.3 AS build
 WORKDIR /app
@@ -13,19 +10,36 @@ COPY package.json bun.lock ./
 COPY web/package.json web/
 RUN bun install --frozen-lockfile --ignore-scripts
 COPY web web
-RUN bun run build
+RUN bun run build \
+	&& mkdir -p /out/node_modules \
+	&& cp -rL web/node_modules/srvx /out/node_modules/srvx \
+	&& cp -r web/dist/server /out/server
 
-FROM node:24-slim
+# Compress once at build time so Caddy serves .br/.zst/.gz files without spending CPU.
+FROM alpine:3.22 AS static
+RUN apk add --no-cache brotli zstd
+COPY --from=build /app/web/dist/client /srv
+RUN find /srv -type f \( -name '*.js' -o -name '*.css' -o -name '*.svg' \) \
+	-exec gzip -9 -k {} \; -exec brotli -q 11 -k {} \; -exec zstd -19 -q -k {} \;
+
+FROM caddy:2-alpine AS caddy
+COPY --from=static /srv /srv
+COPY Caddyfile /etc/caddy/Caddyfile
+
+# Only the node binary on plain Alpine: no npm, yarn or corepack.
+FROM alpine:3.22 AS web
+RUN apk add --no-cache libstdc++ \
+	&& addgroup -S node && adduser -S -G node node
+COPY --from=node:24-alpine /usr/local/bin/node /usr/local/bin/node
 ENV NODE_ENV=production \
-    PORT=3000 \
-    DATA_DIR=/app/data \
-    DATABASE_PATH=/state/progress.db
+	PORT=3000 \
+	DATA_DIR=/app/data \
+	DATABASE_PATH=/state/progress.db \
+	NODE_OPTIONS="--max-old-space-size=64 --max-semi-space-size=1"
 WORKDIR /app
-COPY --from=deps /app/node_modules node_modules
-COPY --from=deps /app/web/node_modules web/node_modules
-COPY --from=build /app/web/dist web/dist
-COPY web/package.json web/
+COPY --from=build /out ./
 COPY data/problems.json data/approaches.json data/
-WORKDIR /app/web
+RUN mkdir -p /state && chown node:node /state
+USER node
 EXPOSE 3000
-CMD ["node_modules/.bin/srvx", "serve", "--prod", "--entry", "dist/server/server.js", "--static", "../client", "--port", "3000"]
+CMD ["node", "node_modules/srvx/bin/srvx.mjs", "serve", "--prod", "--entry", "server/server.js", "--port", "3000"]

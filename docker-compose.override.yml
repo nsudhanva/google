@@ -1,0 +1,10 @@
+# Local development: build the images from this checkout instead of pulling them.
+services:
+  web:
+    build:
+      context: .
+      target: web
+  caddy:
+    build:
+      context: .
+      target: caddy
