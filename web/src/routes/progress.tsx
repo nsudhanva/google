@@ -1,18 +1,8 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { type ReactNode, useState } from "react";
+import type { ReactNode } from "react";
+import { ConfirmClear } from "@/components/confirm-clear";
 import { FitPages } from "@/components/fit-pages";
 import { PageHeader } from "@/components/page-header";
-import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { percent } from "@/lib/format";
 import type { StudySet } from "@/lib/scheduler";
@@ -269,34 +259,17 @@ function Trend({ history }: { history: DailyScore[] }) {
 
 function ResetAll() {
 	const router = useRouter();
-	const [open, setOpen] = useState(false);
 	return (
-		<AlertDialog open={open} onOpenChange={setOpen}>
-			<AlertDialogTrigger render={<Button variant="destructive" />}>
-				Clear all progress
-			</AlertDialogTrigger>
-			<AlertDialogContent>
-				<AlertDialogHeader>
-					<AlertDialogTitle>Clear all progress?</AlertDialogTitle>
-					<AlertDialogDescription>
-						This deletes every graded card, both lists and the score history.
-						You cannot undo it.
-					</AlertDialogDescription>
-				</AlertDialogHeader>
-				<AlertDialogFooter>
-					<AlertDialogCancel>Keep progress</AlertDialogCancel>
-					<AlertDialogAction
-						variant="destructive"
-						onClick={async () => {
-							await resetProgress({ data: { all: true } });
-							setOpen(false);
-							await router.invalidate();
-						}}
-					>
-						Clear all progress
-					</AlertDialogAction>
-				</AlertDialogFooter>
-			</AlertDialogContent>
-		</AlertDialog>
+		<ConfirmClear
+			trigger={<Button variant="destructive" />}
+			title="Clear all progress?"
+			description="This deletes every graded card, both lists and the score history. Your own answers stay."
+			onClear={async () => {
+				await resetProgress({ data: { all: true } });
+				await router.invalidate();
+			}}
+		>
+			Clear all progress
+		</ConfirmClear>
 	);
 }

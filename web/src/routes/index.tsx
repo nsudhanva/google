@@ -10,7 +10,12 @@ import { StudyBar } from "@/components/study/study-bar";
 import { buttonVariants } from "@/components/ui/button";
 import { STUDY_SETS } from "@/lib/scheduler";
 import { type StudySearch, studySearchSchema } from "@/lib/schemas";
-import { getDeck, recordAttempt, saveNote } from "@/server/functions";
+import {
+	getDeck,
+	recordAttempt,
+	resetProgress,
+	saveNote,
+} from "@/server/functions";
 
 export const Route = createFileRoute("/")({
 	validateSearch: studySearchSchema,
@@ -47,6 +52,14 @@ function Study() {
 		}
 	}
 
+	// Clearing keeps you on the same card, now unseen, instead of moving to the next one.
+	async function clear() {
+		if (!card) return;
+		await resetProgress({ data: { slug: card.problem.slug } });
+		if (search.slug) await router.invalidate();
+		else await go({ slug: card.problem.slug });
+	}
+
 	function back() {
 		const previous = history.at(-1);
 		if (!previous) return;
@@ -74,6 +87,7 @@ function Study() {
 					onSaveNote={async (text) =>
 						(await saveNote({ data: { slug: card.problem.slug, text } })).note
 					}
+					onClear={clear}
 				/>
 			) : (
 				<EmptySet setLabel={STUDY_SETS[search.set]} />

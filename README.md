@@ -101,8 +101,10 @@ uv run ruff check && uv run ruff format --check && uv run ty check
 - **Backend** (`web/src/server/`): plain service functions over `node:sqlite`, exposed twice as
   thin wrappers: TanStack Start server functions for the UI and a JSON API for scripts. The
   attempt log is the only state: card state, lists and scores are all derived from it, so
-  clearing progress is a delete. Your own answers ("My answer") live in a separate `notes` table,
-  so clearing progress keeps them.
+  clearing progress is a delete. Clear one problem from its card or its row on the Problems page,
+  or everything from the Progress page; each asks twice, with "Keep progress" focused both
+  times. Your own answers ("My answer") live in a separate `notes` table, so clearing progress
+  keeps them.
 
 ## API
 

@@ -1,6 +1,7 @@
-import { ExternalLinkIcon, LightbulbIcon } from "lucide-react";
+import { ExternalLinkIcon, LightbulbIcon, RotateCcwIcon } from "lucide-react";
 import { type ComponentProps, type ReactNode, useState } from "react";
 import { AskedBadges } from "@/components/asked-badges";
+import { ConfirmClear } from "@/components/confirm-clear";
 import { DifficultyBadge } from "@/components/difficulty-badge";
 import { FitPages } from "@/components/fit-pages";
 import { InlineCode } from "@/components/inline-code";
@@ -59,6 +60,7 @@ export function Flashcard({
 	onBack,
 	onAnswer,
 	onSaveNote,
+	onClear,
 }: {
 	card: StudyCard;
 	topics: string[];
@@ -68,6 +70,8 @@ export function Flashcard({
 	onAnswer: (answer: Answered) => void;
 	/** Stores your answer and returns what was kept (null once deleted). */
 	onSaveNote: (text: string) => Promise<string | null>;
+	/** Deletes this problem's grades; your own answer stays. */
+	onClear: () => Promise<void>;
 }) {
 	const { problem, approach, state } = card;
 	const hints = approach?.hints ?? [];
@@ -131,6 +135,23 @@ export function Flashcard({
 					<DifficultyBadge difficulty={problem.difficulty} />
 					<AskedBadges asked={problem.asked} />
 					<CardHistory state={state} />
+					{state && (
+						<ConfirmClear
+							trigger={
+								<Button
+									variant="ghost"
+									size="icon-xs"
+									aria-label="Clear progress for this problem"
+									title="Clear progress"
+								/>
+							}
+							title={`Clear progress for ${problem.title}?`}
+							description="This deletes its grades and takes it off your lists. Your own answer stays."
+							onClear={onClear}
+						>
+							<RotateCcwIcon />
+						</ConfirmClear>
+					)}
 					<a
 						href={problem.url}
 						target="_blank"

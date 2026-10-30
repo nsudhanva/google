@@ -7,6 +7,7 @@ import {
 	SearchIcon,
 } from "lucide-react";
 import { useRef, useState } from "react";
+import { ConfirmClear } from "@/components/confirm-clear";
 import { DifficultyBadge } from "@/components/difficulty-badge";
 import { ListBadge } from "@/components/list-badge";
 import { PageHeader } from "@/components/page-header";
@@ -197,15 +198,21 @@ function Problems() {
 								</TableCell>
 								<TableCell>
 									{row.lastAt && (
-										<Button
-											variant="ghost"
-											size="icon-xs"
-											aria-label={`Clear progress for ${row.title}`}
-											title="Clear progress"
-											onClick={() => reset(row.slug)}
+										<ConfirmClear
+											trigger={
+												<Button
+													variant="ghost"
+													size="icon-xs"
+													aria-label={`Clear progress for ${row.title}`}
+													title="Clear progress"
+												/>
+											}
+											title={`Clear progress for ${row.title}?`}
+											description="This deletes its grades and takes it off your lists. Your own answer stays."
+											onClear={() => reset(row.slug)}
 										>
 											<RotateCcwIcon />
-										</Button>
+										</ConfirmClear>
 									)}
 								</TableCell>
 							</TableRow>
